@@ -32,7 +32,7 @@ public class KeyGenBenchmark {
 	}
 
 	@Benchmark
-	@BenchmarkMode({Mode.Throughput, Mode.AverageTime, Mode.SampleTime, Mode.SingleShotTime})
+	@BenchmarkMode({Mode.AverageTime, Mode.Throughput,  Mode.SampleTime, Mode.SingleShotTime})
 	@OutputTimeUnit(TimeUnit.SECONDS)
 	public void measureKeyGen() {
 		gsk.keyGen(keyGenParameters);
@@ -45,7 +45,10 @@ public class KeyGenBenchmark {
 				.param("l_n", "512", "1024", "2048", "3072")
 				.warmupIterations(5)
 				.measurementIterations(10)
-				.forks(2)
+				.threads(1)
+				.forks(1)
+				.shouldFailOnError(true)
+				//.shouldDoGC(true)
 				.result("results-keygen.csv")
 				.resultFormat(ResultFormatType.CSV)
 				.build();
