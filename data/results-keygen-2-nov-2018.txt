@@ -1,0 +1,49 @@
+Benchmark                                            (l_n)    Mode  Cnt     Score      Error  Units
+KeyGenBenchmark.measureKeyGen                          512   thrpt   25     0.887 ±    0.124  ops/s
+KeyGenBenchmark.measureKeyGen                         1024   thrpt   25     0.135 ±    0.055  ops/s
+KeyGenBenchmark.measureKeyGen                         2048   thrpt   25     0.014 ±    0.011  ops/s
+KeyGenBenchmark.measureKeyGen                         3072   thrpt   25     0.002 ±    0.001  ops/s
+KeyGenBenchmark.measureKeyGen                          512    avgt   25     1.140 ±    0.203   s/op
+KeyGenBenchmark.measureKeyGen                         1024    avgt   25     8.849 ±    2.646   s/op
+KeyGenBenchmark.measureKeyGen                         2048    avgt   25   119.508 ±   59.015   s/op
+KeyGenBenchmark.measureKeyGen                         3072    avgt   25   901.295 ±  514.340   s/op
+KeyGenBenchmark.measureKeyGen                          512  sample  250     1.087 ±    0.151   s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.00      512  sample          0.079              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.50      512  sample          0.830              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.90      512  sample          2.168              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.95      512  sample          2.573              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.99      512  sample          3.302              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.999     512  sample          3.515              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.9999    512  sample          3.515              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p1.00      512  sample          3.515              s/op
+KeyGenBenchmark.measureKeyGen                         1024  sample   47     8.542 ±    3.269   s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.00     1024  sample          1.892              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.50     1024  sample          6.493              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.90     1024  sample         21.065              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.95     1024  sample         25.662              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.99     1024  sample         27.750              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.999    1024  sample         27.750              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.9999   1024  sample         27.750              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p1.00     1024  sample         27.750              s/op
+KeyGenBenchmark.measureKeyGen                         2048  sample   25   122.011 ±   58.675   s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.00     2048  sample         23.354              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.50     2048  sample        109.924              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.90     2048  sample        269.080              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.95     2048  sample        282.877              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.99     2048  sample        285.615              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.999    2048  sample        285.615              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.9999   2048  sample        285.615              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p1.00     2048  sample        285.615              s/op
+KeyGenBenchmark.measureKeyGen                         3072  sample   25   627.709 ±  360.675   s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.00     3072  sample         57.043              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.50     3072  sample        426.276              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.90     3072  sample       1387.274              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.95     3072  sample       1830.300              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.99     3072  sample       1848.983              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.999    3072  sample       1848.983              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p0.9999   3072  sample       1848.983              s/op
+KeyGenBenchmark.measureKeyGen:measureKeyGen·p1.00     3072  sample       1848.983              s/op
+KeyGenBenchmark.measureKeyGen                          512      ss    5     1.461 ±    2.443   s/op
+KeyGenBenchmark.measureKeyGen                         1024      ss    5     7.276 ±   19.596   s/op
+KeyGenBenchmark.measureKeyGen                         2048      ss    5   105.700 ±  105.489   s/op
+KeyGenBenchmark.measureKeyGen                         3072      ss    3   178.974 ± 2363.893   s/op
