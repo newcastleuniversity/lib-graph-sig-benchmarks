@@ -38,23 +38,23 @@ THE POSSIBILITY OF SUCH DAMAGE.
     <packaging>jar</packaging>
     <name>Graph Signature Library benchmark</name>
     <properties>
-         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-         <!--
-             JMH version to use with this project.
-           -->
-         <jmh.version>1.21</jmh.version>
+        <!--
+            JMH version to use with this project.
+          -->
+        <jmh.version>1.21</jmh.version>
 
-         <!--
-             Java source/target to use for compilation.
-           -->
-         <javac.target>1.8</javac.target>
+        <!--
+            Java source/target to use for compilation.
+          -->
+        <javac.target>1.8</javac.target>
 
-         <!--
-             Name of the benchmark Uber-JAR to generate.
-           -->
-         <uberjar.name>benchmarks</uberjar.name>
-     </properties>
+        <!--
+            Name of the benchmark Uber-JAR to generate.
+          -->
+        <uberjar.name>benchmarks</uberjar.name>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -62,6 +62,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
             <artifactId>jmh-core</artifactId>
             <version>${jmh.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-generator-annprocess</artifactId>
@@ -76,6 +77,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
             <groupId>prismacloud.primitives</groupId>
             <artifactId>graph-sig</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- add support for Java Flight Recording profiler -->
+        <dependency>
+            <groupId>com.github.biboudis</groupId>
+            <artifactId>jmh-profilers</artifactId>
+            <version>0.1.4</version>
         </dependency>
     </dependencies>
 
@@ -104,7 +111,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
                         <configuration>
                             <finalName>${uberjar.name}</finalName>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>org.openjdk.jmh.Main</mainClass>
                                 </transformer>
                             </transformers>
