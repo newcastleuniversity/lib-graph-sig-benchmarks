@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class KeyGenBenchmark {
 
 	public static final String DATA_RESULTS_KEYGEN_RAW_CSV = "data/results-keygen-raw";
-	
+
 	@Param({"512", "1024", "2048", "3072"})
 	private int l_n;
 
@@ -39,7 +39,8 @@ public class KeyGenBenchmark {
 	}
 
 	@Benchmark
-	@BenchmarkMode({Mode.AverageTime, Mode.Throughput,  Mode.SampleTime, Mode.SingleShotTime})
+	// other benchmark modes include Mode.SampleTime and Mode.SingleShotTime
+	@BenchmarkMode({Mode.AverageTime, Mode.Throughput})
 	@OutputTimeUnit(TimeUnit.SECONDS)
 	public void measureKeyGen() {
 		gsk.keyGen(keyGenParameters);
@@ -49,13 +50,12 @@ public class KeyGenBenchmark {
 
 		Options opt = new OptionsBuilder()
 				.include(KeyGenBenchmark.class.getSimpleName())
-				.forks(1)
 				.param("l_n", "512", "1024", "2048", "3072")
-				.warmupIterations(1)
 				.jvmArgs("-server")
-				.measurementIterations(1)
+				.warmupIterations(10)
+				.measurementIterations(10)
 				.threads(1)
-				.forks(1)
+				.forks(10)
 				.shouldFailOnError(true)
 				//.shouldDoGC(true)
 				.build();
