@@ -1,0 +1,801 @@
+"Benchmark","Mode","Score","Unit","Param: l_n"
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.860801,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.491663,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.052479,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.130929,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.230542,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.868777,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.927896,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.595715,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.998075,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.615445,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.556651,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.193998,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.809643,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.786174,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.592302,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.696600,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.634826,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.290717,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.503628,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.859722,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.799117,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.684612,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.478567,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.928642,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.546007,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.876197,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.337149,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.780576,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.664374,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.102793,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.348724,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.777894,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.767584,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.075742,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.960852,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.534282,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.498918,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.687438,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.734588,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.979722,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.081743,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.656494,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.852228,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.919275,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.482193,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.316199,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.484811,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.808967,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.914993,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.808339,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.772186,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.562141,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.146670,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.679598,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.870853,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.690618,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.429915,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.963624,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.184844,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.625337,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.472429,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.670866,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.957217,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.794332,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.399318,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.681657,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.818299,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.880651,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.848035,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.560574,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.850670,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.885826,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.870319,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.875361,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.513029,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.269261,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.157844,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.949853,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.938825,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.597981,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.178247,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.389517,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.467719,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.580583,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.771029,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.586121,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.086146,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.681344,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.878631,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.725565,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.017372,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.389393,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.983970,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.576897,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.794142,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.639536,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.518358,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",2.100053,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.640210,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",1.909011,"ops/s",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.231041,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.254976,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.181695,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.197034,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.257971,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.244076,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.202437,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.278039,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.248588,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.258036,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.260220,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.098238,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.195469,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.392053,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.268510,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.278288,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.435469,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.219912,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.120754,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.198870,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.144070,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.084512,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.300268,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.199373,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.098899,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.284803,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.224817,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.184117,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.212429,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.172630,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.135747,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.181424,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.242198,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.187830,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.437907,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.260740,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.210951,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.328185,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.342221,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.178967,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.243718,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.191609,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.181281,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.240075,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.099310,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.112905,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.369170,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.177535,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.139410,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.320091,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.260315,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.465431,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.216705,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.199632,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.222125,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.209747,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.449921,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.306200,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.259565,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.258506,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.379034,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.194404,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.196775,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.196289,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.075920,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.164254,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.084638,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.325541,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.210146,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.205867,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.270809,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.250556,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.374684,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.156182,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.389077,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.280041,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.236216,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.158858,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.144413,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.299548,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.295480,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.197402,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.187100,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.184449,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.227193,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.208606,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.077310,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.075429,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.271494,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.352735,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.253725,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.204136,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.311942,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.197435,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.499420,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.215869,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.186418,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.202658,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.209978,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.104176,"ops/s",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.068212,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.022761,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.020074,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.015702,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.033943,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.042188,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.028020,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.018304,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.006459,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.016819,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.008393,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.019789,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.026305,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.010151,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.016693,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.046369,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.022801,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.027930,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.032712,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.008720,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.017892,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.010716,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.011156,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.006712,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.011893,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.038594,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.015209,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.025302,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005644,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.024521,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.010850,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.015800,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.038490,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.075344,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.027739,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.010238,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.033633,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.009977,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.007557,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.027515,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.032889,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.007462,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.015561,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.015074,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.032023,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.045794,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.023370,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.064379,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.055108,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.017777,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.006674,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.018962,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.059122,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.055971,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.017305,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.007490,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.027043,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.028098,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.035468,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.014178,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.027810,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.008392,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.009687,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.018786,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.019894,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.053210,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.050864,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.012919,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.012134,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.018157,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.014113,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.054023,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.038133,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.020002,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.020912,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.048253,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.027559,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.014313,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.014637,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.008735,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.022165,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.019999,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.041468,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.032551,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.032640,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.015373,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.056394,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.024356,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.053337,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.032857,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.030342,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.053206,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.015670,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.015383,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.036228,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.078349,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.014305,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.065336,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.023009,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.029162,"ops/s",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.008941,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004377,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.038389,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003803,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002990,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003502,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.031351,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004115,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003754,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002684,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003585,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003100,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002005,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.013584,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002139,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.031234,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002329,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.007257,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.010901,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004435,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.006653,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.007376,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003226,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004523,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.001752,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002178,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.001571,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004750,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.001982,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005877,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.001929,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002165,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003174,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002568,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002959,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005670,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003844,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002220,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003193,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002721,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003125,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005460,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.007655,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004859,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005274,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.011731,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003209,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.007344,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.021270,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.013510,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.024757,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004485,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002016,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003042,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.006736,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002225,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.007632,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002653,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.006377,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005942,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.007361,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002353,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003947,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005118,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005779,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002104,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.001549,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003962,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004106,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.001806,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003806,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002186,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.001249,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005078,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.007573,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004579,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.017786,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.007942,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002716,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004973,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003887,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.001855,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002921,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003108,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004339,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004617,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.076505,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.004734,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.014429,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003840,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003483,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005543,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005068,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002425,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005276,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.028909,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002300,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.005787,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.003162,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Throughput, ops/time",0.002188,"ops/s",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.720700,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.615805,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.487109,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.515228,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.564281,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.548971,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.502545,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.506348,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.691888,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.477281,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.496842,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.599578,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.566584,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.729330,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.543648,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.514539,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.492394,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.646979,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.542763,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.446963,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.637179,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.621122,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.649044,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.605895,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.457535,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.527564,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.411922,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.441294,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.591907,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.534794,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.511187,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.633703,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.465054,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.564842,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.474042,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.605063,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.705287,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.549735,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.532001,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.654561,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.475653,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.571160,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.562833,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.398256,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.491013,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.548022,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.537621,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.562996,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.652573,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.588591,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.923671,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.541018,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.591216,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.545351,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.501525,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.595423,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.468627,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.473837,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.575908,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.531936,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.530319,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.576010,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.492084,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.567724,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.591522,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.846362,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.847942,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.485605,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.688652,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.623000,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.428802,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.673671,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.632961,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.496587,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.484009,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.454843,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.473637,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.806618,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.602736,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.484407,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.589078,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.422332,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.493897,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.560446,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.630155,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.524327,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.501167,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.628949,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.482362,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.458299,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.652880,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.519597,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.537867,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.678853,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.756201,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.549611,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.533787,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.618559,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.639345,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",0.594230,"s/op",512
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.905810,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.804880,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.026527,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.320377,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.511933,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.058563,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.333637,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.023386,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.324264,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.666030,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",7.416117,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.505515,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.855245,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.442617,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.677898,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.404924,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.941272,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.009004,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.476629,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.936769,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.072900,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.470415,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",8.575862,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.731124,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.702965,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.054013,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.437656,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",7.586279,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.749724,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.828662,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.614593,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.217617,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.021693,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",1.851494,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.609849,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.551207,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.095504,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.520758,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.748567,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.097111,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.214877,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.128695,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.900587,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.206367,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.906688,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.458576,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.999036,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",7.699815,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.230436,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.492448,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.075171,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.963045,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.019310,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.591897,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.613848,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.516060,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.846915,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.271267,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.657398,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.995167,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.303925,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.727796,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",8.914281,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.383569,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.679598,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.626067,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.061599,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.053846,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.841800,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.470260,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.728312,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.050728,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",10.349259,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.007138,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.253477,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.780870,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.902360,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.567014,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.454471,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.100287,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.271343,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.262416,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.026035,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.392697,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",7.748627,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.540071,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.630095,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.650017,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.100828,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",7.298671,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.627031,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",6.016681,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.973661,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",5.796698,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.142000,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.390948,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.512213,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",4.679009,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",2.094748,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",3.848839,"s/op",1024
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",27.097889,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",24.820389,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",20.754478,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",33.391748,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",142.265974,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",77.017465,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",35.801119,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",31.420097,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",50.433478,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",81.618507,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",87.698775,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",42.355669,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",18.973848,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",60.939346,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",61.879307,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",10.829757,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",135.207609,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",40.809377,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",43.484630,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",34.161394,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",36.799868,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",50.278275,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",17.018013,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",20.514360,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",10.653927,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",53.581817,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",194.576922,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",76.825753,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",44.721044,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",44.214635,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",15.101137,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",38.898004,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",25.403676,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",31.268446,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",38.100286,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",32.810326,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",81.948760,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",21.782181,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",78.039319,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",37.716152,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",33.920944,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",64.222385,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",41.466472,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",79.492602,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",27.599485,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",28.326059,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",42.563588,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",25.495233,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",124.651558,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",10.787404,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",112.853321,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",96.169893,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",35.644336,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",16.664517,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",102.969065,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",42.386112,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",52.104080,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",57.152930,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",47.088511,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",54.378200,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",12.357993,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",27.857128,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",56.049616,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",13.916296,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",29.784077,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",26.957147,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",27.291683,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",40.824346,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",54.296624,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",25.437646,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",28.196764,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",20.211290,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",14.789926,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",26.897744,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",67.047131,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",56.235062,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",17.159514,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",54.673935,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",47.689659,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",58.886454,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",50.978795,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",97.254296,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",134.377552,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",46.154469,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",46.243061,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",73.031226,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",71.300348,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",36.879626,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",96.403695,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",54.012195,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",31.631887,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",10.470899,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",34.876766,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",73.712453,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",13.974669,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",44.660762,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",35.279286,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",72.865570,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",29.816310,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",63.381325,"s/op",2048
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",49.608211,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",364.145196,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",305.200017,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",197.454127,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",297.483852,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",221.578457,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",318.618070,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",233.747509,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",168.920635,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",508.550840,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",213.644037,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",244.622563,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",577.648165,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",153.696084,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",275.263961,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",901.220777,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",123.484520,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",181.291237,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",1774.025227,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",1274.890437,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",381.524828,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",305.714403,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",179.315815,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",376.273815,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",173.580591,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",310.467943,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",302.376626,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",284.763270,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",182.268224,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",108.723233,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",223.276251,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",66.239756,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",153.996686,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",595.380226,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",249.564117,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",257.835278,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",425.913207,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",163.213253,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",360.281940,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",377.106288,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",149.967174,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",366.322293,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",381.147701,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",104.181832,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",138.103228,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",343.495802,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",119.981155,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",180.895082,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",505.654993,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",560.987679,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",82.562058,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",365.407287,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",120.356432,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",156.442425,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",100.499785,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",539.442518,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",127.225481,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",107.425841,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",663.197920,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",282.316076,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",787.533815,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",690.591146,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",392.478680,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",436.582605,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",859.710834,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",307.119793,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",269.759275,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",531.238429,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",248.571455,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",239.933613,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",98.618221,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",17.552537,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",203.513292,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",521.606469,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",200.990486,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",108.989727,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",45.549953,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",271.479283,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",155.269139,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",388.456658,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",125.427738,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",111.005156,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",701.173338,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",212.069876,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",220.912568,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",701.597617,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",188.144520,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",36.877301,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",124.459648,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",203.864313,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",136.815122,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",370.788348,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",240.217937,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",716.205432,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",242.745665,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",376.228503,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",231.767598,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",188.678893,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",381.118231,"s/op",3072
+"eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen","Average time, time/op",19.762196,"s/op",3072
