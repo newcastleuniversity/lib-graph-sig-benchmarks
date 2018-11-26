@@ -8,6 +8,7 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
+import org.openjdk.jmh.runner.options.TimeValue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,6 +21,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Creates a benchmark for generating keys with 512, 1024, 2048 and 3072 length
+ * Usage: java -cp target/benchmarks.jar  eu.prismacloud.primitives.grs.bench.KeyGenBenchmark
+ *
+ * Measuring Throughput (ops/time unit) needs to define the measurement time, which currently is set to 1 minute.
  */
 @State(Scope.Benchmark)
 public class KeyGenBenchmark {
@@ -40,8 +44,10 @@ public class KeyGenBenchmark {
 
 	@Benchmark
 	// other benchmark modes include Mode.SampleTime and Mode.SingleShotTime
-	@BenchmarkMode({Mode.AverageTime, Mode.Throughput})
-	@OutputTimeUnit(TimeUnit.SECONDS)
+//	@BenchmarkMode({Mode.AverageTime, Mode.Throughput})
+//	@BenchmarkMode({Mode.AverageTime})
+	@BenchmarkMode({Mode.Throughput})
+	@OutputTimeUnit(TimeUnit.MINUTES)
 	public void measureKeyGen() {
 		gsk.keyGen(keyGenParameters);
 	}
@@ -57,6 +63,7 @@ public class KeyGenBenchmark {
 				.threads(1)
 				.forks(10)
 				.shouldFailOnError(true)
+				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
 				//.shouldDoGC(true)
 				.build();
 
