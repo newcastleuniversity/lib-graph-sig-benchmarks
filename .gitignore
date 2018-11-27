@@ -3,3 +3,8 @@
 /target
 /.clover
 .Rproj.user
+/analysis/.Rhistory
+/analysis/.RData
+/.settings
+/.project
+/.classpath
