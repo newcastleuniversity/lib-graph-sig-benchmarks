@@ -89,7 +89,9 @@ public class RawCSVResultFormat implements ResultFormat {
 //        out.print(delimiter);
 //        out.print(emit(result.getPrimaryResult().getSampleCount()));
 //        out.print(delimiter);
+        out.print("\"");
         out.print(emit(result.getPrimaryResult().getScore()));
+        out.print("\"");
 //        out.print(delimiter);
 //        out.print(emit(result.getPrimaryResult().getScoreError()));
         out.print(delimiter);
@@ -101,7 +103,9 @@ public class RawCSVResultFormat implements ResultFormat {
             out.print(delimiter);
             String v = benchmarkParams.getParam(p);
             if (v != null) {
+                out.print("\"");
                 out.print(emit(v));
+                out.print("\"");
             }
         }
 
