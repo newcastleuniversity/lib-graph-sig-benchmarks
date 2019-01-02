@@ -1,23 +1,22 @@
 #!/bin/bash
-# usage: ./benchmark.sh <benchmark_mode> <profiler>
-# example: ./benchmark.sh profilers.FlightRecordingProfiler
-# shell script to execute jmh benchmarks with a supported profiler 
+# usage: ./benchmarkProfiling.sh <data path>
+# example: ./benchmarkProfiling.sh experiment-fork-20-12-18/
+#shell script to create an csv file from performance experiments 
 
-if [ "$1" = "" ] ; then 
-	BENCHMODE="-bm avgt"
+if [ "$1" = "" ] ; then
+        DATA_PATH=""
 else
-	BENCHMODE="-bm ${1}"
-fi
-if [ "$2" = "" ] ; then 
-	PROFILER=
-else
-	PROFILER=-prof=$2
+	DATA_PATH="${1}"
+        cd $DATA_PATH
 fi
 
-JVMOPTIONS=" -XX:+UnlockCommercialFeatures -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints"
+#cd experiment-fork-20-12-18/
 
-# -wi (warmup iterations) -i (iterations) -f (forks) -foe (fail on error) -p (parameters)
-BENCHOPTIONS="-wi 1 -i 1 -f 1 -foe true -p l_n=512" #,1024,2048,3072"
+echo  "\"Experiment\"","\"CPU Time(Secs)\"","\"Method Name\"" 
+#Experiment,CPU Time,Method Name
 
-java  $JVMOPTIONS -jar target/benchmarks.jar KeyGenBenchmark $BENCHMODE $PROFILER $BENCHOPTIONS
-
+for filename in test.*.er; do 
+	#echo -e "\"$filename\",\c" &&
+		er_print  -printmode "," -sort i.totalcpu -metrics i.totalcpu -header  -func $filename  | grep "eu.prismacloud.primitives.zkpgs" | awk -v var="$filename" 'BEGIN{OFS="";}{ print "\""var"\",",$0 }'
+#er_print  -printmode "," -sort i.totalcpu -metrics i.totalcpu -header  -func $filename  | grep "eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair.keyGen(eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters)" 
+done 
