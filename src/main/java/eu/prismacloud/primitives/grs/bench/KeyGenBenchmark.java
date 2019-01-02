@@ -2,6 +2,7 @@ package eu.prismacloud.primitives.grs.bench;
 
 import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
 import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
+import net.nicoulaj.jmh.profilers.SolarisStudioProfiler;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.RunResult;
 import org.openjdk.jmh.runner.Runner;
@@ -9,6 +10,7 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
+import org.openjdk.jmh.runner.options.WarmupMode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,9 +47,13 @@ public class KeyGenBenchmark {
 	@Benchmark
 	// other benchmark modes include Mode.SampleTime and Mode.SingleShotTime
 //	@BenchmarkMode({Mode.AverageTime, Mode.Throughput})
-//	@BenchmarkMode({Mode.AverageTime})
-	@BenchmarkMode({Mode.Throughput})
+	@BenchmarkMode({Mode.AverageTime})
+//	@BenchmarkMode({Mode.Throughput})
 	@OutputTimeUnit(TimeUnit.MINUTES)
+	//@Benchmark
+	//@Warmup(iterations = 3, batchSize = 1)
+	//@Measurement(iterations = 1, batchSize = 1)
+	//@BenchmarkMode(Mode.SingleShotTime)
 	public void measureKeyGen() {
 		gsk.keyGen(keyGenParameters);
 	}
@@ -58,12 +64,16 @@ public class KeyGenBenchmark {
 				.include(KeyGenBenchmark.class.getSimpleName())
 				.param("l_n", "512", "1024", "2048", "3072")
 				.jvmArgs("-server")
-				.warmupIterations(10)
-				.measurementIterations(10)
+				.warmupIterations(0)
+				.measurementIterations(1)
+				.addProfiler(SolarisStudioProfiler.class)
+//				.addProfiler(OraclePerformanceAnalyzerProfiler.class)
+				.warmupMode(WarmupMode.INDI)
 				.threads(1)
+				.warmupForks(2)
 				.forks(10)
 				.shouldFailOnError(true)
-				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
+			//	.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
 				//.shouldDoGC(true)
 				.build();
 
