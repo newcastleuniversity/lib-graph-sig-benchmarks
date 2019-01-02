@@ -4,13 +4,17 @@
 # install.packages('DMwR')
 # install.packages("gplots")
 # install.packages('DAAG')
-
+#install.packages("agricolae")
+library(agricolae)
 library(ggplot2)
 library(gplots)
 library(DAAG)
 library(e1071)
 library(dplyr)
 library(outliers)
+library(plyr)
+library(reshape2)
+library(car)
 
 options(digits=10)
 
@@ -24,6 +28,8 @@ col_headings <- c('Name','Mode', 'Score', 'Type','KeyLength')
 names(keyGenData) <- col_headings
 str(keyGenData)
 
+scatter.smooth(x=keyGenData$KeyLength, y=keyGenData$Score, main="Keylength ~ Score")  # scatterplot
+
 fKeyLength <- factor(keyGenData$KeyLength)
 fKeyLength
 
@@ -32,6 +38,8 @@ keyGenTime
 
 fKeyLength <- factor(keyGenTime$KeyLength)
 fKeyLength
+
+keyGenTime$KeyLength <- factor(keyGenTime$KeyLength)
 
 
 summary(keyGenTime$Score)
@@ -73,16 +81,16 @@ boxplot(keyGenTime$Score ~ keyGenTime$KeyLength, main="Key generation by key len
 plot(density(keyGenTime$Score), main="Density Plot: Score", ylab="Frequency", sub=paste("Skewness:", round(e1071::skewness(keyGenTime$Score), 2)))  # density plot for 'speed'
 polygon(density(keyGenTime$Score), col="red")
 
-# perform anova 
-(an <- anova(fit))
-anova(fit)["Residuals", "Sum Sq"]
-(aov_cont<- aov(fit))
-
+(aov_cont<- aov(keyGenTime$Score ~ keyGenTime$KeyLength))
+ls(aov_cont)
 summary(aov_cont)
 confint(aov_cont, level = 0.9)
+summary.lm(aov_cont)
+plot(aov_cont)
+outlierTest(aov_cont)
 
 # perform Tukey test
-(tuk<- TukeyHSD(aov_cont))
+(tuk<- TukeyHSD(aov_cont, conf.level = 0.95))
 plot(tuk)
 
 lmo <- lm(keyGenTime$Score ~ keyGenTime$KeyLength)
@@ -117,8 +125,7 @@ meansg
 barplot(meansg$x, names.arg=meansg$Group.1,main="Means bar plot", xlab="Key Length", ylab="Mean",          col=c("red", "yellow","green", "blue"))
 
 plot(keyGenTime$KeyLength)
-#install.packages("agricolae")
-library(agricolae)
+
 res <- HSD.test(ares, 'keyGenTime$KeyLength')
 res
 plot(res)
@@ -126,60 +133,8 @@ plot(res)
 posthoc <- TukeyHSD(x=aov_cont, 'keyGenTime$KeyLength', conf.level=0.95)
 plot(posthoc)
 
-library(car)
 leveneTest(keyGenTime$Score ~ keyGenTime$KeyLength, keyGenTime)
 
-library(plyr)
-library(reshape2)
-melted <- melt(keyGenTime, id.vars=c("KeyLength", "Type"))
-melted
-# Run the functions length, mean, and sd on the value of "change" for each group, 
-# broken down by key length
-cdata <- ddply(keyGenTime, .(KeyLength), summarise,
-               N    = length(keyGenTime$Score),
-               mean = mean(keyGenTime$Score),
-                sd   = sd(keyGenTime$Score),
-               se   = sd / sqrt(N))
-cdata
-
-group_by(keyGenTime, keyGenTime$KeyLength) %>% 
-  summarize(m = mean(keyGenTime$Score), N= length(keyGenTime$Score))
-
-players <- group_by(keyGenTime, keyGenTime$KeyLength)
-games <- summarise(players, total = sum(keyGenTime$Score))
-head(arrange(games, desc(total)), 5)
-
-keyGenTime$KeyLength <- as.factor(keyGenTime$KeyLength)
-
-keyGenTime %>%
-  group_by(keyGenTime$KeyLength) %>%
-  summarise(total = sum(keyGenTime$Score)) %>%
-  arrange(desc(total)) %>%
-  head(5)
-
-filter(keyGenTime, keyGenTime$Score == "30.064309")
-keyGenTime %>% 
-  select(keyGenTime$Score, ends_with("0.535075"))
-
-m <- aggregate(keyGenTime$Score~keyGenTime$KeyLength, FUN=mean)
-m
-
-
-grouped <- group_by(keyGenTime,  keyGenTime$KeyLength)
-summarise(grouped, mean=mean(keyGenTime$Score), sd=sd(keyGenTime$Score))
-
-summarise(group_by(keyGenTime, keyGenTime$KeyLength),
-          mean=mean(keyGenTime$Score), sd=sd(keyGenTime$Score))
-   
-#+++++++++++++++++++++++++
-# Function to calculate the mean and the standard deviation
-# for each group
-#+++++++++++++++++++++++++
-# data : a data frame
-# varname : the name of a column containing the variable
-#to be summariezed
-# groupnames : vector of column names to be used as
-# grouping variables
 data_summary <- function(data, varname, groupnames){
    require(plyr)
    summary_func <- function(x, col){
@@ -195,11 +150,9 @@ data_summary <- function(data, varname, groupnames){
    return(data_sum)
  }
    
- df2 <- data_summary(keyGenTime, varname = "Score", groupnames = c("KeyLength"))
- df2
+ (df2 <- data_summary(keyGenTime, varname = "Score", groupnames = c("KeyLength")))
  
- #(table(keyGenTime))
-
+ 
  (mean(keyGenTime$Score, na.rm=TRUE))
  (sd(keyGenTime$Score, na.rm=TRUE))
 
@@ -218,21 +171,22 @@ pairwise.t.test(keyGenTime$Score, keyGenTime$KeyLength)
 
 glimpse(keyGenTime)
 
-totalMean <- mean(keyGenTime$Score, na.rm=TRUE)
-totalMean
-demo <- keyGenTime %>%
-  #mutate(m = mean(Score, na.rm=TRUE)) %>%
-  #m = mean(keyGenTime$Score) %>%
-  group_by(KeyLength) %>%
-  summarise(mean = mean(Score, na.rm=TRUE), 
-            standardDeviation = sd(Score, na.rm = TRUE), 
-            standardError =  (sd(Score, na.rm=TRUE)/sqrt(n())))
-
-dd <- demo %>%
-  mutate(effect = totalMean - mean)
-dd
+(totalMean <- mean(keyGenTime$Score, na.rm=TRUE))
 
 
-glimpse(dd)
+# demo <- keyGenTime %>%
+#   #mutate(m = mean(Score, na.rm=TRUE)) %>%
+#   #m = mean(keyGenTime$Score) %>%
+#   group_by(KeyLength) 
+#   summarise(mean = mean(Score, na.rm=TRUE), 
+#             standardDeviation = sd(Score, na.rm = TRUE), 
+#             standardError =  (sd(Score, na.rm=TRUE)/sqrt(n())))
+# demo
+# dd <- demo %>%
+#   mutate(effect = totalMean - mean)
+# dd
+# 
+# 
+# glimpse(dd)
+# add key lenght sizes 
 
-scatter.smooth(x=keyGenTime$KeyLength, y=keyGenTime$Score, main="Keylength ~ Score")  # scatterplot
