@@ -1,4 +1,4 @@
-# key generation results analysis
+# commitment computation results analysis
 
 # packages
 # install.packages('DMwR')
@@ -29,10 +29,6 @@ names(commitmentData) <- col_headings
 str(commitmentData)
 
 scatter.smooth(x=commitmentData$KeyLength, y=commitmentData$Score, main="Keylength ~ Score")  # scatterplot
-
-#fKeyLength <- factor(commitmentData$KeyLength)
-#fKeyLength
-
 
 summary(commitmentData$Score)
 max(commitmentData$Score)
@@ -68,7 +64,6 @@ plotmeans(commitmentData$Score ~ commitmentData$KeyLength, digits=2, ccol="red",
 
 boxplot(commitmentData$Score ~ commitmentData$KeyLength, main="Key generation by key length (mean is black dot)", xlab="key length", ylab="execution time (sec) for generating keys", col=rainbow(7))
 
-
 # create density plots
 plot(density(commitmentData$Score), main="Density Plot: Score", ylab="Frequency", sub=paste("Skewness:", round(e1071::skewness(commitmentData$Score), 2)))  # density plot for 'speed'
 polygon(density(commitmentData$Score), col="red")
@@ -93,14 +88,13 @@ anova(lmo)
 plot(lmo)
 outlierTest(lmo)
 
-
 # discard outliers 
 commitmentData$Score<-ifelse(commitmentData$Score==outlier(commitmentData$Score),NA,commitmentData$Score)
 commitmentData
 
 influence.measures(lmo)
 
-ares <- aov(commitmentData$Score ~ commitmentData$KeyLength, data = commitmentData)
+ares <- aov(commitmentData$Score ~ factor(commitmentData$KeyLength), data = commitmentData)
 TukeyHSD(ares)
 plot(TukeyHSD(ares), las=0)
 summary(ares)
@@ -108,9 +102,6 @@ summary(ares)
 kruskal.test(commitmentData$Score ~ commitmentData$KeyLength, commitmentData)
 
 barplot(commitmentData$Score)
-(counts <- table(commitmentData$KeyLength))
-
-barplot(counts,main=" Bar Plot",         xlab="Key Length", ylab="Frequency",          col=c("red", "yellow","green", "blue"),         legend=rownames(counts))
 
 meansg <- aggregate(commitmentData$Score, by=list(commitmentData$KeyLength), FUN=mean)
 meansg
@@ -118,14 +109,14 @@ barplot(meansg$x, names.arg=meansg$Group.1,main="Means bar plot", xlab="Key Leng
 
 plot(commitmentData$KeyLength)
 
-res <- HSD.test(ares, 'keyGenTime$KeyLength')
+res <- HSD.test(ares, 'commitmentData$KeyLength')
 res
 plot(res)
 
-posthoc <- TukeyHSD(x=aov_cont, 'keyGenTime$KeyLength', conf.level=0.95)
+posthoc <- TukeyHSD(x=aov_cont, factor(commitmentData$KeyLength), conf.level=0.95)
 plot(posthoc)
 
-leveneTest(commitmentData$Score ~ commitmentData$KeyLength, commitmentData)
+leveneTest(commitmentData$Score ~ factor(commitmentData$KeyLength), commitmentData)
 
 data_summary <- function(data, varname, groupnames){
    require(plyr)
@@ -144,7 +135,6 @@ data_summary <- function(data, varname, groupnames){
    
  (df2 <- data_summary(commitmentData, varname = "Score", groupnames = c("KeyLength")))
  
- 
  (mean(commitmentData$Score, na.rm=TRUE))
  (sd(commitmentData$Score, na.rm=TRUE))
 
@@ -153,32 +143,15 @@ ggplot(df2, aes(x=df2$KeyLength, y=df2$mean,  fill = df2$KeyLength)) +
   theme_minimal() +
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width=.15,
                 position=position_dodge(0.9)) +
-  labs( x="Key length",  y = "Mean key generation time (sec)", fill="") 
+  labs( x="Key length",  y = "Mean commitment computation time (sec)", fill="") 
 
 
 # calculate quantiles
 quantile(commitmentData$Score)
 t.test(commitmentData$Score, mu=95)
-pairwise.t.test(commitmentData$Score, keyGenTime$KeyLength)
+pairwise.t.test(commitmentData$Score, commitmentData$KeyLength)
 
 glimpse(commitmentData)
 
 (totalMean <- mean(commitmentData$Score, na.rm=TRUE))
-
-
-# demo <- keyGenTime %>%
-#   #mutate(m = mean(Score, na.rm=TRUE)) %>%
-#   #m = mean(keyGenTime$Score) %>%
-#   group_by(KeyLength) 
-#   summarise(mean = mean(Score, na.rm=TRUE), 
-#             standardDeviation = sd(Score, na.rm = TRUE), 
-#             standardError =  (sd(Score, na.rm=TRUE)/sqrt(n())))
-# demo
-# dd <- demo %>%
-#   mutate(effect = totalMean - mean)
-# dd
-# 
-# 
-# glimpse(dd)
-# add key lenght sizes 
 
