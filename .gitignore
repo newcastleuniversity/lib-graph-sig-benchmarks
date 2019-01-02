@@ -8,3 +8,15 @@
 /.settings
 /.project
 /.classpath
+/experiment-fork-10
+/experiment-fork-20-12-18
+/experiment-fork-28-12-18
+/experiments
+/eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen-0.jfr
+/eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen-1.jfr
+/eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen-2.jfr
+/eu.prismacloud.primitives.grs.bench.KeyGenBenchmark.measureKeyGen-3.jfr
+/experiment-fork-20-12-18.zip
+/experiments.zip
+*.er.rc
+*.log
