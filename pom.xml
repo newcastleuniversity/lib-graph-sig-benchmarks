@@ -43,7 +43,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
         <!--
             JMH version to use with this project.
           -->
-        <jmh.version>1.21</jmh.version>
+        <jmh.version>1.22-SNAPSHOT</jmh.version>
+        <!--<jmh.version>1.21</jmh.version>-->
 
         <!--
             Java source/target to use for compilation.
@@ -79,10 +80,27 @@ THE POSSIBILITY OF SUCH DAMAGE.
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!-- add support for Java Flight Recording profiler -->
+        <!--<dependency>-->
+        <!--<groupId>com.github.biboudis</groupId>-->
+        <!--<artifactId>jmh-profilers</artifactId>-->
+        <!--<version>0.1.4</version>-->
+        <!--</dependency>-->
+        
+        <!-- support for extra profilers flight recorder and solaris studio -->
         <dependency>
-            <groupId>com.github.biboudis</groupId>
-            <artifactId>jmh-profilers</artifactId>
-            <version>0.1.4</version>
+            <groupId>net.nicoulaj.jmh-utils</groupId>
+            <artifactId>jmh-profiler-flight-recorder</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>net.nicoulaj.jmh-utils</groupId>
+            <artifactId>jmh-profiler-solaris-studio</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>net.nicoulaj.jmh-utils</groupId>
+            <artifactId>jmh-profiler-utils</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
