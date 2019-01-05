@@ -7,6 +7,7 @@ import eu.prismacloud.primitives.zkpgs.keys.ExtendedPublicKey;
 import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
 import eu.prismacloud.primitives.zkpgs.message.HttpMessageGateway;
 import eu.prismacloud.primitives.zkpgs.parameters.GraphEncodingParameters;
+import net.nicoulaj.jmh.profilers.SolarisStudioProfiler;
 import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
 import eu.prismacloud.primitives.zkpgs.recipient.GSRecipient;
 import eu.prismacloud.primitives.zkpgs.util.BaseCollection;
@@ -114,10 +115,12 @@ public class CommitmentBenchmark {
 
 		Options opt = new OptionsBuilder()
 				.include(eu.prismacloud.primitives.grs.bench.CommitmentBenchmark.class.getSimpleName())
-				.param("l_n", "512")//, "1024", "2048", "3072")
-				.param("l_V", "10")//, "100", "1000", "10000")
+				.param("l_n", "512", "1024", "2048", "3072")
+				.param("l_V", "10", "100", "1000", "10000")
 				.jvmArgs("-server")
-				.warmupIterations(1)
+				.warmupIterations(0)
+				.addProfiler(SolarisStudioProfiler.class)
+				.warmupForks(1)
 				.measurementIterations(1)
 				.threads(1)
 				.forks(10)
