@@ -1,5 +1,6 @@
 package eu.prismacloud.primitives.grs.bench;
 
+import eu.prismacloud.primitives.zkpgs.BaseRepresentation;
 import eu.prismacloud.primitives.zkpgs.commitment.GSCommitment;
 import eu.prismacloud.primitives.zkpgs.exception.EncodingException;
 import eu.prismacloud.primitives.zkpgs.keys.ExtendedKeyPair;
@@ -7,9 +8,10 @@ import eu.prismacloud.primitives.zkpgs.keys.ExtendedPublicKey;
 import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
 import eu.prismacloud.primitives.zkpgs.message.HttpMessageGateway;
 import eu.prismacloud.primitives.zkpgs.parameters.GraphEncodingParameters;
-import net.nicoulaj.jmh.profilers.SolarisStudioProfiler;
+//import net.nicoulaj.jmh.profilers.SolarisStudioProfiler;
 import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
 import eu.prismacloud.primitives.zkpgs.recipient.GSRecipient;
+import eu.prismacloud.primitives.zkpgs.store.URN;
 import eu.prismacloud.primitives.zkpgs.util.BaseCollection;
 import eu.prismacloud.primitives.zkpgs.util.FilePersistenceUtil;
 import org.openjdk.jmh.annotations.*;
@@ -29,6 +31,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -45,8 +48,15 @@ public class CommitmentBenchmark {
 	@Param({"512", "1024", "2048", "3072"})
 	private int l_n;
 
-	@Param({"100"})
+
+	@Param({"50", "500", "5000", "50000"})
+	private int bases;
+
+//	@Param({"10", "100", "1000", "10000"})
 	private int l_V;
+
+//	@Param({"50", "500", "5000", "50000"})
+	private int l_E;
 
 	private KeyGenParameters keyGenParameters;
 	private SignerKeyPair gsk;
@@ -56,20 +66,25 @@ public class CommitmentBenchmark {
 	private FilePersistenceUtil persistenceUtil;
 	private GraphEncodingParameters graphEncParams;
 	private ExtendedKeyPair ekp;
+	private Map<URN, BaseRepresentation> encodedBases;
 
 	@Setup
 	public void setup() throws IOException, EncodingException, ClassNotFoundException {
-		String signerKeyPairFilename = "SignerKeyPair-" + l_n + ".ser";
+		// calculate number of bases for vertices and edges
+		l_V = bases/5;
+		l_E = bases - (bases/5);
+		
+		String signerKeyPairFilename = "SignerKeyPair-" + l_n  + ".ser";
 		String signerPKFilename = "SignerPublicKey-" + l_n + ".ser";
-		String ekpFilename = "ExtendedKeyPair-" + l_n + ".ser";
-		String epkFilename = "ExtendedPublicKey-" + l_n + ".ser";
+		String ekpFilename = "ExtendedKeyPair-" + l_n + l_V + l_E + ".ser";
+		String epkFilename = "ExtendedPublicKey-" + l_n + l_V + l_E + ".ser";
 
 		persistenceUtil = new FilePersistenceUtil();
 		gsk = new SignerKeyPair();
 
 		keyGenParameters = KeyGenParameters.createKeyGenParameters(l_n, 1632, 256, 256, 1, 597, 120, 2724, 80, 256, 80, 80);
 
-		graphEncParams = new GraphEncodingParameters(l_V, 56, 500, 256, 16);
+		graphEncParams = new GraphEncodingParameters(l_V, 56, l_E, 256, 16);
 
 		if (!new File(signerKeyPairFilename).isFile()) {
 			gsk.keyGen(keyGenParameters);
@@ -81,20 +96,28 @@ public class CommitmentBenchmark {
 
 		if (!new File(ekpFilename).isFile()) {
 			ekp = new ExtendedKeyPair(gsk, graphEncParams, keyGenParameters);
-			ekp.generateBases();
 			ekp.setupEncoding();
+
+			ekp.generateBases();
 			ekp.createExtendedKeyPair();
 			persistenceUtil.write(ekp, ekpFilename);
 		} else {
 			ekp = (ExtendedKeyPair) persistenceUtil.read(ekpFilename);
 		}
 
+
 		epk = ekp.getExtendedPublicKey();
+
 		persistenceUtil.write(ekp.getExtendedPublicKey(), epkFilename);
 		baseCollection = epk.getBaseCollection();
 
+
 		GSRecipient recipient = new GSRecipient(epk, new HttpMessageGateway("127.0.0.1", 78));
 		randomness = recipient.generatevPrime();
+		System.out.println("basecollection length: " + baseCollection.size());
+		System.out.println("l_V: " + ekp.getGraphEncodingParameters().getL_V());
+		System.out.println("l_E: " + ekp.getGraphEncodingParameters().getL_E());
+//		System.out.println("vertex bases: " + epk.getEncoding().);
 
 	}
 
@@ -104,10 +127,9 @@ public class CommitmentBenchmark {
 	@BenchmarkMode({Mode.AverageTime})
 //	@BenchmarkMode({Mode.Throughput})
 //	@OutputTimeUnit(TimeUnit.MINUTES)
-	@OutputTimeUnit(TimeUnit.MICROSECONDS)
+	@OutputTimeUnit(TimeUnit.MILLISECONDS)
 	public GSCommitment measureCommitments() {
 		GSCommitment commitment = GSCommitment.createCommitment(baseCollection, randomness, epk);
-
 		return commitment;
 	}
 
@@ -116,14 +138,15 @@ public class CommitmentBenchmark {
 		Options opt = new OptionsBuilder()
 				.include(eu.prismacloud.primitives.grs.bench.CommitmentBenchmark.class.getSimpleName())
 				.param("l_n", "512", "1024", "2048", "3072")
-				.param("l_V", "10", "100", "1000", "10000")
+				.param("bases", "50", "500", "5000", "50000")
 				.jvmArgs("-server")
 				.warmupIterations(0)
-				.addProfiler(SolarisStudioProfiler.class)
+//				.addProfiler(SolarisStudioProfiler.class)
 				.warmupForks(1)
+				.
 				.measurementIterations(1)
 				.threads(1)
-				.forks(10)
+				.forks(1)
 				.shouldFailOnError(true)
 				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
 				//.shouldDoGC(true)
