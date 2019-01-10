@@ -142,11 +142,10 @@ public class CommitmentBenchmark {
 				.jvmArgs("-server")
 				.warmupIterations(0)
 //				.addProfiler(SolarisStudioProfiler.class)
-				.warmupForks(1)
-				.
+				.warmupForks(10)
 				.measurementIterations(1)
 				.threads(1)
-				.forks(1)
+				.forks(100)
 				.shouldFailOnError(true)
 				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
 				//.shouldDoGC(true)
