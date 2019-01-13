@@ -83,7 +83,7 @@ ggplot(df2, aes(x=factor(df2$KeyLength), y=df2$mean,  fill = factor(df2$Bases)))
   theme_minimal() +
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width=.15,
                 position=position_dodge(0.9)) +
-  labs( x="Key length",  y = "Mean commitment computation time (msec)", fill="Number of Bases") 
+  labs(x="Key length", y="Mean commitment computation time (msec)", fill="Number of Bases") 
 
 # read data
 imgFileName <- "mean-commitment-execution-time"
