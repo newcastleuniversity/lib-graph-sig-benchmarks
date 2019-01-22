@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
 public class IssuingBenchmark {
-	public static final String DATA_RESULTS_KEYGEN_RAW_CSV = "data/results-commitment-raw";
+	public static final String DATA_RESULTS_ISSUING_RAW_CSV = "data/results-issuing-raw";
 
 	@Param({"512", "1024", "2048", "3072"})
 	private int l_n;
@@ -186,7 +186,6 @@ public class IssuingBenchmark {
 		}
 	}
 
-
 	@State(Scope.Benchmark)
 	@BenchmarkMode({Mode.AverageTime})
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -307,6 +306,6 @@ public class IssuingBenchmark {
 	private static PrintStream getPrintStream() throws FileNotFoundException {
 		Date date = new Date();
 		Format formatter = new SimpleDateFormat("YYYY-MM-dd_hh-mm-ss");
-		return new PrintStream(new File(DATA_RESULTS_KEYGEN_RAW_CSV + "-" + ((SimpleDateFormat) formatter).format(date)) + ".csv");
+		return new PrintStream(new File(DATA_RESULTS_ISSUING_RAW_CSV + "-" + ((SimpleDateFormat) formatter).format(date)) + ".csv");
 	}
 }
