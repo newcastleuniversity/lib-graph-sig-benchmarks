@@ -5,7 +5,7 @@ source("functions.R")
 source("configuration.R")
 
 # read data
-dataFile <- "results-commitment-raw-2019-01-11_08-14-56"
+dataFile <- "results-commitment-raw-2019-01-13_01-20-05"
 dataPath <- getFilePath("../data/", dataFile, ".csv")
 commitmentData <- read.csv(dataPath, sep=",")
 
