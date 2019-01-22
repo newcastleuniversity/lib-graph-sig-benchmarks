@@ -78,8 +78,8 @@ public class IssuingBenchmark {
 
 		String signerKeyPairFilename = "SignerKeyPair-" + l_n + ".ser";
 		String signerPKFilename = "SignerPublicKey-" + l_n + ".ser";
-		String ekpFilename = "ExtendedKeyPair-" + l_n + l_V + l_E + ".ser";
-		String epkFilename = "ExtendedPublicKey-" + l_n + l_V + l_E + ".ser";
+		String ekpFilename = "ExtendedKeyPair-" + l_n + "-" + l_V + "-" + l_E + ".ser";
+		String epkFilename = "ExtendedPublicKey-" + l_n + "-" + l_V + "-" + l_E + ".ser";
 
 		persistenceUtil = new FilePersistenceUtil();
 		gsk = new SignerKeyPair();
