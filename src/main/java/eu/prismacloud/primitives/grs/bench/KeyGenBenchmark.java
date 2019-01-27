@@ -2,7 +2,7 @@ package eu.prismacloud.primitives.grs.bench;
 
 import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
 import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
-import net.nicoulaj.jmh.profilers.SolarisStudioProfiler;
+//import net.nicoulaj.jmh.profilers.SolarisStudioProfiler;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.RunResult;
 import org.openjdk.jmh.runner.Runner;
@@ -66,7 +66,7 @@ public class KeyGenBenchmark {
 				.jvmArgs("-server")
 				.warmupIterations(0)
 				.measurementIterations(1)
-				.addProfiler(SolarisStudioProfiler.class)
+//				.addProfiler(SolarisStudioProfiler.class)
 //				.addProfiler(OraclePerformanceAnalyzerProfiler.class)
 				.warmupMode(WarmupMode.INDI)
 				.threads(1)
