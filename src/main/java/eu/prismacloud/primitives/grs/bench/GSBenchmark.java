@@ -10,43 +10,31 @@ import eu.prismacloud.primitives.zkpgs.keys.ExtendedPublicKey;
 import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
 import eu.prismacloud.primitives.zkpgs.orchestrator.RecipientOrchestrator;
 import eu.prismacloud.primitives.zkpgs.orchestrator.SignerOrchestrator;
+import eu.prismacloud.primitives.zkpgs.orchestrator.VerifierOrchestrator;
 import eu.prismacloud.primitives.zkpgs.parameters.GraphEncodingParameters;
 import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
 import eu.prismacloud.primitives.zkpgs.store.URN;
 import eu.prismacloud.primitives.zkpgs.util.BaseCollection;
 import eu.prismacloud.primitives.zkpgs.util.FilePersistenceUtil;
 import org.jgrapht.io.ImportException;
-import org.openjdk.jmh.annotations.*;
-import org.openjdk.jmh.results.RunResult;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.openjdk.jmh.runner.options.TimeValue;
+import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
 import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 /**
- * Creates a benchmark for measuring the verification phase of the pair-wise difference verifier component
+ * Created by Ioannis Sfyrakis on 2019-01-27
  */
 @State(Scope.Benchmark)
-public class PairWiseVerifierBenchmark {
+public abstract class GSBenchmark {
 
-	public static final String DATA_RESULTS_PAIR_WISE_VERIFIER_CSV = "data/results-pair-wise-verifier-raw";
 
 	@Param({"512", "1024", "2048", "3072"})
 	private int l_n;
@@ -70,13 +58,40 @@ public class PairWiseVerifierBenchmark {
 	private ExtendedKeyPair ekp;
 	private Map<URN, BaseRepresentation> encodedBases;
 	private static SignerOrchestrator signer;
+
+	public ExtendedPublicKey getEpk() {
+		return epk;
+	}
+
+	public ExtendedKeyPair getEkp() {
+		return ekp;
+	}
+
+	public SignerOrchestrator getSigner() {
+		return signer;
+	}
+
+	public RecipientOrchestrator getRecipient() {
+		return recipient;
+	}
+
+	public ProverOrchestratorPerf getProver() {
+		return prover;
+	}
+
+	public VerifierOrchestrator getVerifier() {
+		return verifier;
+	}
+
 	private static RecipientOrchestrator recipient;
 	private static MockMessageGateway messageGateway;
 	private static ProverOrchestratorPerf prover;
-	private static VerifierOrchestratorPerf verifier;
-	private BigInteger cChallenge;
+	private static VerifierOrchestrator verifier;
+	public void GSBenchmark() {
 
-	public void setup() throws IOException, EncodingException, ClassNotFoundException, InterruptedException, ExecutionException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+	}
+
+	public void setup() throws IOException, EncodingException, ClassNotFoundException, InterruptedException, ExecutionException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 		// calculate number of bases for vertices and edges
 		l_V = bases / 5;
 		l_E = bases - (bases / 5);
@@ -87,13 +102,9 @@ public class PairWiseVerifierBenchmark {
 		messageGateway = new MockMessageGateway(DefaultValues.CLIENT, hostAddress, portNumber);
 
 		setupIssuing(sigmaFilename);
-
 		prover = new ProverOrchestratorPerf(ekp.getExtendedPublicKey(), messageGateway);
-
-		verifier = new VerifierOrchestratorPerf(ekp.getExtendedPublicKey(), messageGateway);
-
+		verifier = new VerifierOrchestrator(ekp.getExtendedPublicKey(), messageGateway);
 		prover.readSignature(sigmaFilename);
-
 		Vector<Integer> vector = new Vector<>();
 		// add proof vectors
 		vector.add(1);
@@ -104,7 +115,7 @@ public class PairWiseVerifierBenchmark {
 
 	}
 
-	private void setupIssuing(String sigmaFilename) throws IOException, ClassNotFoundException, EncodingException, ProofStoreException, NoSuchAlgorithmException, ImportException, VerificationException {
+	public void setupIssuing(String sigmaFilename) throws IOException, ClassNotFoundException, EncodingException, ProofStoreException, NoSuchAlgorithmException, ImportException, VerificationException {
 
 		String signerKeyPairFilename = "SignerKeyPair-" + l_n + ".ser";
 		String signerPKFilename = "SignerPublicKey-" + l_n + ".ser";
@@ -135,7 +146,7 @@ public class PairWiseVerifierBenchmark {
 		} else {
 			ekp = (ExtendedKeyPair) persistenceUtil.read(ekpFilename);
 		}
-		
+
 		epk = ekp.getExtendedPublicKey();
 		persistenceUtil.write(ekp.getExtendedPublicKey(), epkFilename);
 		baseCollection = epk.getBaseCollection();
@@ -145,7 +156,7 @@ public class PairWiseVerifierBenchmark {
 		//		System.out.println("l_E: " + ekp.getGraphEncodingParameters().getL_E());
 		//		System.out.println("vertex bases: " + epk.getEncoding().);
 
-		String graphFilename = "/Users/alpac/DEV/lib-graph-sig-benchmarks/test.graphml";
+		String graphFilename = "/Users/alpac/DEV/lib-graph-sig-benchmarks/signer-infra.graphml";
 
 		signer = new SignerOrchestrator(ekp, messageGateway);
 		recipient = new RecipientOrchestrator(ekp.getExtendedPublicKey(), messageGateway);
@@ -163,73 +174,5 @@ public class PairWiseVerifierBenchmark {
 		}
 	}
 
-	@State(Scope.Benchmark)
-	@BenchmarkMode({Mode.AverageTime})
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class ExecuteVerificationBenchmark extends PairWiseVerifierBenchmark {
-		private BigInteger cChallenge;
 
-		public ExecuteVerificationBenchmark() {
-			super();
-		}
-
-		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-
-			super.setup();
-			prover.executePreChallengePhase();
-			cChallenge = prover.computeChallenge();
-			prover.executePostChallengePhase(cChallenge);
-			verifier.receiveProverMessage();
-			verifier.executeVerificationForPairWiseVerifiers();
-
-		}
-
-		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public Object executeCompoundVerification(ExecuteVerificationBenchmark state) throws Exception {
-			return verifier.executePairWiseVerifiers();
-		}
-
-		@TearDown(Level.Invocation)
-		public void afterInvocation() throws Exception {
-			signer = null;
-			recipient = null;
-			prover = null;
-			verifier = null;
-		}
-	}
-
-	public static void main(String[] args) throws FileNotFoundException, RunnerException {
-		Options opt = new OptionsBuilder()
-				.include(PairWiseVerifierBenchmark.class.getSimpleName())
-				.param("l_n", "512")//, "1024", "2048", "3072")
-				.param("bases", "100")//, "1000", "10000", "100000")
-				.jvmArgs("-server")
-				.warmupIterations(0)
-				//				.addProfiler(SolarisStudioProfiler.class)
-				.warmupForks(1)
-				.measurementIterations(1)
-				.threads(1)
-				.forks(1)
-				.shouldFailOnError(true)
-				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
-				//.shouldDoGC(true)
-				.build();
-
-		Collection<RunResult> res = new Runner(opt).run();
-		PrintStream out = getPrintStream();
-		RawCSVResultFormat rcsv = new RawCSVResultFormat(out, ",");
-		rcsv.writeOut(res);
-
-	}
-
-	private static PrintStream getPrintStream() throws FileNotFoundException {
-		Date date = new Date();
-		Format formatter = new SimpleDateFormat("YYYY-MM-dd_hh-mm-ss");
-		return new PrintStream(new File(DATA_RESULTS_PAIR_WISE_VERIFIER_CSV + "-" + ((SimpleDateFormat) formatter).format(date)) + ".csv");
-	}
 }
-
-

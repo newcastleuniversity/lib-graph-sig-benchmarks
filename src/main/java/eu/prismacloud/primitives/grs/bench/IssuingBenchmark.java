@@ -10,6 +10,7 @@ import eu.prismacloud.primitives.zkpgs.keys.ExtendedPublicKey;
 import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
 import eu.prismacloud.primitives.zkpgs.orchestrator.RecipientOrchestrator;
 import eu.prismacloud.primitives.zkpgs.orchestrator.SignerOrchestrator;
+import eu.prismacloud.primitives.zkpgs.orchestrator.VerifierOrchestrator;
 import eu.prismacloud.primitives.zkpgs.parameters.GraphEncodingParameters;
 import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
 import eu.prismacloud.primitives.zkpgs.store.URN;
@@ -35,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -43,9 +45,11 @@ import java.util.concurrent.TimeUnit;
  */
 
 @State(Scope.Benchmark)
-public class IssuingBenchmark {
+public class IssuingBenchmark  {
 	public static final String DATA_RESULTS_ISSUING_RAW_CSV = "data/results-issuing-raw";
 
+	private static SignerOrchestrator signer;
+	private static RecipientOrchestrator recipient;
 	@Param({"512", "1024", "2048", "3072"})
 	private int l_n;
 
@@ -67,72 +71,96 @@ public class IssuingBenchmark {
 	private GraphEncodingParameters graphEncParams;
 	private ExtendedKeyPair ekp;
 	private Map<URN, BaseRepresentation> encodedBases;
-	private static SignerOrchestrator signer;
-	private static RecipientOrchestrator recipient;
-	private static MockMessageGateway messageGateway;
+	private MockMessageGateway messageGateway;
+	private ProverOrchestratorPerf prover;
+	private VerifierOrchestrator verifier;
+	private static String sigmaFilename;
 
-	public void setup() throws IOException, EncodingException, ClassNotFoundException, InterruptedException, ExecutionException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException {
-		// calculate number of bases for vertices and edges
-		l_V = bases / 5;
-		l_E = bases - (bases / 5);
 
-		String signerKeyPairFilename = "SignerKeyPair-" + l_n + ".ser";
-		String signerPKFilename = "SignerPublicKey-" + l_n + ".ser";
-		String ekpFilename = "ExtendedKeyPair-" + l_n + "-" + l_V + "-" + l_E + ".ser";
-		String epkFilename = "ExtendedPublicKey-" + l_n + "-" + l_V + "-" + l_E + ".ser";
+	public void setup() throws IOException, EncodingException, ClassNotFoundException, InterruptedException, ExecutionException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+			// calculate number of bases for vertices and edges
+			l_V = bases / 5;
+			l_E = bases - (bases / 5);
+			 sigmaFilename = "signer-infra-" + l_n + "-" + l_V + "-" + l_E + ".ser";
+			String hostAddress = "192.168.0.19";
+			int portNumber = 9998;
 
-		persistenceUtil = new FilePersistenceUtil();
-		gsk = new SignerKeyPair();
+			messageGateway = new MockMessageGateway(DefaultValues.CLIENT, hostAddress, portNumber);
 
-		keyGenParameters = KeyGenParameters.createKeyGenParameters(l_n, 1632, 256, 256, 1, 597, 120, 2724, 80, 256, 80, 80);
+			setupIssuing(sigmaFilename);
+//			prover = new ProverOrchestratorPerf(ekp.getExtendedPublicKey(), messageGateway);
+//			verifier = new VerifierOrchestrator(ekp.getExtendedPublicKey(), messageGateway);
+//			prover.readSignature(sigmaFilename);
+//			Vector<Integer> vector = new Vector<>();
+//			// add proof vectors
+//			vector.add(1);
+//			vector.add(12);
+//			verifier.createQuery(vector);
+//			verifier.init();
+//			prover.init();
 
-		graphEncParams = new GraphEncodingParameters(l_V, 56, l_E, 256, 16);
-
-		if (!new File(signerKeyPairFilename).isFile()) {
-			gsk.keyGen(keyGenParameters);
-			persistenceUtil.write(gsk, signerKeyPairFilename);
-			persistenceUtil.write(gsk.getPublicKey(), signerPKFilename);
-		} else {
-			gsk = (SignerKeyPair) persistenceUtil.read(signerKeyPairFilename);
 		}
 
-		if (!new File(ekpFilename).isFile()) {
-			ekp = new ExtendedKeyPair(gsk, graphEncParams, keyGenParameters);
-			ekp.setupEncoding();
-			ekp.generateBases();
-			ekp.createExtendedKeyPair();
-			persistenceUtil.write(ekp, ekpFilename);
-		} else {
-			ekp = (ExtendedKeyPair) persistenceUtil.read(ekpFilename);
+		public void setupIssuing(String sigmaFilename) throws IOException, ClassNotFoundException, EncodingException, ProofStoreException, NoSuchAlgorithmException, ImportException, VerificationException {
+
+			String signerKeyPairFilename = "SignerKeyPair-" + l_n + ".ser";
+			String signerPKFilename = "SignerPublicKey-" + l_n + ".ser";
+			String ekpFilename = "ExtendedKeyPair-" + l_n + "-" + l_V + "-" + l_E + ".ser";
+			String epkFilename = "ExtendedPublicKey-" + l_n + "-" + l_V + "-" + l_E + ".ser";
+
+			persistenceUtil = new FilePersistenceUtil();
+			gsk = new SignerKeyPair();
+
+			keyGenParameters = KeyGenParameters.createKeyGenParameters(l_n, 1632, 256, 256, 1, 597, 120, 2724, 80, 256, 80, 80);
+
+			graphEncParams = new GraphEncodingParameters(l_V, 56, l_E, 256, 16);
+
+			if (!new File(signerKeyPairFilename).isFile()) {
+				gsk.keyGen(keyGenParameters);
+				persistenceUtil.write(gsk, signerKeyPairFilename);
+				persistenceUtil.write(gsk.getPublicKey(), signerPKFilename);
+			} else {
+				gsk = (SignerKeyPair) persistenceUtil.read(signerKeyPairFilename);
+			}
+
+			if (!new File(ekpFilename).isFile()) {
+				ekp = new ExtendedKeyPair(gsk, graphEncParams, keyGenParameters);
+				ekp.setupEncoding();
+				ekp.generateBases();
+				ekp.createExtendedKeyPair();
+				persistenceUtil.write(ekp, ekpFilename);
+			} else {
+				ekp = (ExtendedKeyPair) persistenceUtil.read(ekpFilename);
+			}
+
+			epk = ekp.getExtendedPublicKey();
+			persistenceUtil.write(ekp.getExtendedPublicKey(), epkFilename);
+			baseCollection = epk.getBaseCollection();
+
+			//		System.out.println("basecollection length: " + baseCollection.size());
+			//		System.out.println("l_V: " + ekp.getGraphEncodingParameters().getL_V());
+			//		System.out.println("l_E: " + ekp.getGraphEncodingParameters().getL_E());
+			//		System.out.println("vertex bases: " + epk.getEncoding().);
+
+			String graphFilename = "/Users/alpac/DEV/lib-graph-sig-benchmarks/test.graphml";
+
+			signer = new SignerOrchestrator(ekp, messageGateway);
+			recipient = new RecipientOrchestrator(ekp.getExtendedPublicKey(), messageGateway);
+
+			try {
+				signer.init();
+				recipient.init();
+//				signer.round0();
+//				recipient.round1();
+//				signer.round2();
+//				recipient.round3();
+//				recipient.serializeFinalSignature(sigmaFilename);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-
-		epk = ekp.getExtendedPublicKey();
-		persistenceUtil.write(ekp.getExtendedPublicKey(), epkFilename);
-		baseCollection = epk.getBaseCollection();
-
-//		System.out.println("basecollection length: " + baseCollection.size());
-//		System.out.println("l_V: " + ekp.getGraphEncodingParameters().getL_V());
-//		System.out.println("l_E: " + ekp.getGraphEncodingParameters().getL_E());
-//		System.out.println("vertex bases: " + epk.getEncoding().);
-
-		String hostAddress = "192.168.0.19";
-		int portNumber = 9998;
-
-		messageGateway = new MockMessageGateway(DefaultValues.CLIENT, hostAddress, portNumber);
-		String graphFilename = "/Users/alpac/DEV/lib-graph-sig-benchmarks/signer-infra.graphml";
-		signer = new SignerOrchestrator(ekp, messageGateway);
-		recipient = new RecipientOrchestrator(ekp.getExtendedPublicKey(), messageGateway);
-
-		try {
-			signer.init();
-			recipient.init();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	@State(Scope.Benchmark)
-	@BenchmarkMode({Mode.AverageTime})
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
 	public static class Round0Benchmark extends IssuingBenchmark {
 		public Round0Benchmark() {
@@ -140,14 +168,16 @@ public class IssuingBenchmark {
 		}
 
 		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException {
+		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 			super.setup();
+
 		}
 
 		@Benchmark
 		@BenchmarkMode({Mode.AverageTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public void round0(Round0Benchmark state) throws Exception {
+
 			signer.round0();
 		}
 
@@ -159,7 +189,6 @@ public class IssuingBenchmark {
 	}
 
 	@State(Scope.Benchmark)
-	@BenchmarkMode({Mode.AverageTime})
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
 	public static class Round1Benchmark extends IssuingBenchmark {
 		public Round1Benchmark() {
@@ -167,7 +196,8 @@ public class IssuingBenchmark {
 		}
 
 		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException {
+		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+			String sigmaFilename = "signer-infra-" + ".ser";
 			super.setup();
 			signer.round0();
 		}
@@ -187,7 +217,6 @@ public class IssuingBenchmark {
 	}
 
 	@State(Scope.Benchmark)
-	@BenchmarkMode({Mode.AverageTime})
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
 	public static class Round2Benchmark extends IssuingBenchmark {
 		public Round2Benchmark() {
@@ -202,7 +231,7 @@ public class IssuingBenchmark {
 		}
 
 		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException {
+		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 			super.setup();
 			signer.round0();
 			recipient.round1();
@@ -210,7 +239,6 @@ public class IssuingBenchmark {
 
 		@TearDown(Level.Invocation)
 		public void stop() throws Exception {
-			messageGateway.close();
 			signer = null;
 			recipient = null;
 		}
@@ -218,7 +246,6 @@ public class IssuingBenchmark {
 
 
 	@State(Scope.Benchmark)
-	@BenchmarkMode({Mode.AverageTime})
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
 	public static class Round3Benchmark extends IssuingBenchmark {
 		public Round3Benchmark() {
@@ -233,7 +260,7 @@ public class IssuingBenchmark {
 		}
 
 		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException {
+		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 			super.setup();
 			signer.round0();
 			recipient.round1();
@@ -242,12 +269,10 @@ public class IssuingBenchmark {
 
 		@TearDown(Level.Invocation)
 		public void stop() throws Exception {
-			messageGateway.close();
 			signer = null;
 			recipient = null;
 		}
 	}
-
 
 	@State(Scope.Benchmark)
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -257,7 +282,7 @@ public class IssuingBenchmark {
 		}
 
 		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException {
+		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 			super.setup();
 		}
 
@@ -273,7 +298,36 @@ public class IssuingBenchmark {
 
 		@TearDown(Level.Invocation)
 		public void stop() throws Exception {
-			messageGateway.close();
+			signer = null;
+			recipient = null;
+		}
+	}
+	
+	@State(Scope.Benchmark)
+	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+	public static class SerializeGSBenchmark extends IssuingBenchmark {
+		public SerializeGSBenchmark() {
+			super();
+		}
+
+		@Setup(Level.Invocation)
+		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+			super.setup();
+		}
+
+		@Benchmark
+		@BenchmarkMode({Mode.AverageTime})
+		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+		public void issuing(SerializeGSBenchmark state) throws Exception {
+			signer.round0();
+			recipient.round1();
+			signer.round2();
+			recipient.round3();
+			recipient.serializeFinalSignature(sigmaFilename);
+		}
+
+		@TearDown(Level.Invocation)
+		public void stop() throws Exception {
 			signer = null;
 			recipient = null;
 		}
@@ -282,8 +336,8 @@ public class IssuingBenchmark {
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
 				.include(eu.prismacloud.primitives.grs.bench.IssuingBenchmark.class.getSimpleName())
-				.param("l_n", "512", "1024", "2048", "3072")
-				.param("bases", "100", "1000", "10000", "100000")
+				.param("l_n", "512", "1024")//, "2048", "3072")
+				.param("bases", "100")//, "1000", "10000", "100000")
 				.jvmArgs("-server")
 				.warmupIterations(0)
 //				.addProfiler(SolarisStudioProfiler.class)
