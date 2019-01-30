@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-''' Generates random graphs according to a number of vertices and randomly assigns countries as labels in vertices.
+''' Generates random graphs according to a number of vertices and randomly assigns country codes as labels in vertices.
     Creates a graphml file for each number of nodes.
     Dendendencies: networkx '''
 
@@ -11,7 +11,7 @@ nodes_options = [50, 500, 5000]
 # G = nx.waxman_graph(num_nodes, 0.4, 0.15, seed=secure_random)
 
 # list of countries that are included in the graph
-countries = ['UK', 'DE', 'ES', 'FI']
+countries = ['GB', 'DE', 'IT', 'FI']
 
 for num_nodes in nodes_options:
     secure_random = random.SystemRandom()
