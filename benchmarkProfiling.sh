@@ -1,7 +1,8 @@
 #!/bin/bash
 # usage: ./benchmarkProfiling.sh <data path>
 # example: ./benchmarkProfiling.sh experiment-fork-20-12-18/
-#shell script to create an csv file from performance experiments 
+#shell script to create a folder for profiling results in csv files  
+YHOME= "/Applications/YourKit-Java-Profiler-2019.1.app/Contents/Resources"
 
 if [ "$1" = "" ] ; then
         DATA_PATH=""
@@ -10,13 +11,8 @@ else
         cd $DATA_PATH
 fi
 
-#cd experiment-fork-20-12-18/
+for filename in *.snapshot; do 
+	mkdir "$filename-csv"
+	java -jar -Dexport.csv -Dexport.call.tree.cpu -Dexport.method.list.cpu -Dexport.apply.filters "/Applications/YourKit-Java-Profiler-2019.1.app/Contents/Resources/lib/yourkit.jar" -export "$filename" "$filename-csv/"
 
-echo  "\"Experiment\"","\"CPU Time(Secs)\"","\"Method Name\"" 
-#Experiment,CPU Time,Method Name
-
-for filename in test.*.er; do 
-	#echo -e "\"$filename\",\c" &&
-		er_print  -printmode "," -sort i.totalcpu -metrics i.totalcpu -header  -func $filename  | grep "eu.prismacloud.primitives.zkpgs" | awk -v var="$filename" 'BEGIN{OFS="";}{ print "\""var"\",",$0 }'
-#er_print  -printmode "," -sort i.totalcpu -metrics i.totalcpu -header  -func $filename  | grep "eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair.keyGen(eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters)" 
 done 
