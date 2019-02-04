@@ -1,6 +1,5 @@
 package eu.prismacloud.primitives.grs.bench;
 
-import eu.prismacloud.primitives.zkpgs.BaseRepresentation;
 import eu.prismacloud.primitives.zkpgs.DefaultValues;
 import eu.prismacloud.primitives.zkpgs.exception.EncodingException;
 import eu.prismacloud.primitives.zkpgs.exception.ProofStoreException;
@@ -10,13 +9,11 @@ import eu.prismacloud.primitives.zkpgs.keys.ExtendedPublicKey;
 import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
 import eu.prismacloud.primitives.zkpgs.orchestrator.RecipientOrchestrator;
 import eu.prismacloud.primitives.zkpgs.orchestrator.SignerOrchestrator;
-import eu.prismacloud.primitives.zkpgs.orchestrator.VerifierOrchestrator;
 import eu.prismacloud.primitives.zkpgs.parameters.GraphEncodingParameters;
 import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
-import eu.prismacloud.primitives.zkpgs.store.URN;
 import eu.prismacloud.primitives.zkpgs.util.BaseCollection;
 import eu.prismacloud.primitives.zkpgs.util.FilePersistenceUtil;
-import net.nicoulaj.jmh.profilers.SolarisStudioProfiler;
+import net.nicoulaj.jmh.profilers.YourkitProfiler;
 import org.jgrapht.io.ImportException;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.RunResult;
@@ -24,19 +21,16 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.openjdk.jmh.runner.options.TimeValue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -153,7 +147,7 @@ public class IssuingBenchmark {
 		}
 
 		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
+		@BenchmarkMode({Mode.SingleShotTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public void round0(Round0Benchmark state) throws Exception {
 			signer.round0();
@@ -180,7 +174,7 @@ public class IssuingBenchmark {
 		}
 
 		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
+		@BenchmarkMode({Mode.SingleShotTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public void round1(Round1Benchmark state) throws Exception {
 			recipient.round1();
@@ -200,19 +194,23 @@ public class IssuingBenchmark {
 			super();
 		}
 
-		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void round2(Round2Benchmark state) throws Exception {
-			signer.round2();
-		}
-
 		@Setup(Level.Invocation)
 		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 			super.setup();
+			System.out.println("round0: ");
 			signer.round0();
+			System.out.println("round1: ");
 			recipient.round1();
 		}
+
+		@Benchmark
+		@BenchmarkMode({Mode.SingleShotTime})
+		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+		public void round2(Round2Benchmark state) throws Exception {
+			System.out.println("round2: ");
+			signer.round2();
+		}
+
 
 		@TearDown(Level.Invocation)
 		public void stop() throws Exception {
@@ -229,7 +227,7 @@ public class IssuingBenchmark {
 		}
 
 		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
+		@BenchmarkMode({Mode.SingleShotTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public void round3(Round3Benchmark state) throws Exception {
 			recipient.round3();
@@ -263,7 +261,7 @@ public class IssuingBenchmark {
 		}
 
 		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
+		@BenchmarkMode({Mode.SingleShotTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public void issuing(RoundAllBenchmark state) throws Exception {
 			signer.round0();
@@ -292,7 +290,7 @@ public class IssuingBenchmark {
 		}
 
 		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
+		@BenchmarkMode({Mode.SingleShotTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public void issuing(SerializeGSBenchmark state) throws Exception {
 			signer.round0();
@@ -313,16 +311,16 @@ public class IssuingBenchmark {
 		Options opt = new OptionsBuilder()
 				.include(eu.prismacloud.primitives.grs.bench.IssuingBenchmark.class.getSimpleName())
 				.param("l_n", "512")//, "1024")//, "2048", "3072")
-				.param("bases", "200")//, "2000", "20000", "200000")
+				.param("bases", "300")//, "2000", "20000", "200000")
 				.jvmArgs("-server")
 				.warmupIterations(0)
-//				.addProfiler(SolarisStudioProfiler.class)
+				.addProfiler(YourkitProfiler.class)
 				.warmupForks(0)
 				.measurementIterations(1)
 				.threads(1)
 				.forks(1)
 				.shouldFailOnError(true)
-				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
+//				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
 				//.shouldDoGC(true)
 				.build();
 
