@@ -86,11 +86,16 @@ public class IssuingBenchmark {
 		String signerPKFilename = "SignerPublicKey-" + l_n + ".ser";
 		String ekpFilename = "ExtendedKeyPair-" + l_n + "-" + l_V + "-" + l_E + ".ser";
 		String epkFilename = "ExtendedPublicKey-" + l_n + "-" + l_V + "-" + l_E + ".ser";
-
+		int l_v = 2724;
 		persistenceUtil = new FilePersistenceUtil();
 		gsk = new SignerKeyPair();
 
-		keyGenParameters = KeyGenParameters.createKeyGenParameters(l_n, 1632, 256, 256, 1, 597, 120, 2724, 80, 256, 80, 80);
+		if (l_n == 3072) l_v = l_v + 1024;
+		if (l_n == 4096) l_v = l_v + 2048;
+
+		System.out.println("lv: " + l_v);
+		
+		keyGenParameters = KeyGenParameters.createKeyGenParameters(l_n, 1632, 256, 256, 1, 597, 120, l_v, 80, 256, 80, 80);
 
 		graphEncParams = new GraphEncodingParameters(l_V, 56, l_E, 256, 16);
 
@@ -134,148 +139,148 @@ public class IssuingBenchmark {
 		}
 	}
 
-	@State(Scope.Benchmark)
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class Round0Benchmark extends IssuingBenchmark {
-		public Round0Benchmark() {
-			super();
-		}
-
-		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
-			super.setup();
-		}
-
-		@Benchmark
-		@BenchmarkMode({Mode.SingleShotTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void round0(Round0Benchmark state) throws Exception {
-			signer.round0();
-		}
-
-		@TearDown(Level.Invocation)
-		public void stop() throws Exception {
-			signer = null;
-			recipient = null;
-		}
-	}
-
-	@State(Scope.Benchmark)
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class Round1Benchmark extends IssuingBenchmark {
-		public Round1Benchmark() {
-			super();
-		}
-
-		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
-			super.setup();
-			signer.round0();
-		}
-
-		@Benchmark
-		@BenchmarkMode({Mode.SingleShotTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void round1(Round1Benchmark state) throws Exception {
-			recipient.round1();
-		}
-
-		@TearDown(Level.Invocation)
-		public void stop() throws Exception {
-			signer = null;
-			recipient = null;
-		}
-	}
-
-	@State(Scope.Benchmark)
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class Round2Benchmark extends IssuingBenchmark {
-		public Round2Benchmark() {
-			super();
-		}
-
-		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
-			super.setup();
-			System.out.println("round0: ");
-			signer.round0();
-			System.out.println("round1: ");
-			recipient.round1();
-		}
-
-		@Benchmark
-		@BenchmarkMode({Mode.SingleShotTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void round2(Round2Benchmark state) throws Exception {
-			System.out.println("round2: ");
-			signer.round2();
-		}
-
-
-		@TearDown(Level.Invocation)
-		public void stop() throws Exception {
-			signer = null;
-			recipient = null;
-		}
-	}
-
-	@State(Scope.Benchmark)
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class Round3Benchmark extends IssuingBenchmark {
-		public Round3Benchmark() {
-			super();
-		}
-
-		@Benchmark
-		@BenchmarkMode({Mode.SingleShotTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void round3(Round3Benchmark state) throws Exception {
-			recipient.round3();
-		}
-
-		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
-			super.setup();
-			signer.round0();
-			recipient.round1();
-			signer.round2();
-		}
-
-		@TearDown(Level.Invocation)
-		public void stop() throws Exception {
-			signer = null;
-			recipient = null;
-		}
-	}
-
-	@State(Scope.Benchmark)
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class RoundAllBenchmark extends IssuingBenchmark {
-		public RoundAllBenchmark() {
-			super();
-		}
-
-		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
-			super.setup();
-		}
-
-		@Benchmark
-		@BenchmarkMode({Mode.SingleShotTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void issuing(RoundAllBenchmark state) throws Exception {
-			signer.round0();
-			recipient.round1();
-			signer.round2();
-			recipient.round3();
-		}
-
-		@TearDown(Level.Invocation)
-		public void stop() throws Exception {
-			signer = null;
-			recipient = null;
-		}
-	}
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class Round0Benchmark extends IssuingBenchmark {
+//		public Round0Benchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void round0(Round0Benchmark state) throws Exception {
+//			signer.round0();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void stop() throws Exception {
+//			signer = null;
+//			recipient = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class Round1Benchmark extends IssuingBenchmark {
+//		public Round1Benchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//			signer.round0();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void round1(Round1Benchmark state) throws Exception {
+//			recipient.round1();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void stop() throws Exception {
+//			signer = null;
+//			recipient = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class Round2Benchmark extends IssuingBenchmark {
+//		public Round2Benchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//			System.out.println("round0: ");
+//			signer.round0();
+//			System.out.println("round1: ");
+//			recipient.round1();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void round2(Round2Benchmark state) throws Exception {
+//			System.out.println("round2: ");
+//			signer.round2();
+//		}
+//
+//
+//		@TearDown(Level.Invocation)
+//		public void stop() throws Exception {
+//			signer = null;
+//			recipient = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class Round3Benchmark extends IssuingBenchmark {
+//		public Round3Benchmark() {
+//			super();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void round3(Round3Benchmark state) throws Exception {
+//			recipient.round3();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//			signer.round0();
+//			recipient.round1();
+//			signer.round2();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void stop() throws Exception {
+//			signer = null;
+//			recipient = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class RoundAllBenchmark extends IssuingBenchmark {
+//		public RoundAllBenchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void issuing(RoundAllBenchmark state) throws Exception {
+//			signer.round0();
+//			recipient.round1();
+//			signer.round2();
+//			recipient.round3();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void stop() throws Exception {
+//			signer = null;
+//			recipient = null;
+//		}
+//	}
 
 	@State(Scope.Benchmark)
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -310,12 +315,12 @@ public class IssuingBenchmark {
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
 				.include(eu.prismacloud.primitives.grs.bench.IssuingBenchmark.class.getSimpleName())
-				.param("l_n", "512")//, "1024")//, "2048", "3072")
-				.param("bases", "300")//, "2000", "20000", "200000")
+				.param("l_n", "512", "1024", "2048", "3072")
+				.param("bases", "400")//, "2000", "20000", "200000")
 				.jvmArgs("-server")
 				.warmupIterations(0)
 				.addProfiler(YourkitProfiler.class)
-				.warmupForks(0)
+				.warmupForks(100)
 				.measurementIterations(1)
 				.threads(1)
 				.forks(1)
