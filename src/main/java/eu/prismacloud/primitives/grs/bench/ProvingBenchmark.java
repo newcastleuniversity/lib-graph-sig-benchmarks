@@ -13,7 +13,6 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.openjdk.jmh.runner.options.TimeValue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,141 +38,183 @@ public class ProvingBenchmark extends GSBenchmark {
 	private static ProverOrchestrator prover;
 	private static VerifierOrchestrator verifier;
 
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class PreChallengeBenchmark extends ProvingBenchmark {
+//		public PreChallengeBenchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//			prover = getProver();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void preChallenge(PreChallengeBenchmark state) throws Exception {
+//			prover.executePreChallengePhase();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void afterInvocation() throws Exception {
+//			prover = null;
+//			verifier = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class ReceiveProverMessageBenchmark extends ProvingBenchmark {
+//		public ReceiveProverMessageBenchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//			prover = getProver();
+//			prover.executePreChallengePhase();
+//			BigInteger challenge = prover.computeChallenge();
+//			prover.executePostChallengePhase(challenge);
+//			verifier = getVerifier();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void proverMessage(ReceiveProverMessageBenchmark state) throws Exception {
+//			verifier.receiveProverMessage();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void afterInvocation() throws Exception {
+//			prover = null;
+//			verifier = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class ExecuteVerificationBenchmark extends ProvingBenchmark {
+//		public ExecuteVerificationBenchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//			prover = getProver();
+//			prover.executePreChallengePhase();
+//			BigInteger challenge = prover.computeChallenge();
+//			prover.executePostChallengePhase(challenge);
+//			verifier = getVerifier();
+//			verifier.receiveProverMessage();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void verification(ExecuteVerificationBenchmark state) throws Exception {
+//			verifier.executeVerification();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void afterInvocation() throws Exception {
+//			prover = null;
+//			verifier = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class ComputeChallengeBenchmark extends ProvingBenchmark {
+//		public ComputeChallengeBenchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//			prover = getProver();
+//			prover.executePreChallengePhase();
+//			BigInteger challenge = prover.computeChallenge();
+//			prover.executePostChallengePhase(challenge);
+//			verifier = getVerifier();
+//			verifier.receiveProverMessage();
+//			verifier.executeVerification();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public BigInteger challenge(ComputeChallengeBenchmark state) throws Exception {
+//			return verifier.computeChallenge();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void afterInvocation() throws Exception {
+//			prover = null;
+//			verifier = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class VerifyChallengeBenchmark extends ProvingBenchmark {
+//		BigInteger challenge;
+//
+//		public VerifyChallengeBenchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//			prover = getProver();
+//			prover.executePreChallengePhase();
+//			BigInteger challenge = prover.computeChallenge();
+//			prover.executePostChallengePhase(challenge);
+//			verifier = getVerifier();
+//			verifier.receiveProverMessage();
+//			verifier.executeVerification();
+//			challenge = verifier.computeChallenge();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void challenge(VerifyChallengeBenchmark state) throws Exception {
+//			verifier.verifyChallenge();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void afterInvocation() throws Exception {
+//			prover = null;
+//			verifier = null;
+//		}
+//	}
+
 	@State(Scope.Benchmark)
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class PreChallengeBenchmark extends ProvingBenchmark {
-		public PreChallengeBenchmark() {
-			super();
-		}
-
-		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
-			super.setup();
-			prover = getProver();
-		}
-
-		@Benchmark
-		@BenchmarkMode({Mode.SingleShotTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void preChallenge(PreChallengeBenchmark state) throws Exception {
-			prover.executePreChallengePhase();
-		}
-
-		@TearDown(Level.Invocation)
-		public void afterInvocation() throws Exception {
-			prover = null;
-			verifier = null;
-		}
-	}
-
-	@State(Scope.Benchmark)
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class ReceiveProverMessageBenchmark extends ProvingBenchmark {
-		public ReceiveProverMessageBenchmark() {
-			super();
-		}
-
-		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
-			super.setup();
-			prover = getProver();
-			prover.executePreChallengePhase();
-			BigInteger challenge = prover.computeChallenge();
-			prover.executePostChallengePhase(challenge);
-			verifier = getVerifier();
-		}
-
-		@Benchmark
-		@BenchmarkMode({Mode.SingleShotTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void proverMessage(ReceiveProverMessageBenchmark state) throws Exception {
-			verifier.receiveProverMessage();
-		}
-
-		@TearDown(Level.Invocation)
-		public void afterInvocation() throws Exception {
-			prover = null;
-			verifier = null;
-		}
-	}
-
-	@State(Scope.Benchmark)
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class ExecuteVerificationBenchmark extends ProvingBenchmark {
-		public ExecuteVerificationBenchmark() {
-			super();
-		}
-
-		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
-			super.setup();
-			prover = getProver();
-			prover.executePreChallengePhase();
-			BigInteger challenge = prover.computeChallenge();
-			prover.executePostChallengePhase(challenge);
-			verifier = getVerifier();
-			verifier.receiveProverMessage();
-		}
-
-		@Benchmark
-		@BenchmarkMode({Mode.SingleShotTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void verification(ExecuteVerificationBenchmark state) throws Exception {
-			verifier.executeVerification();
-		}
-
-		@TearDown(Level.Invocation)
-		public void afterInvocation() throws Exception {
-			prover = null;
-			verifier = null;
-		}
-	}
-
-	@State(Scope.Benchmark)
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class ComputeChallengeBenchmark extends ProvingBenchmark {
-		public ComputeChallengeBenchmark() {
-			super();
-		}
-
-		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
-			super.setup();
-			prover = getProver();
-			prover.executePreChallengePhase();
-			BigInteger challenge = prover.computeChallenge();
-			prover.executePostChallengePhase(challenge);
-			verifier = getVerifier();
-			verifier.receiveProverMessage();
-			verifier.executeVerification();
-		}
-
-		@Benchmark
-		@BenchmarkMode({Mode.SingleShotTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public BigInteger challenge(ComputeChallengeBenchmark state) throws Exception {
-			return verifier.computeChallenge();
-		}
-
-		@TearDown(Level.Invocation)
-		public void afterInvocation() throws Exception {
-			prover = null;
-			verifier = null;
-		}
-	}
-
-	@State(Scope.Benchmark)
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class VerifyChallengeBenchmark extends ProvingBenchmark {
+	public static class ProvingVerifyingBenchmark extends ProvingBenchmark {
 		BigInteger challenge;
 
-		public VerifyChallengeBenchmark() {
+		public ProvingVerifyingBenchmark() {
 			super();
 		}
 
 		@Setup(Level.Invocation)
 		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 			super.setup();
+		}
+
+		@Benchmark
+		@BenchmarkMode({Mode.SingleShotTime})
+		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+		public void compute(ProvingVerifyingBenchmark state) throws Exception {
 			prover = getProver();
 			prover.executePreChallengePhase();
 			BigInteger challenge = prover.computeChallenge();
@@ -182,12 +223,6 @@ public class ProvingBenchmark extends GSBenchmark {
 			verifier.receiveProverMessage();
 			verifier.executeVerification();
 			challenge = verifier.computeChallenge();
-		}
-
-		@Benchmark
-		@BenchmarkMode({Mode.SingleShotTime})
-		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void challenge(VerifyChallengeBenchmark state) throws Exception {
 			verifier.verifyChallenge();
 		}
 
@@ -201,15 +236,15 @@ public class ProvingBenchmark extends GSBenchmark {
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
 				.include(eu.prismacloud.primitives.grs.bench.ProvingBenchmark.class.getSimpleName())
-				.param("l_n", "3072")//"512")//, "1024", "2048", "3072")
+				.param("l_n", "512", "1024", "2048", "3072")
 				.param("bases", "400")//, "1000", "10000", "100000")
 				.jvmArgs("-server")
 				.warmupIterations(0)
 				.addProfiler(YourkitProfiler.class)
-				.warmupForks(1)
+				.warmupForks(5)
 				.measurementIterations(1)
 				.threads(1)
-				.forks(1)
+				.forks(100)
 				.shouldFailOnError(true)
 //				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
 				//.shouldDoGC(true)
