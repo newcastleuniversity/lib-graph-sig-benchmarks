@@ -5,6 +5,7 @@ import eu.prismacloud.primitives.zkpgs.exception.ProofStoreException;
 import eu.prismacloud.primitives.zkpgs.exception.VerificationException;
 import eu.prismacloud.primitives.zkpgs.orchestrator.ProverOrchestrator;
 import eu.prismacloud.primitives.zkpgs.orchestrator.VerifierOrchestrator;
+import net.nicoulaj.jmh.profilers.YourkitProfiler;
 import org.jgrapht.io.ImportException;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.RunResult;
@@ -52,7 +53,7 @@ public class ProvingBenchmark extends GSBenchmark {
 		}
 
 		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
+		@BenchmarkMode({Mode.SingleShotTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public void preChallenge(PreChallengeBenchmark state) throws Exception {
 			prover.executePreChallengePhase();
@@ -83,7 +84,7 @@ public class ProvingBenchmark extends GSBenchmark {
 		}
 
 		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
+		@BenchmarkMode({Mode.SingleShotTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public void proverMessage(ReceiveProverMessageBenchmark state) throws Exception {
 			verifier.receiveProverMessage();
@@ -115,7 +116,7 @@ public class ProvingBenchmark extends GSBenchmark {
 		}
 
 		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
+		@BenchmarkMode({Mode.SingleShotTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public void verification(ExecuteVerificationBenchmark state) throws Exception {
 			verifier.executeVerification();
@@ -148,7 +149,7 @@ public class ProvingBenchmark extends GSBenchmark {
 		}
 
 		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
+		@BenchmarkMode({Mode.SingleShotTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public BigInteger challenge(ComputeChallengeBenchmark state) throws Exception {
 			return verifier.computeChallenge();
@@ -184,7 +185,7 @@ public class ProvingBenchmark extends GSBenchmark {
 		}
 
 		@Benchmark
-		@BenchmarkMode({Mode.AverageTime})
+		@BenchmarkMode({Mode.SingleShotTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public void challenge(VerifyChallengeBenchmark state) throws Exception {
 			verifier.verifyChallenge();
@@ -200,17 +201,17 @@ public class ProvingBenchmark extends GSBenchmark {
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
 				.include(eu.prismacloud.primitives.grs.bench.ProvingBenchmark.class.getSimpleName())
-				.param("l_n", "512")//, "1024", "2048", "3072")
-				.param("bases", "100")//, "1000", "10000", "100000")
+				.param("l_n", "3072")//"512")//, "1024", "2048", "3072")
+				.param("bases", "400")//, "1000", "10000", "100000")
 				.jvmArgs("-server")
 				.warmupIterations(0)
-				//				.addProfiler(SolarisStudioProfiler.class)
+				.addProfiler(YourkitProfiler.class)
 				.warmupForks(1)
 				.measurementIterations(1)
 				.threads(1)
 				.forks(1)
 				.shouldFailOnError(true)
-				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
+//				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
 				//.shouldDoGC(true)
 				.build();
 
