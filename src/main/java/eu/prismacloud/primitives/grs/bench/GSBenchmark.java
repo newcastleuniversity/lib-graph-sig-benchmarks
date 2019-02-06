@@ -35,11 +35,10 @@ import java.util.concurrent.ExecutionException;
 @State(Scope.Benchmark)
 public abstract class GSBenchmark {
 
-
 	@Param({"512", "1024", "2048", "3072"})
 	private int l_n;
 
-	@Param({"100", "1000", "10000", "100000"})
+	@Param({"200", "2000", "20000"})
 	private int bases;
 
 	//	@Param({"10", "100", "1000", "10000"})
@@ -87,14 +86,15 @@ public abstract class GSBenchmark {
 	private static MockMessageGateway messageGateway;
 	private static ProverOrchestratorPerf prover;
 	private static VerifierOrchestrator verifier;
+
 	public void GSBenchmark() {
 
 	}
 
 	public void setup() throws IOException, EncodingException, ClassNotFoundException, InterruptedException, ExecutionException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 		// calculate number of bases for vertices and edges
-		l_V = bases / 5;
-		l_E = bases - (bases / 5);
+		l_V = bases / 4;
+		l_E = bases - (bases / 4);
 		String sigmaFilename = "signer-infra-" + l_n + "-" + l_V + "-" + l_E + ".ser";
 		String hostAddress = "192.168.0.19";
 		int portNumber = 9998;
@@ -106,9 +106,11 @@ public abstract class GSBenchmark {
 		verifier = new VerifierOrchestrator(ekp.getExtendedPublicKey(), messageGateway);
 		prover.readSignature(sigmaFilename);
 		Vector<Integer> vector = new Vector<>();
+
 		// add proof vectors
 		vector.add(1);
-		vector.add(12);
+		vector.add(14);
+
 		verifier.createQuery(vector);
 		verifier.init();
 		prover.init();
@@ -125,7 +127,12 @@ public abstract class GSBenchmark {
 		persistenceUtil = new FilePersistenceUtil();
 		gsk = new SignerKeyPair();
 
-		keyGenParameters = KeyGenParameters.createKeyGenParameters(l_n, 1632, 256, 256, 1, 597, 120, 2724, 80, 256, 80, 80);
+		int l_v = 2724;
+		if (l_n == 3072) l_v = l_v + 1024;
+		if (l_n == 4096) l_v = l_v + 2048;
+
+		System.out.println("lv: " + l_v);
+		keyGenParameters = KeyGenParameters.createKeyGenParameters(l_n, 1632, 256, 256, 1, 597, 120, l_v, 80, 256, 80, 80);
 
 		graphEncParams = new GraphEncodingParameters(l_V, 56, l_E, 256, 16);
 
