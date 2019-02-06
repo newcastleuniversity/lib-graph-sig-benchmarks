@@ -320,7 +320,7 @@ public class IssuingBenchmark {
 				.jvmArgs("-server")
 				.warmupIterations(0)
 				.addProfiler(YourkitProfiler.class)
-				.warmupForks(100)
+				.warmupForks(1)
 				.measurementIterations(1)
 				.threads(1)
 				.forks(1)
