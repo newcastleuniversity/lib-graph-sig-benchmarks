@@ -71,3 +71,13 @@ filterIssuing <- function(df) {
   return(d)
 }
 
+createMeanSDBarplots <- function(df, dx, dy, dg, xlabel, ylabel, flabel) {
+  
+p <-  ggplot(df, aes(x = reorder(factor(dx), dy), y = dy)) +
+    geom_bar(stat = "summary", fun.y = "mean", position = "dodge", aes(fill = factor(dg)))  +
+    geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.25, position=position_dodge(0.9)) +
+    facet_grid(dg, margins = FALSE,  scales = "free", space = "free") +
+    labs( x = xlabel,  y = ylabel, fill = flabel) +
+    coord_flip() +  theme_bw()
+return(p) 
+}

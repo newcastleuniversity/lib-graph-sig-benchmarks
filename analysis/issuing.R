@@ -13,7 +13,6 @@ folderPattern3072 = "^issuing-400-3072"
 
 folders <- dir("../data/issuing-profile-50-csv", pattern = folderPattern512 , full.names = TRUE, ignore.case = TRUE)
 
-
 (dirs <- grep("issuing-400-512*",list.dirs("../data/issuing-profile-50-csv",recursive=FALSE),value=TRUE))
 
 (lfiles <- list.files(dirs, pattern = "Method-list--CPU\\.csv", recursive = TRUE, full.names = TRUE, include.dirs = TRUE))
@@ -78,52 +77,38 @@ ggplot(filtered, aes(x = filtered$Time_ms)) +
   geom_density(adjust = 0.25)
 
 str(filtered$Method)
-str(filtered$`Time_ms `)
-length(filtered$`Time_ms `)
+str(filtered$Time_ms)
+length(filtered$Time_ms)
 length(filtered$Method)
-
 head(filtered)
 
 # filter dataframe to include only methods with cpu time > 50 ms
-filtered80 <- filter(filtered, filtered$Time_ms > 0)
+filtered <- filter(filtered, filtered$Time_ms > 0)
 
-filteredSmall <- filter(filtered, filtered$`Time_ms ` < 50)
+filteredSmall <- filter(filtered, filtered$Time_ms < 50)
+
 (uniqueM <- unique(filtered$Method))
 
-filtered80 <- filterIssuing(filtered80)
+dIssuing <- filterIssuing(filtered)
 
-(jitterOrderedBoxplot(filtered80, filtered80$Method, filtered80$Time_ms, filtered80$KeyLength, "Methods", "CPU time (ms)", "") )
+(jitterOrderedBoxplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", "") )
 
-(facetOrderedBoxplot(filtered80, filtered80$Method, filtered80$Time_ms, filtered80$KeyLength, "Methods", "CPU time (ms)", "Key length"))
+(facetOrderedBoxplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", "Key length"))
 
-(facetOrderedMeanBarplot(filtered80, filtered80$Method, filtered80$Time_ms, filtered80$KeyLength, "Methods", "CPU time (ms)", "Key length"))
+(facetOrderedMeanBarplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", "Key length"))
 
-(cpuKeySummary <- data_summary(filtered80, varname = "Time_ms", groupnames = c("KeyLength")))
-
+(cpuKeySummary <- data_summary(dIssuing, varname = "Time_ms", groupnames = c("KeyLength")))
 
 ggplot(cpuKeySummary, aes(x=factor(cpuKeySummary$KeyLength), y=cpuKeySummary$mean,  fill = factor(cpuKeySummary$KeyLength))) +
   geom_bar(stat="identity", position=position_dodge())+
-  theme_minimal() +
+  theme_bw() +
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width=.15,
                 position=position_dodge(0.9)) +
   labs( x = "Key length",  y = "Mean CPU time (ms)", fill = "Key length") 
 
-(methodsCpu <- data_summary(filtered80, varname= "Time_ms", groupnames = c("KeyLength", "Method")))
+(dsummary <- data_summary(dIssuing, varname = "Time_ms", groupnames = c("KeyLength", "Method")))
 
-ggplot(methodsCpu, aes(x=factor(methodsCpu$KeyLength), y=methodsCpu$mean,  fill = factor(methodsCpu$KeyLength))) +
-  geom_bar(stat="identity", position=position_dodge())+
-  theme_minimal() +
-  geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width=.15,
-                position=position_dodge(0.9)) +
-  labs( x = "Key length",  y = "Mean CPU time (ms)", fill = "Key length") 
-
-ggplot(methodsCpu, aes(x = reorder(factor(methodsCpu$Method), methodsCpu$mean), y = methodsCpu$mean)) +
-  geom_bar(stat = "summary", fun.y = "mean", position = "dodge", aes(fill = factor(methodsCpu$KeyLength)))  +
-  geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.25, position=position_dodge(0.9)) +
-  facet_grid(methodsCpu$KeyLength, margins = FALSE,  scales = "free", space = "free") +
-  labs( x = "Methods",  y = "Mean CPU time (ms)", fill = "Key length") +
-  coord_flip() +  theme_bw()
-
+(createMeanSDBarplots(dsummary, dsummary$Method, dsummary$mean, dsummary$KeyLength, "Methods", "CPU time (ms)", "Key length"))
 
 # plot means
 plotmeans(filtered$Time_ms ~ filtered$Method, digits=3, ccol="red", xlab = "Methods", ylab="CPU time for issuing methods (msec)",las=2, cex.axis=0.4, mean.labels=F, mar=c(10.1,4.1,4.1,2.1),n.label = FALSE, mgp=c(3,1,0) , main="Plot of issuing methods")
