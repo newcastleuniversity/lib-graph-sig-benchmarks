@@ -71,6 +71,7 @@ filterIssuing <- function(df) {
   return(d)
 }
 
+## create ordered mean barplots with standar deviation
 createMeanSDBarplots <- function(df, dx, dy, dg, xlabel, ylabel, flabel) {
   
 p <-  ggplot(df, aes(x = reorder(factor(dx), dy), y = dy)) +
@@ -80,4 +81,48 @@ p <-  ggplot(df, aes(x = reorder(factor(dx), dy), y = dy)) +
     labs( x = xlabel,  y = ylabel, fill = flabel) +
     coord_flip() +  theme_bw()
 return(p) 
+}
+
+## create a dataframe that includes data from csv file for all key lengths
+createDataSetFromCSV <- function(csvFolder, expFolder, csvName, verticesNo) {
+  (data_512 <- getCSVData(paste0(csvFolder,"-512*"), paste0("../data/", expFolder), csvName))
+  # create a dataframe from the experiments
+  df_512 <- bind_rows(data_512, .id="expID")
+  df_512['KeyLength'] = 512
+  
+  (data_1024 <- getCSVData(paste0(csvFolder,"-1024*"), paste0("../data/", expFolder), csvName))
+  df_1024 <- bind_rows(data_1024, .id="expID")
+  df_1024['KeyLength'] = 1024
+  
+  (data_2048 <- getCSVData(paste0(csvFolder,"-2048*"), paste0("../data/", expFolder), csvName))
+  df_2048 <- bind_rows(data_2048, .id="expID")
+  df_2048['KeyLength'] = 2048
+  
+  (data_3072 <- getCSVData(paste0(csvFolder,"-3072*"), paste0("../data/", expFolder), csvName))
+  df_3072 <- bind_rows(data_3072, .id="expID")
+  df_3072['KeyLength'] = 3072
+  
+  perfData <- rbind(df_512, df_1024)
+  perfData <- rbind(perfData, df_2048)
+  perfData <- rbind(perfData, df_3072)
+  
+  perfData <- bind_rows(perfData, .id="expID")
+  perfData['Vertices'] = verticesNo 
+  return(perfData)
+}
+
+renameHeadings <- function(df, columns) {
+  names(df) <- columns
+  return(df)
+}
+
+## filters Method column for adding only graph signature library related functions and keeps only the name of the method
+filterMethods <- function(df){
+  (filtered <- df[with(df, grepl("eu.prismacloud.primitives.zkpgs.*", df$Method)), ])
+  
+  # truncate method names
+  (filtered$Method <- gsub(pattern = "eu.prismacloud.primitives.zkpgs.", replacement = "", filtered$Method)) 
+  (filtered$Method <- gsub(pattern = " (/.)*[a-zA-Z]*.java", replacement = "", filtered$Method)) 
+  (filtered$Method <- gsub(pattern = "\\(.*?\\)", replacement = "", filtered$Method)) 
+  return(filtered)
 }
