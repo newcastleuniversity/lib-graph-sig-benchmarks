@@ -70,3 +70,9 @@ dProving_50_500 <- rbind(v_50, v_500)
 p <- (createMeanSDBarplots(dProving_50_500, dProving_50_500$Method, dProving_50_500$mean, dProving_50_500$KeyLength, "Methods", "Mean CPU time (ms)", "Key length"))
 
 p + facet_grid(dProving_50_500$Vertices ~ dProving_50_500$KeyLength)
+
+ol <- createOrderedLinePlots(dProving_50_500, dProving_50_500$Method, dProving_50_500$mean, dProving_50_500$KeyLength, dProving_50_500$Vertices, "Methods", "Mean CPU time (ms)", "Key length")
+
+(ol +  scale_linetype_manual(values=c("solid","twodash", "dotted", "dashed")) +
+    theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=1)))
+
