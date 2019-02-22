@@ -38,7 +38,6 @@ dProving <- filterProving(filtered_50)
 
 (createMeanSDBarplots(dsummaryProving, dsummaryProving$Method, dsummaryProving$mean, dsummaryProving$KeyLength, "Methods", "Mean CPU time (ms)", "Key length"))
 
-
 # create dataframe from proving with 500 vertices
 (proving_500 <- createDataSetFromCSV("compute-4000", "proving-profile-500-csv", "Method-list--CPU\\.csv", 500))
 
@@ -73,6 +72,7 @@ p + facet_grid(dProving_50_500$Vertices ~ dProving_50_500$KeyLength)
 
 ol <- createOrderedLinePlots(dProving_50_500, dProving_50_500$Method, dProving_50_500$mean, dProving_50_500$KeyLength, dProving_50_500$Vertices, "Methods", "Mean CPU time (ms)", "Key length")
 
-(ol +  scale_linetype_manual(values=c("solid","twodash", "dotted", "dashed")) +
-    theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=1)))
+(ol +  
+    scale_linetype_manual(values=c("solid","twodash", "dotted", "dashed")) +
+    theme(axis.text.x = element_text(angle = 77, vjust = 1, hjust=1)))
 
