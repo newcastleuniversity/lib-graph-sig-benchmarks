@@ -24,23 +24,33 @@ hist(keyGenData$Score)
 kmean <- mean(keyGenData$Score)
 kmean
 
-ggplot(keyGenData, aes(x = keyGenData$Score)) + 
-  geom_histogram(binwidth = 2)
+khist <- ggplot(keyGenData, aes(x = keyGenData$Score)) + 
+  geom_histogram(binwidth = 2) + theme_bw() 
+savePlot(khist, "key-histogram.pdf")
 
 ggplot(keyGenData, aes(x = keyGenData$Score)) + 
-  geom_density(adjust = 0.25)
+  geom_density(adjust = 0.25) + theme_bw() 
+
+savePlot(last_plot(), "key-dens-histogram.pdf")
+
 
 ggplot(keyGenData, aes(x=factor(keyGenData$KeyLength), y=keyGenData$Score)) +
   stat_boxplot(geom ='errorbar', color="black") +
   geom_boxplot(fill="cornflowerblue", color="black", notch=FALSE) +
   geom_point(position="jitter", color="blue", alpha=.5) +
-  geom_rug( color="black") + 
+  geom_rug( color="black") + theme_bw() +
   labs( x="Key size",  y = "Key generation time (sec)", fill="") 
+
+savePlot(last_plot(), "key-jitter-boxplot.pdf")
+
 
 ggplot(keyGenData, aes(x=factor(keyGenData$KeyLength), y=keyGenData$Score, fill=keyGenData$KeyLength)) +
   stat_boxplot(geom ='errorbar', color="black") +
   geom_boxplot(outlier.colour="black", outlier.shape=18, outlier.size=4, notch=FALSE, fatten=2) + 
   labs( x="Key size",  y = "Key generation time (sec)", fill="") 
+
+savePlot(last_plot(), "key-boxplot.pdf")
+
 
 # calculate means
 (means<- round(tapply(keyGenData$Score, keyGenData$KeyLength, mean), digits=2)) 
@@ -75,10 +85,7 @@ ggplot(df2, aes(x=factor(df2$KeyLength), y=df2$mean,  fill = factor(df2$KeyLengt
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width=.15,
                 position=position_dodge(0.9)) +
   labs( x="Key length",  y = "Mean key generation time (sec)", fill="") 
-# read data
-imgFileName <- "mean-key-generation-time"
-imgPath <- getFilePath("../figures/", imgFileName, ".pdf")
 
-#save plot
-ggsave(imgPath)
+savePlot(last_plot(), "mean-key-generation-time.pdf")
+
 
