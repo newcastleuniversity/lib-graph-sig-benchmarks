@@ -41,7 +41,9 @@ issuing_count_msg1 <- count(issuing_msg1, "ClassName")
 i_msg1 <- bind_rows(issuing_count_msg1, .id="MessageNo")
 i_msg1['MessageNo'] = 1
 
-issuing_count_msg2 <- count(issuing_msg2, "ClassName")
+(issuing_count_msg2 <- count(issuing_msg2, "ClassName"))
+issuing_count_msg2[2,2]
+issuing_count_msg2$freq
 i_msg2 <- bind_rows(issuing_count_msg2, .id = "MessageNo")
 i_msg2['MessageNo'] = 2
 elementsIssuing <- rbind(i_msg1, i_msg2)
@@ -51,17 +53,20 @@ i_msg3 <- bind_rows(issuing_count_msg3, .id = "MessageNo")
 i_msg3['MessageNo'] = 3
 elementsIssuing <- rbind(elementsIssuing, i_msg3)
 
+# calculate total number of QRElements during issuing
+(total_QRElements_Issuing <- issuing_count_msg2[2,2] + issuing_count_msg3[2,2])
+
 summary(elementsIssuing)
 
 ggplot(elementsIssuing, aes(x=factor(elementsIssuing$MessageNo), y=elementsIssuing$freq, fill=elementsIssuing$ClassName)) +
   geom_bar(stat="identity") + theme_bw() +
   labs( x="Message No",  y = "Number of elements", fill="Class Name") 
 
-proving_count_msg1 <- count(proving_msg1, "ClassName")
+(proving_count_msg1 <- count(proving_msg1, "ClassName"))
 p_msg1 <- bind_rows(proving_count_msg1, .id = "MessageNo")
 p_msg1['MessageNo'] = 1
 
-proving_count_msg2 <- count(proving_msg2, "ClassName")
+(proving_count_msg2 <- count(proving_msg2, "ClassName"))
 p_msg2 <- bind_rows(proving_count_msg2, .id = "MessageNo")
 p_msg2['MessageNo'] = 2
 elementsProving <- rbind(p_msg1, p_msg2)
@@ -82,9 +87,12 @@ p_msg7['MessageNo'] = 5
 elementsProving <- rbind(elementsProving, p_msg7)
 summary(elementsProving)
 
-ggplot(elementsProving, aes(x=factor(elementsProving$MessageNo), y=elementsProving$freq, fill=elementsProving$ClassName)) +
+(total_QRElements_Proving <- proving_count_msg2[2,2] + proving_count_msg3[2,2] + proving_count_msg7[2,2])
+names <- c("Issuing", "Proving")
+qrElements <- c(total_QRElements_Issuing, total_QRElements_Proving)
+
+(totalQREl <- data.frame(names, qrElements))
+
+ggplot(totalQREl, aes(x=totalQREl$names, y=totalQREl$qrElements, fill= totalQREl$names)) +
   geom_bar(stat="identity") + theme_bw() +
-  labs( x="Message No",  y = "Number of elements", fill="Class Name") 
-
-
-
+  labs( x="",  y = "Number of QRElements", fill="") 
