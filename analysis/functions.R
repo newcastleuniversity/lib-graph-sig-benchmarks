@@ -148,3 +148,7 @@ filterMethods <- function(df){
   (filtered$Method <- gsub(pattern = "commitment.", replacement = "", filtered$Method)) 
   return(filtered)
 }
+
+savePlot <- function(plot, name) {
+  ggsave(name, plot, device = "pdf", path = "../figures")
+}
