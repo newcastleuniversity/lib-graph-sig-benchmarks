@@ -1,0 +1,8 @@
+"URN","ClassName","Bitlength"
+"URN:recipient.U","QRElement","1023"
+"URN:issuing.commitmentprover.responses.hatm_0","BigInteger","593"
+"URN:issuing.commitmentprover.responses.hatvPrime","BigInteger","1440"
+"URN:proofsignature.P_1.responses.hatvPrime","BigInteger","1440"
+"URN:proofsignature.P_1.responses.hatm_0","BigInteger","593"
+"URN:proofsignature.P_1.challenge.c","BigInteger","256"
+"URN:recipient.n_2","BigInteger","256"
