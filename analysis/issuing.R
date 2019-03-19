@@ -8,7 +8,7 @@ source("configuration.R")
 (issuing_50 <- createDataSetFromCSV("issuing-400", "issuing-profile-50-csv", "Method-list--CPU\\.csv", 50))
 
 # rename headings 
-issuing_50 <- renameHeadings(issuing_50, c('ExpID','Method','Time_ms', 'OwnTime_ms', 'KeyLength', 'Vertices'))
+issuing_50 <- renameHeadings(issuing_50, c('ExpID','ExpID.1', 'Method','Time_ms', 'OwnTime_ms', 'KeyLength', 'Vertices'))
 str(issuing_50)
 
 filtered_50 <- filterMethods(issuing_50)
@@ -45,9 +45,15 @@ dIssuing <- filterIssuing(filtered_50)
 
 (jitterOrderedBoxplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", "") )
 
+savePlot(last_plot(), "issuing-jitter-ordered-boxplot.pdf")
+
 (facetOrderedBoxplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", "Key length"))
 
+savePlot(last_plot(), "issuing-facet-ordered-boxplot.pdf")
+
+
 (facetOrderedMeanBarplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", "Key length"))
+savePlot(last_plot(), "issuing-facet-ordered-mean-barplot.pdf")
 
 (cpuKeySummary <- data_summary(dIssuing, varname = "Time_ms", groupnames = c("KeyLength")))
 
@@ -62,8 +68,10 @@ ggplot(cpuKeySummary, aes(x=factor(cpuKeySummary$KeyLength), y=cpuKeySummary$mea
 
 (createMeanSDBarplots(dsummary, dsummary$Method, dsummary$mean, dsummary$KeyLength, "Methods", "Mean CPU time (ms)", "Key length"))
 
+savePlot(last_plot(), "issuing-facet-mean-sd-barplot.pdf")
+
 # plot means
-plotmeans(filtered$Time_ms ~ filtered$Method, digits=3, ccol="red", xlab = "Methods", ylab="CPU time for issuing methods (msec)",las=2, cex.axis=0.4, mean.labels=F, mar=c(10.1,4.1,4.1,2.1),n.label = FALSE, mgp=c(3,1,0) , main="Plot of issuing methods")
+plotmeans(filtered_50$Time_ms ~ filtered_50$Method, digits=3, ccol="red", xlab = "Methods", ylab="CPU time for issuing methods (msec)",las=2, cex.axis=0.4, mean.labels=F, mar=c(10.1,4.1,4.1,2.1),n.label = FALSE, mgp=c(3,1,0) , main="Plot of issuing methods")
 
 # create dataframe from issuing with 500 vertices
 (issuing_500 <- createDataSetFromCSV("issuing-3000", "issuing-profile-500-csv", "Method-list--CPU\\.csv", 500))
@@ -76,14 +84,18 @@ filtered_500 <- filterMethods(issuing_500)
 dIssuing_500 <- filterIssuing(filtered_500)
 
 (jitterOrderedBoxplot(dIssuing_500, dIssuing_500$Method, dIssuing_500$Time_ms, dIssuing_500$KeyLength, "Methods", "CPU time (ms)", "") )
+savePlot(last_plot(), "issuing-jitter-ordered-boxplot-500.pdf")
 
 (facetOrderedBoxplot(dIssuing_500, dIssuing_500$Method, dIssuing_500$Time_ms, dIssuing_500$KeyLength, "Methods", "CPU time (ms)", "Key length"))
+savePlot(last_plot(), "issuing-facet-ordered-boxplot-500.pdf")
 
 (facetOrderedMeanBarplot(dIssuing_500, dIssuing_500$Method, dIssuing_500$Time_ms, dIssuing_500$KeyLength, "Methods", "CPU time (ms)", "Key length"))
+savePlot(last_plot(), "issuing-facet-ordered-mean-barplot-500.pdf")
 
 (dsummary_500 <- data_summary(dIssuing_500, varname = "Time_ms", groupnames = c("KeyLength", "Method")))
 
 (createMeanSDBarplots(dsummary_500, dsummary_500$Method, dsummary_500$mean, dsummary_500$KeyLength, "Methods", "Mean CPU time (ms)", "Key length"))
+savePlot(last_plot(), "issuing-mean-sd-barplot-500.pdf")
 
 v_50 <- bind_rows(dsummary, .id="expID")
 v_50['Vertices'] = 50
@@ -96,3 +108,4 @@ dIssuing_50_500 <- rbind(v_50, v_500)
 p <- (createMeanSDBarplots(dIssuing_50_500, dIssuing_50_500$Method, dIssuing_50_500$mean, dIssuing_50_500$KeyLength, "Methods", "Mean CPU time (ms)", "Key length"))
 
 p + facet_grid(dIssuing_50_500$Vertices ~ dIssuing_50_500$KeyLength)
+savePlot(last_plot(), "issuing-facet-mean-sd-barplot-50-500.pdf")
