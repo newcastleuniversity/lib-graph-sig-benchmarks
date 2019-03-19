@@ -29,14 +29,18 @@ ggplot(filtered_50, aes(x = filtered_50$Time_ms)) +
 dProving <- filterProving(filtered_50)
 
 (jitterOrderedBoxplot(dProving, dProving$Method, dProving$Time_ms, dProving$KeyLength, "Methods", "CPU time (ms)", "") )
+savePlot(last_plot(), "proving-jitter-ordered-boxplot.pdf")
 
 (facetOrderedBoxplot(dProving, dProving$Method, dProving$Time_ms, dProving$KeyLength, "Methods", "CPU time (ms)", "Key length"))
+savePlot(last_plot(), "proving-facet-ordered-boxplot.pdf")
 
 (facetOrderedMeanBarplot(dProving, dProving$Method, dProving$Time_ms, dProving$KeyLength, "Methods", "CPU time (ms)", "Key length"))
+savePlot(last_plot(), "proving-ordered-mean-barplot.pdf")
 
 (dsummaryProving <- data_summary(dProving, varname = "Time_ms", groupnames = c("KeyLength", "Method")))
 
 (createMeanSDBarplots(dsummaryProving, dsummaryProving$Method, dsummaryProving$mean, dsummaryProving$KeyLength, "Methods", "Mean CPU time (ms)", "Key length"))
+savePlot(last_plot(), "proving-mean-sd-barplot.pdf")
 
 # create dataframe from proving with 500 vertices
 (proving_500 <- createDataSetFromCSV("compute-4000", "proving-profile-500-csv", "Method-list--CPU\\.csv", 500))
@@ -49,14 +53,18 @@ filtered_500 <- filterMethods(proving_500)
 dProving_500 <- filterProving(filtered_500)
 
 (jitterOrderedBoxplot(dProving_500, dProving_500$Method, dProving_500$Time_ms, dProving_500$KeyLength, "Methods", "CPU time (ms)", "") )
+savePlot(last_plot(), "proving-jitter-ordered-boxplot-500.pdf")
 
 (facetOrderedBoxplot(dProving_500, dProving_500$Method, dProving_500$Time_ms, dProving_500$KeyLength, "Methods", "CPU time (ms)", "Key length"))
+savePlot(last_plot(), "proving-facet-ordered-boxplot-500.pdf")
 
 (facetOrderedMeanBarplot(dProving_500, dProving_500$Method, dProving_500$Time_ms, dProving_500$KeyLength, "Methods", "CPU time (ms)", "Key length"))
+savePlot(last_plot(), "proving-ordered-mean-barplot-500.pdf")
 
 (dsummary_500 <- data_summary(dProving_500, varname = "Time_ms", groupnames = c("KeyLength", "Method")))
 
 (createMeanSDBarplots(dsummary_500, dsummary_500$Method, dsummary_500$mean, dsummary_500$KeyLength, "Methods", "Mean CPU time (ms)", "Key length"))
+savePlot(last_plot(), "proving-mean-sd-barplot-500.pdf")
 
 v_50 <- bind_rows(dsummaryProving, .id="expID")
 v_50['Vertices'] = 50
@@ -69,10 +77,11 @@ dProving_50_500 <- rbind(v_50, v_500)
 p <- (createMeanSDBarplots(dProving_50_500, dProving_50_500$Method, dProving_50_500$mean, dProving_50_500$KeyLength, "Methods", "Mean CPU time (ms)", "Key length"))
 
 p + facet_grid(dProving_50_500$Vertices ~ dProving_50_500$KeyLength)
+savePlot(last_plot(), "proving-facet-mean-sd-barplot-50-500.pdf")
 
 ol <- createOrderedLinePlots(dProving_50_500, dProving_50_500$Method, dProving_50_500$mean, dProving_50_500$KeyLength, dProving_50_500$Vertices, "Methods", "Mean CPU time (ms)", "Key length")
 
 (ol +  
     scale_linetype_manual(values=c("solid","twodash", "dotted", "dashed")) +
     theme(axis.text.x = element_text(angle = 77, vjust = 1, hjust=1)))
-
+savePlot(last_plot(), "proving-facet-lineplot-50-500.pdf")
