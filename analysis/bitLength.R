@@ -62,6 +62,8 @@ ggplot(elementsIssuing, aes(x=factor(elementsIssuing$MessageNo), y=elementsIssui
   geom_bar(stat="identity") + theme_bw() +
   labs( x="Message No",  y = "Number of elements", fill="Class Name") 
 
+savePlot(last_plot(), "issuing-elements-no-per-message.pdf")
+
 (proving_count_msg1 <- count(proving_msg1, "ClassName"))
 p_msg1 <- bind_rows(proving_count_msg1, .id = "MessageNo")
 p_msg1['MessageNo'] = 1
@@ -87,6 +89,11 @@ p_msg7['MessageNo'] = 5
 elementsProving <- rbind(elementsProving, p_msg7)
 summary(elementsProving)
 
+ggplot(elementsProving, aes(x=factor(elementsProving$MessageNo), y=elementsProving$freq, fill=elementsProving$ClassName)) +
+  geom_bar(stat="identity") + theme_bw() +
+  labs( x="Message No",  y = "Number of elements", fill="Class Name") 
+savePlot(last_plot(), "proving-elements-no-per-message.pdf")
+
 (total_QRElements_Proving <- proving_count_msg2[2,2] + proving_count_msg3[2,2] + proving_count_msg7[2,2])
 names <- c("Issuing", "Proving")
 qrElements <- c(total_QRElements_Issuing, total_QRElements_Proving)
@@ -96,3 +103,6 @@ qrElements <- c(total_QRElements_Issuing, total_QRElements_Proving)
 ggplot(totalQREl, aes(x=totalQREl$names, y=totalQREl$qrElements, fill= totalQREl$names)) +
   geom_bar(stat="identity") + theme_bw() +
   labs( x="",  y = "Number of QRElements", fill="") 
+
+savePlot(last_plot(), "QRElements-per-stage.pdf")
+
