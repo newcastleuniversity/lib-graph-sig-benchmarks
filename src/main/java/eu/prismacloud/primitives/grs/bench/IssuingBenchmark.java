@@ -315,11 +315,11 @@ public class IssuingBenchmark {
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
 				.include(eu.prismacloud.primitives.grs.bench.IssuingBenchmark.class.getSimpleName())
-				.param("l_n", "512", "1024", "2048", "3072")
+				.param("l_n", "2048")//"512")//, "1024", "2048", "3072")
 				.param("bases", "400")//, "2000", "20000", "200000")
 				.jvmArgs("-server")
 				.warmupIterations(0)
-				.addProfiler(YourkitProfiler.class)
+//				.addProfiler(YourkitProfiler.class)
 				.warmupForks(1)
 				.measurementIterations(1)
 				.threads(1)
