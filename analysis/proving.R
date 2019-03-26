@@ -112,10 +112,13 @@ ggplot(pOrchestrator_filtered, aes(x = reorder(factor( pOrchestrator_filtered$Ve
   # coord_flip() +  
   theme_bw()
 
+savePlot(last_plot(), "pOrchestrator-proving-50-500.pdf")
+
+
 ggplot() +
-  geom_line(aes(x=factor(pOrchestrator_filtered$Vertices), y=pOrchestrator_filtered$ProvingTime, group=pOrchestrator_filtered$KeyLength, color=factor(pOrchestrator_filtered$KeyLength)), pOrchestrator_filtered) +
+  geom_line(aes(x = factor(pOrchestrator_filtered$Vertices), y = pOrchestrator_filtered$ProvingTime, group = pOrchestrator_filtered$KeyLength, color = factor(pOrchestrator_filtered$KeyLength)), pOrchestrator_filtered) +
   # geom_point(data=pOrchestrator_filtered, aes(x=factor(pOrchestrator_filtered$Vertices), y=pOrchestrator_filtered$ProvingTime, color=factor(pOrchestrator_filtered$KeyLength),    shape=factor(pOrchestrator_filtered$KeyLength))) + 
-  geom_line(aes(x=factor(pOrchestrator$Vertices), y=pOrchestrator$mean, group=factor(pOrchestrator$Method), color=factor(pOrchestrator$Method)), pOrchestrator) + 
+  geom_line(aes(x = factor(pOrchestrator$Vertices), y = pOrchestrator$mean, group = factor(pOrchestrator$Method), color = factor(pOrchestrator$Method)), pOrchestrator) + 
   
   # geom_line(aes(x=factor(signer_issuing_time$Vertices), y=signer_issuing_time$IssuingTime, group=signer_issuing_time$KeyLength, color=factor(signer_issuing_time$KeyLength), linetype=factor(signer_issuing_time$KeyLength)), signer_issuing_time) +
   # geom_point(data=signer_issuing_time, aes(x=factor(signer_issuing_time$Vertices), y=signer_issuing_time$IssuingTime), color=factor(signer_issuing_time$KeyLength), shape=factor(total_issuing_time$KeyLength), size=2, fill="black") +
@@ -124,12 +127,27 @@ ggplot() +
   labs( x = "Graph size (number of vertices)",  y = "Proving time (ms)", color = "", shape = "Key length") +
   theme_bw()
 
-ggplot(pOrchestrator, aes(x = reorder(factor( pOrchestrator$Vertices), pOrchestrator$mean), y = pOrchestrator$mean, group= pOrchestrator$Method)) +
+ggplot(pOrchestrator, aes(x = reorder(factor( pOrchestrator$Vertices), pOrchestrator$mean), y = pOrchestrator$mean, group = pOrchestrator$Method)) +
   geom_bar(stat = "summary", fun.y = "mean", position = "dodge", aes(fill = factor( pOrchestrator$Method)))  +
-  geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.25, position=position_dodge(0.9)) +
+  geom_errorbar(aes(ymin = mean-sd, ymax=mean+sd), width = .25, position = position_dodge(0.9)) +
   facet_grid(factor( pOrchestrator$KeyLength), margins = FALSE,  scales = "free", space = "free") +
   labs( x = "Graph size (number of vertices)",  y = "Proving time (ms)", fill = "") +
   # coord_flip() +  
   theme_bw()
 
+savePlot(last_plot(), "pOrchestrator-methods-proving-50-500.pdf")
 
+# calculate verifying time from VerifierOrchestrator
+vmethods <- c("VerifierOrchestrator.checkLengths", "VerifierOrchestrator.computeChallenge", "VerifierOrchestrator.computeCommitmentVerifiers", "VerifierOrchestrator.computePairWiseVerifiers", "VerifierOrchestrator.executeVerification", "PossessionVerifier.executeCompoundVerification")
+
+(vOrchestrator <- dProving_50_500[with(dProving_50_500, grepl(paste(vmethods, collapse = "|"), dProving_50_500$Method)), ])
+
+ggplot(vOrchestrator, aes(x = reorder(factor( vOrchestrator$Vertices), vOrchestrator$mean), y = vOrchestrator$mean, group = vOrchestrator$Method)) +
+  geom_bar(stat = "summary", fun.y = "mean", position = "dodge", aes(fill = factor( vOrchestrator$Method)))  +
+  geom_errorbar(aes(ymin = mean-sd, ymax = mean+sd), width = .25, position = position_dodge(0.9)) +
+  facet_grid(factor(vOrchestrator$KeyLength), margins = FALSE,  scales = "free", space = "free") +
+  labs( x = "Graph size (number of vertices)",  y = "Verifying time (ms)", fill = "") +
+  # coord_flip() +  
+  theme_bw()
+
+savePlot(last_plot(), "vOrchestrator-verifying-50-500.pdf")
