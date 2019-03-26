@@ -1,4 +1,5 @@
 # issuing computation results analysis
+setwd("~/DEV/lib-graph-sig-benchmarks/analysis")
 ## load required packages, auxiliary functions and configuration
 source("packages.R")
 source("functions.R")
@@ -109,3 +110,72 @@ p <- (createMeanSDBarplots(dIssuing_50_500, dIssuing_50_500$Method, dIssuing_50_
 
 p + facet_grid(dIssuing_50_500$Vertices ~ dIssuing_50_500$KeyLength)
 savePlot(last_plot(), "issuing-facet-mean-sd-barplot-50-500.pdf")
+
+# measure total issuing time for both parties
+(filtered <- dIssuing_50_500[with(dIssuing_50_500, grepl("*.round*", dIssuing_50_500$Method)), ])
+str(filtered)
+
+# detach plyr so we can work with dplyr otherwise the summation per group doesn't work
+detach(package:plyr)    
+library(dplyr)
+(total_issuing_time <- filtered %>% 
+  group_by(KeyLength, Vertices) %>%
+  summarise(IssuingTime = sum(mean)))
+
+total_issuing_time <- bind_rows(total_issuing_time, .id = "Type")
+total_issuing_time['Type'] = "Total issuing time"
+
+
+
+(signer_filtered <- filtered[with(filtered, grepl("SignerOrchestrator.*", filtered$Method)), ])
+
+(signer_issuing_time <- signer_filtered %>% 
+    group_by(KeyLength, Vertices) %>%
+    summarise(IssuingTime = sum(mean)))
+
+
+# signer_issuing_time$Type = "Signer issuing time"
+signer_issuing_time <- bind_rows(signer_issuing_time, .id = "Type")
+signer_issuing_time['Type'] = "Signer issuing time"
+issuing_time <- rbind(total_issuing_time, signer_issuing_time)
+
+(recipient_filtered <- filtered[with(filtered, grepl("RecipientOrchestrator.*", filtered$Method)), ])
+
+(recipient_issuing_time <- recipient_filtered %>% 
+    group_by(KeyLength, Vertices) %>%
+    summarise(IssuingTime = sum(mean)))
+# recipient_issuing_time$Type = "Recipient issuing time"
+
+recipient_issuing_time <- bind_rows(recipient_issuing_time, .id = "Type")
+recipient_issuing_time['Type'] = "Recipient issuing time"
+
+(issuing_time <- rbind(issuing_time, recipient_issuing_time))
+str(issuing_time)
+
+ggplot() +
+   geom_line(aes(x=factor(issuing_time$Vertices), y=issuing_time$IssuingTime, group=issuing_time$Type, color=factor(issuing_time$Type)), issuing_time) + 
+  geom_point(data=issuing_time, aes(x=factor(issuing_time$Vertices), y=issuing_time$IssuingTime, color=factor(issuing_time$Type),    shape=factor(issuing_time$KeyLength))) + 
+  # geom_line(aes(x=factor(signer_issuing_time$Vertices), y=signer_issuing_time$IssuingTime, group=signer_issuing_time$KeyLength, color=factor(signer_issuing_time$KeyLength), linetype=factor(signer_issuing_time$KeyLength)), signer_issuing_time) +
+  # geom_point(data=signer_issuing_time, aes(x=factor(signer_issuing_time$Vertices), y=signer_issuing_time$IssuingTime), color=factor(signer_issuing_time$KeyLength), shape=factor(total_issuing_time$KeyLength), size=2, fill="black") +
+  
+  facet_grid(issuing_time$KeyLength) +
+  labs( x = "Graph size (number of vertices)",  y = "Issuing time (ms)", color = "", shape = "Key length") +
+  theme_bw()
+
+ggplot( issuing_time, aes(x=factor(issuing_time$Vertices), y=issuing_time$IssuingTime, group=issuing_time$Type, color=factor(issuing_time$Type))) +
+  geom_line(stat='summary', fun.y='mean') + 
+  # geom_point(data=issuing_time, aes(x=factor(issuing_time$Vertices), y=issuing_time$IssuingTime, color=factor(issuing_time$KeyLength),    shape=factor(issuing_time$KeyLength))) + 
+  # geom_line(aes(x=factor(signer_issuing_time$Vertices), y=signer_issuing_time$IssuingTime, group=signer_issuing_time$KeyLength, color=factor(signer_issuing_time$KeyLength), linetype=factor(signer_issuing_time$KeyLength)), signer_issuing_time) +
+  # geom_point(data=signer_issuing_time, aes(x=factor(signer_issuing_time$Vertices), y=signer_issuing_time$IssuingTime), color=factor(signer_issuing_time$KeyLength), shape=factor(total_issuing_time$KeyLength), size=2, fill="black") +
+  geom_point(stat='summary', fun.y='mean') +
+   # facet_grid(issuing_time$KeyLength) +
+  labs( x = "Graph size (number of vertices)",  y = "Issuing time (ms)", color = "", shape = "Key length") +
+  theme_bw()
+
+ggplot(issuing_time, aes(x = reorder(factor( issuing_time$Vertices), issuing_time$IssuingTime), y = issuing_time$IssuingTime, group= issuing_time$Type)) +
+  geom_bar(stat = "summary", fun.y = "mean", position = "dodge", aes(fill = factor( issuing_time$Type)))  +
+  facet_grid(factor( issuing_time$KeyLength), margins = FALSE,  scales = "free", space = "free") +
+  labs( x = "Graph size (number of vertices)",  y = "Issuing time (ms)", fill = "") +
+  # coord_flip() +  
+  theme_bw()
+
