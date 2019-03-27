@@ -1,4 +1,4 @@
-# key generation results analysis
+# key generation performance results analysis
 
 ## load required packages, auxiliary functions and configuration
 source("packages.R")
@@ -26,12 +26,12 @@ kmean
 
 khist <- ggplot(keyGenData, aes(x = keyGenData$Score)) + 
   geom_histogram(binwidth = 2) + theme_bw() 
-savePlot(khist, "key-histogram.pdf")
+# savePlot(khist, "key-histogram.pdf")
 
 ggplot(keyGenData, aes(x = keyGenData$Score)) + 
   geom_density(adjust = 0.25) + theme_bw() 
 
-savePlot(last_plot(), "key-dens-histogram.pdf")
+# savePlot(last_plot(), "key-dens-histogram.pdf")
 
 
 ggplot(keyGenData, aes(x=factor(keyGenData$KeyLength), y=keyGenData$Score)) +
@@ -60,21 +60,15 @@ plotmeans(keyGenData$Score ~ keyGenData$KeyLength, digits=2, ccol="red", mean.la
 
 boxplot(keyGenData$Score ~ keyGenData$KeyLength, main="Key generation by key length (mean is black dot)", xlab="key length", ylab="execution time (sec) for generating keys", col=rainbow(7))
 
-
 # create density plots
 plot(density(keyGenData$Score), main="Density Plot: Score", ylab="Frequency", sub=paste("Skewness:", round(e1071::skewness(keyGenData$Score), 2)))  # density plot for 'speed'
 polygon(density(keyGenData$Score), col="red")
 
+(meansg <- aggregate(keyGenData$Score, by=list(keyGenData$KeyLength), FUN=mean))
 
-
-
-meansg <- aggregate(keyGenData$Score, by=list(keyGenData$KeyLength), FUN=mean)
-meansg
 barplot(meansg$x, names.arg=meansg$Group.1,main="Means bar plot", xlab="Key Length", ylab="Mean",          col=c("red", "yellow","green", "blue"))
 
-   
  (df2 <- data_summary(keyGenData, varname = "Score", groupnames = c("KeyLength")))
- 
  
  (mean(keyGenData$Score, na.rm=TRUE))
  (sd(keyGenData$Score, na.rm=TRUE))
@@ -87,5 +81,3 @@ ggplot(df2, aes(x=factor(df2$KeyLength), y=df2$mean,  fill = factor(df2$KeyLengt
   labs( x="Key length",  y = "Mean key generation time (sec)", fill="") 
 
 savePlot(last_plot(), "mean-key-generation-time.pdf")
-
-
