@@ -42,7 +42,7 @@ filteredSmall <- filter(filtered_50, filtered_50$Time_ms < 50)
 
 (uniqueM <- unique(filtered_50$Method))
 
-dIssuing <- filtered_50 #filterIssuing(filtered_50)
+dIssuing <- filterIssuing(filtered_50)
 
 (jitterOrderedBoxplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", "") )
 
@@ -82,7 +82,7 @@ issuing_500 <- renameHeadings(issuing_500, c('ExpID','ExpID.1', 'Method','Time_m
 str(issuing_500)
 
 filtered_500 <- filterMethods(issuing_500)
-dIssuing_500 <- filtered_500 #filterIssuing(filtered_500)
+dIssuing_500 <- filterIssuing(filtered_500)
 
 (jitterOrderedBoxplot(dIssuing_500, dIssuing_500$Method, dIssuing_500$Time_ms, dIssuing_500$KeyLength, "Methods", "CPU time (ms)", "") )
 savePlot(last_plot(), "issuing-jitter-ordered-boxplot-500.pdf")
