@@ -6,9 +6,8 @@
 # install.packages("ggpubr")
 # devtools::install_github("thomasp85/patchwork")
 library(agricolae)
-#
 library(ggplot2)
-library(cowplot)
+# library(cowplot)
 library(gplots)
 library(DAAG)
 library(e1071)
