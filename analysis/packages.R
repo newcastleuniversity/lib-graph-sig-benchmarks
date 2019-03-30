@@ -6,8 +6,9 @@
 # install.packages("ggpubr")
 # devtools::install_github("thomasp85/patchwork")
 library(agricolae)
-# library(cowplot)
+#
 library(ggplot2)
+library(cowplot)
 library(gplots)
 library(DAAG)
 library(e1071)
@@ -19,4 +20,4 @@ library(car)
 library(ggpubr)
 theme_set(
   theme_light() #+ theme(legend.position = "top")
-) 
+)
