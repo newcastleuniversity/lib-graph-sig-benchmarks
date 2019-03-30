@@ -150,6 +150,10 @@ filterMethods <- function(df){
   return(filtered)
 }
 
-savePlot <- function( name) {
-  ggsave(name, last_plot(), device = "pdf", path = "../figures")
+savePlot <- function( name, width, height) {
+  if (missing(width) && missing(height)) ggsave(name, device = "pdf", path = "../figures")
+  else if (missing(width)) ggsave(name, device = "pdf", path = "../figures", height = height) 
+  else if (missing(height)) ggsave(name, device = "pdf", path = "../figures", width = width)
+  else ggsave(name, device = "pdf", path = "../figures", width = width, height = height)
 }
+
