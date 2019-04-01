@@ -122,8 +122,10 @@ ggplot(pOrchestrator, aes(x = reorder(factor(pOrchestrator$Vertices)), y = pOrch
   facet_wrap(pOrchestrator$Method ~ ., scales = "free_y", labeller = to_string_p, ncol = 5) +
   labs(x = "Graph size (# of vertices)", y = "CPU time (ms)", fill = "Key Length") +
   theme(
-    strip.background = element_blank(), # remove the background
-    strip.placement = "outside", aspect.ratio = 1.4
+    strip.text.x = element_text(colour = "black", size = 10),
+    strip.background = element_blank(), 
+    strip.placement = "outside", 
+    aspect.ratio = 1.4
   )
 
 savePlot("pOrchestrator-methods-proving-barplot-50-500.pdf", 15, 4)
@@ -134,7 +136,11 @@ ggplot(pOrchestrator, aes(x = reorder(factor(pOrchestrator$Vertices)), y = pOrch
   facet_wrap(pOrchestrator$Method ~ ., scales = "free_y", labeller = to_string_p, ncol = 5) +
   labs(x = "Graph size (# of vertices)", y = "CPU time (ms)", colour = "Key Length", shape = "") +
   background_grid(major = "xy", minor = "none") + guides(shape = FALSE, linetype = FALSE) +
-  theme(strip.background = element_blank(), strip.placement = "outside", aspect.ratio = 1.4)
+  theme(
+    strip.text.x = element_text(colour = "black", size = 10),
+    strip.background = element_blank(), 
+    strip.placement = "outside", 
+    aspect.ratio = 1.4)
 
 savePlot("facet-provers-keylength-lineplot.pdf", 15, 4)
 
@@ -152,6 +158,7 @@ ggplot(vOrchestrator, aes(x = reorder(factor(vOrchestrator$Vertices)), y = vOrch
   facet_wrap(vOrchestrator$Method ~ ., scales = "free_y", labeller = to_string, ncol = 5) +
   labs(x = "Graph size (# of vertices)", y = "CPU time (ms)", fill = "Key Length") + background_grid(major = "xy", minor = "none") +
   theme(
+    strip.text.x = element_text(colour = "black", size = 10),
     strip.background = element_blank(),
     strip.placement = "outside", aspect.ratio = 1.4
   )
@@ -165,9 +172,10 @@ ggplot(vOrchestrator, aes(x = reorder(factor(vOrchestrator$Vertices)), y = vOrch
   labs(x = "Graph size (# of vertices)", y = "CPU time (ms)", colour = "Key Length", shape = "") +
   background_grid(major = "xy", minor = "none") + guides(shape = FALSE, linetype = FALSE) +
   theme(
-    strip.background = element_blank(), # remove the background
+    strip.text.x = element_text(colour = "black", size = 10),
+    strip.background = element_blank(), 
     strip.placement = "outside", aspect.ratio = 1.4
-  ) #+ # theme(plot.margin = unit(c(0,0,0,0), "cm"))
+  ) 
 
 savePlot("facet-verifiers-keylength-lineplot.pdf", 15, 4)
 
@@ -179,7 +187,7 @@ poss_verifier <- vOrchestrator %>%
   geom_line(aes(linetype = factor(poss_verifier$KeyLength), color = factor(poss_verifier$KeyLength)), size = 1) +
   geom_point(aes(shape = factor(poss_verifier$KeyLength), colour = factor(poss_verifier$KeyLength)), size = 2) +
   guides(shape = FALSE, linetype = FALSE) +
-  labs(x = "Graph size (number of vertices)", y = "Verifying time (ms)", colour = "Key length"))
+  labs(x = "Graph size (number of vertices)", y = "CPU time (ms)", colour = "Key length"))
 
 comm_verifier <- vOrchestrator %>%
   filter(Method == "VerifierOrchestrator.computeCommitmentVerifiers")
@@ -188,7 +196,7 @@ comm_verifier <- vOrchestrator %>%
   geom_line(aes(linetype = factor(comm_verifier$KeyLength), color = factor(comm_verifier$KeyLength)), size = 1) +
   geom_point(aes(shape = factor(comm_verifier$KeyLength), colour = factor(comm_verifier$KeyLength)), size = 2) +
   guides(shape = FALSE, linetype = FALSE) +
-  labs(x = "Graph size (number of vertices)", y = "Verifying time (ms)", colour = "Key length"))
+  labs(x = "Graph size (number of vertices)", y = "CPU time (ms)", colour = "Key length"))
 
 
 pair_wise_verifier <- vOrchestrator %>%
@@ -198,7 +206,7 @@ pair_wise_verifier <- vOrchestrator %>%
   geom_line(aes(linetype = factor(pair_wise_verifier$KeyLength), color = factor(pair_wise_verifier$KeyLength)), size = 1) +
   geom_point(aes(shape = factor(pair_wise_verifier$KeyLength), colour = factor(pair_wise_verifier$KeyLength)), size = 2) +
   guides(shape = FALSE, linetype = FALSE) +
-  labs(x = "Graph size (number of vertices)", y = "Verifying time (ms)", colour = "Key length"))
+  labs(x = "Graph size (number of vertices)", y = "CPU time (ms)", colour = "Key length"))
 
 exec_verifier <- vOrchestrator %>%
   filter(Method == "VerifierOrchestrator.executeVerification")
@@ -207,7 +215,7 @@ exec_verifier <- vOrchestrator %>%
   geom_line(aes(linetype = factor(exec_verifier$KeyLength), color = factor(exec_verifier$KeyLength)), size = 1) +
   geom_point(aes(shape = factor(exec_verifier$KeyLength), colour = factor(exec_verifier$KeyLength)), size = 2) +
   guides(shape = FALSE, linetype = FALSE) +
-  labs(x = "Graph size (number of vertices)", y = "Verifying time (ms)", colour = "Key length"))
+  labs(x = "Graph size (number of vertices)", y = "CPU time (ms)", colour = "Key length"))
 
 # library(patchwork) # poss_verifier_lp + comm_verifier_lp + pair_wise_verifier_lp + exec_verifier_lp
 
