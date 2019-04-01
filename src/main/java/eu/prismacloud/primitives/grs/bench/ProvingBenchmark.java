@@ -236,7 +236,7 @@ public class ProvingBenchmark extends GSBenchmark {
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
 				.include(eu.prismacloud.primitives.grs.bench.ProvingBenchmark.class.getSimpleName())
-				.param("l_n", "2048")//"512")//, "1024", "2048", "3072")
+				.param("l_n", "512", "1024", "2048", "3072")
 				.param("bases", "400")//, "1000", "10000", "100000")
 				.jvmArgs("-server")
 				.warmupIterations(0)
