@@ -44,13 +44,13 @@ filteredSmall <- filter(filtered_50, filtered_50$Time_ms < 50)
 
 dIssuing <- filterIssuing(filtered_50)
 
-(jitterOrderedBoxplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", ""))
+# (jitterOrderedBoxplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", ""))
 
-savePlot("issuing-jitter-ordered-boxplot.pdf")
+# savePlot("issuing-jitter-ordered-boxplot.pdf")
 
-(facetOrderedBoxplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", "Key length"))
+# (facetOrderedBoxplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", "Key length"))
 
-savePlot("issuing-facet-ordered-boxplot.pdf")
+# savePlot("issuing-facet-ordered-boxplot.pdf")
 
 (facetOrderedMeanBarplot(dIssuing, dIssuing$Method, dIssuing$Time_ms, dIssuing$KeyLength, "Methods", "CPU time (ms)", "Key length"))
 savePlot("issuing-facet-ordered-mean-barplot.pdf")
@@ -73,7 +73,7 @@ ggplot(cpuKeySummary, aes(x = factor(cpuKeySummary$KeyLength), y = cpuKeySummary
 savePlot("issuing-facet-mean-sd-barplot.pdf")
 
 # plot means
-plotmeans(filtered_50$Time_ms ~ filtered_50$Method, digits = 3, ccol = "red", xlab = "Methods", ylab = "CPU time for issuing methods (msec)", las = 2, cex.axis = 0.4, mean.labels = F, mar = c(10.1, 4.1, 4.1, 2.1), n.label = FALSE, mgp = c(3, 1, 0), main = "Plot of issuing methods")
+# plotmeans(filtered_50$Time_ms ~ filtered_50$Method, digits = 3, ccol = "red", xlab = "Methods", ylab = "CPU time for issuing methods (msec)", las = 2, cex.axis = 0.4, mean.labels = F, mar = c(10.1, 4.1, 4.1, 2.1), n.label = FALSE, mgp = c(3, 1, 0), main = "Plot of issuing methods")
 
 # create dataframe from issuing with 500 vertices
 (issuing_500 <- createDataSetFromCSV("issuing-3000", "issuing-profile-500-csv", "Method-list--CPU\\.csv", 500))
@@ -85,8 +85,8 @@ str(issuing_500)
 filtered_500 <- filterMethods(issuing_500)
 dIssuing_500 <- filterIssuing(filtered_500)
 
-(jitterOrderedBoxplot(dIssuing_500, dIssuing_500$Method, dIssuing_500$Time_ms, dIssuing_500$KeyLength, "Methods", "CPU time (ms)", ""))
-savePlot("issuing-jitter-ordered-boxplot-500.pdf")
+# (jitterOrderedBoxplot(dIssuing_500, dIssuing_500$Method, dIssuing_500$Time_ms, dIssuing_500$KeyLength, "Methods", "CPU time (ms)", ""))
+# savePlot("issuing-jitter-ordered-boxplot-500.pdf")
 
 (facetOrderedBoxplot(dIssuing_500, dIssuing_500$Method, dIssuing_500$Time_ms, dIssuing_500$KeyLength, "Methods", "CPU time (ms)", "Key length"))
 savePlot("issuing-facet-ordered-boxplot-500.pdf")
