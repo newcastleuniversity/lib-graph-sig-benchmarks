@@ -72,7 +72,10 @@ public class MockMessageGateway implements IMessageGateway {
 		i++;
 		System.out.println("------------ MESSAGE_" + i + " -------------- \n");
 		messageNo = "message_" + i;
-		persistenceUtil.write(message, messageNo + ".ser");
+		Date date = new Date();
+		Format formatter = new SimpleDateFormat("YYYY-MM-dd_hh-mm-ss");
+		String fileName = messageNo + "-" + ((SimpleDateFormat) formatter).format(date);
+		persistenceUtil.write(message,  fileName + ".ser");
 	}
 
 	private void measureMessageBits(Map<URN, Object> messageElements) {
