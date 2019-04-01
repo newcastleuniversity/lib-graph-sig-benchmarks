@@ -41,56 +41,51 @@ bitlength_df <- rbind(issuing_bitlength, proving_bitlength)
 
 (issuing_count <- issuing_bitlength %>%
   group_by(Stage, MessageNo, ClassName) %>%
-  tally())
+  tally(name = "count"))
 
 (proving_count <- proving_bitlength %>%
   group_by(Stage, MessageNo, ClassName) %>%
-  tally())
+  tally(name = "count"))
 
-ggplot(elementsIssuing, aes(x = factor(elementsIssuing$MessageNo), y = elementsIssuing$freq, fill = elementsIssuing$ClassName)) +
-  geom_bar(stat = "identity") + theme_bw() +
-  labs(x = "Message No", y = "# of elements", fill = "Class Name")
+(bitlength_count <- bitlength_df %>%
+  group_by(Stage, MessageNo, ClassName, KeyLength) %>%
+  tally(name = "count"))
+
+ggplot(issuing_count, aes(x = factor(issuing_count$MessageNo), y = issuing_count$count, fill = issuing_count$ClassName)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Message No", y = "# of elements", fill = "")
 
 savePlot("issuing-elements-no-per-message.pdf")
 
-(proving_count_msg1 <- count(proving_msg1, "ClassName"))
-p_msg1 <- bind_rows(proving_count_msg1, .id = "MessageNo")
-p_msg1["MessageNo"] <- 1
-
-(proving_count_msg2 <- count(proving_msg2, "ClassName"))
-p_msg2 <- bind_rows(proving_count_msg2, .id = "MessageNo")
-p_msg2["MessageNo"] <- 2
-elementsProving <- rbind(p_msg1, p_msg2)
-
-proving_count_msg3 <- count(proving_msg3, "ClassName")
-p_msg3 <- bind_rows(proving_count_msg3, .id = "MessageNo")
-p_msg3["MessageNo"] <- 3
-elementsProving <- rbind(elementsProving, p_msg3)
-
-proving_count_msg5 <- count(proving_msg5, "ClassName")
-p_msg5 <- bind_rows(proving_count_msg5, .id = "MessageNo")
-p_msg5["MessageNo"] <- 4
-elementsProving <- rbind(elementsProving, p_msg5)
-
-proving_count_msg7 <- count(proving_msg7, "ClassName")
-p_msg7 <- bind_rows(proving_count_msg7, .id = "MessageNo")
-p_msg7["MessageNo"] <- 5
-elementsProving <- rbind(elementsProving, p_msg7)
-summary(elementsProving)
-
-ggplot(elementsProving, aes(x = factor(elementsProving$MessageNo), y = elementsProving$freq, fill = elementsProving$ClassName)) +
-  geom_bar(stat = "identity") + theme_bw() +
-  labs(x = "Message No", y = "# of elements", fill = "Class Name")
+ggplot(proving_count, aes(x = factor(proving_count$MessageNo), y = proving_count$count, fill = proving_count$ClassName)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Message No", y = "# of elements", fill = "")
 savePlot("proving-elements-no-per-message.pdf")
 
-(total_QRElements_Proving <- proving_count_msg2[2, 2] + proving_count_msg3[2, 2] + proving_count_msg7[2, 2])
-names <- c("Issuing", "Proving")
-qrElements <- c(total_QRElements_Issuing, total_QRElements_Proving)
+(bitlength_count_512 <- bitlength_count %>%
+  filter(KeyLength == "512"))
 
-(totalQREl <- data.frame(names, qrElements))
-
-ggplot(totalQREl, aes(x = totalQREl$names, y = totalQREl$qrElements, fill = totalQREl$names)) +
-  geom_bar(stat = "identity") + theme_bw() +
+ggplot(bitlength_count_512, aes(x = bitlength_count_512$Stage, y = bitlength_count_512$count, fill = bitlength_count_512$ClassName)) +
+  geom_bar(stat = "identity") +
   labs(x = "", y = "# of QRElements", fill = "")
 
 savePlot("QRElements-per-stage.pdf")
+
+(issuing_sum <- bitlength_df %>%
+  group_by(Stage, KeyLength) %>%
+  summarise(sum = sum(Bitlength)))
+
+ggplot(issuing_sum, aes(x = reorder(factor(issuing_sum$Stage)), y = issuing_sum$sum, group = issuing_sum$KeyLength)) +
+  geom_line(aes(linetype = factor(issuing_sum$KeyLength), color = factor(issuing_sum$KeyLength)), size = 1) +
+  geom_point(aes(shape = factor(issuing_sum$KeyLength), colour = factor(issuing_sum$KeyLength)), size = 2) +
+  # facet_wrap(issuing_sum$Stage ~ ., scales = "free_y",  ncol = 5) +
+  labs(x = "", y = "Total bitlength", colour = "Key Length", shape = "") +
+  # background_grid(major = "xy", minor = "none") +
+  guides(shape = FALSE, linetype = FALSE) +
+  theme(
+    strip.text.x = element_text(colour = "black", size = 10),
+    strip.background = element_blank(),
+    strip.placement = "outside", aspect.ratio = 1.4
+  )
+
+savePlot("bitlength-sum-keylength-lineplot.pdf")
