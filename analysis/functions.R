@@ -157,3 +157,7 @@ savePlot <- function( name, width, height) {
   else ggsave(name, device = "pdf", path = "../figures", width = width, height = height)
 }
 
+writeCSV <- function(dataframe, path) {
+  write.csv(dataframe,path, row.names = TRUE)
+}
+
