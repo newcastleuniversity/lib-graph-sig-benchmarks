@@ -121,7 +121,7 @@ detach(package:plyr)
 library(dplyr)
 (total_issuing_time <- filtered %>%
   group_by(KeyLength, Vertices) %>%
-  summarise(IssuingTime = sum(mean)))
+    summarise(IssuingTime = sum(mean), SD = sum(sd), SE = sum(se)))
 
 total_issuing_time <- bind_rows(total_issuing_time, .id = "Type")
 total_issuing_time["Type"] <- "Total issuing time"
@@ -130,8 +130,7 @@ total_issuing_time["Type"] <- "Total issuing time"
 
 (signer_issuing_time <- signer_filtered %>%
   group_by(KeyLength, Vertices) %>%
-  summarise(IssuingTime = sum(mean)))
-
+    summarise(IssuingTime = sum(mean), SD = sum(sd), SE = sum(se)))
 
 # signer_issuing_time$Type = "Signer issuing time"
 signer_issuing_time <- bind_rows(signer_issuing_time, .id = "Type")
@@ -140,9 +139,12 @@ issuing_time <- rbind(total_issuing_time, signer_issuing_time)
 
 (recipient_filtered <- filtered[with(filtered, grepl("RecipientOrchestrator.*", filtered$Method)), ])
 
+summary(recipient_filtered)
+
 (recipient_issuing_time <- recipient_filtered %>%
-  group_by(KeyLength, Vertices) %>%
-  summarise(IssuingTime = sum(mean)))
+  group_by(KeyLength, Vertices)      %>%
+  summarise(IssuingTime = sum(mean), SD = sum(sd), SE = sum(se)))
+
 # recipient_issuing_time$Type = "Recipient issuing time"
 
 recipient_issuing_time <- bind_rows(recipient_issuing_time, .id = "Type")
@@ -162,6 +164,10 @@ ggplot(issuing_time, aes(x = reorder(factor(issuing_time$Vertices)), y = issuing
     strip.background = element_blank(),
     strip.placement = "outside"
   )
+
+kDataFile <- "issuingData"
+kCSVFilePath <- paste0(paperDataFolderPath, kDataFile, ".csv", collapse = "")
+writeCSV(issuing_time,kCSVFilePath)
 
 savePlot("issuing-time-line-plot.pdf")
 
