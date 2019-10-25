@@ -50,3 +50,10 @@
 /ExtendedKeyPair-1024-100-300.ser
 /serialization-dump
 /raw-profiler-data
+/ExtendedPublicKey-3072-100-300.ser
+/ExtendedKeyPair-3072-100-300.ser
+/SignerPublicKey-3072.ser
+/SignerKeyPair-3072.ser
+/signer-infra-3072-100-300.ser
+/lib-graph-sig-benchmarks-22-03-19
+/issuing-2019-03-20
