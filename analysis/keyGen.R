@@ -73,11 +73,45 @@ barplot(meansg$x, names.arg=meansg$Group.1,main="Means bar plot", xlab="Key Leng
  (mean(keyGenData$Score, na.rm=TRUE))
  (sd(keyGenData$Score, na.rm=TRUE))
 
+# writeCSV(df2,"../data/keyGenData.csv")
+
+kDataFile <- "keyGenData"
+kCSVFilePath <- paste0(paperDataFolderPath, kDataFile, ".csv", collapse = "")
+writeCSV(df2,kCSVFilePath)
+
 ggplot(df2, aes(x=factor(df2$KeyLength), y=df2$mean,  fill = factor(df2$KeyLength))) +
   geom_bar(stat="identity", position=position_dodge())+
-  theme_minimal() +
+  # theme_minimal() +
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width=.15,
                 position=position_dodge(0.9)) +
-  labs( x="Key length",  y = "Mean key generation time (sec)", fill="") 
+  labs( x="Key length",  y = "Mean key generation time (sec)", fill="") +
+  theme(
+    aspect.ratio = 1/0.9,
+    legend.position="none",
+    axis.title = element_text(colour= "black", size = 12, face = "plain"),
+    axis.text = element_text(colour = "black", size = 10, face = "plain"),
+    # strip.text.x = element_text(colour = "black", size = 14, face = "bold"),
+    strip.background = element_blank(),
+    strip.placement = "outside"
+  )
 
-savePlot(last_plot(), "mean-key-generation-time.pdf")
+savePlot( "mean-key-generation-time.pdf")
+
+# ggplot(df2, aes(x = reorder(factor(df2$KeyLength)), y = df2$mean,  color = factor(df2$KeyLength), linetype = factor(df2$KeyLength), shape = factor(df2$KeyLength))) +
+#   # geom_line(aes(linetype = factor(attrData$Components), color = factor(attrData$Components))) +
+#   geom_line() +
+#   geom_point() +
+#   # geom_point(aes(colour = factor(attrData$Components), shape = factor(attrData$Components))) +
+#   labs(x = "Key length", y = "Mean Key generation Time (sec)", color = "", shape = "") +
+#   # guides(colour = guide_legend(), shape = guide_legend(), linetype = FALSE) +
+#   scale_colour_discrete("") +
+#   # scale_shape_manual(values = c(4,8,15,16)) + #,17,18,21,22,3,42,4,8,15,16)) +
+#   # scale_linetype_manual(values=c("solid", "dashed","dotted", "dotdash")) + #, "longdash", "twodash", "solid", "dashed","dotted", "dotdash", "longdash", "twodash","solid", "dashed")) +
+#   # guides( size = guide_legend(),
+#   # shape = guide_legend(), linetype= FALSE) +
+#   theme(
+#     aspect.ratio = 1/1,
+#     strip.text.x = element_text(colour = "black", size = 10),
+#     strip.background = element_blank(),
+#     strip.placement = "outside"
+#   )
