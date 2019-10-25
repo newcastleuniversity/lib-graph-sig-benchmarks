@@ -135,12 +135,20 @@ ggplot(pOrchestrator, aes(x = reorder(factor(pOrchestrator$Vertices)), y = pOrch
   geom_point(aes(shape = factor(pOrchestrator$KeyLength), colour = factor(pOrchestrator$KeyLength)), size = 2) +
   facet_wrap(pOrchestrator$Method ~ ., scales = "free_y", labeller = to_string_p, ncol = 5) +
   labs(x = "Graph size (# of vertices)", y = "CPU time (ms)", colour = "Key Length", shape = "") +
-  background_grid(major = "xy", minor = "none") + guides(shape = FALSE, linetype = FALSE) +
+  # background_grid(major = "xy", minor = "none") + 
+  guides(shape = FALSE, linetype = FALSE) +
   theme(
     strip.text.x = element_text(colour = "black", size = 10),
     strip.background = element_blank(), 
     strip.placement = "outside", 
     aspect.ratio = 1.4)
+
+pOrchestratorCSV <- pOrchestrator %>%
+  filter(Method != "ProverOrchestrator.executePreChallengePhase" & Method != "ProverOrchestrator.computeChallenge" & Method != "ProverOrchestrator.computePairWiseProvers") 
+
+pDataFile <- "provingData"
+pCSVFilePath <- paste0(paperDataFolderPath, pDataFile, ".csv", collapse = "")
+writeCSV(pOrchestratorCSV, pCSVFilePath)
 
 savePlot("facet-provers-keylength-lineplot.pdf", 15, 4)
 
@@ -170,12 +178,20 @@ ggplot(vOrchestrator, aes(x = reorder(factor(vOrchestrator$Vertices)), y = vOrch
   geom_point(aes(shape = factor(vOrchestrator$KeyLength), colour = factor(vOrchestrator$KeyLength)), size = 2) +
   facet_wrap(vOrchestrator$Method ~ ., scales = "free_y", labeller = to_string, ncol = 5) +
   labs(x = "Graph size (# of vertices)", y = "CPU time (ms)", colour = "Key Length", shape = "") +
-  background_grid(major = "xy", minor = "none") + guides(shape = FALSE, linetype = FALSE) +
+  # background_grid(major = "xy", minor = "none") + 
+  guides(shape = FALSE, linetype = FALSE) +
   theme(
     strip.text.x = element_text(colour = "black", size = 10),
     strip.background = element_blank(), 
     strip.placement = "outside", aspect.ratio = 1.4
-  ) 
+  )
+
+vOrchestratorCSV <- vOrchestrator %>%
+  filter(Method != "VerifierOrchestrator.executePreChallengePhase" & Method != "VerifierOrchestrator.computeChallenge" & Method != "VerifierOrchestrator.computePairWiseVerifiers")
+
+vDataFile <- "verifyingData"
+vCSVFilePath <- paste0(paperDataFolderPath, vDataFile, ".csv", collapse = "")
+writeCSV(vOrchestratorCSV, vCSVFilePath)
 
 savePlot("facet-verifiers-keylength-lineplot.pdf", 15, 4)
 
