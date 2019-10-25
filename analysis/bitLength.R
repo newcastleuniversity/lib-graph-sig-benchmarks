@@ -67,7 +67,7 @@ savePlot("proving-elements-no-per-message.pdf")
 
 ggplot(bitlength_count_512, aes(x = bitlength_count_512$Stage, y = bitlength_count_512$count, fill = bitlength_count_512$ClassName)) +
   geom_bar(stat = "identity") +
-  labs(x = "", y = "# of QRElements", fill = "")
+  labs(x = "", y = "# of elements", fill = "")
 
 savePlot("QRElements-per-stage.pdf")
 
