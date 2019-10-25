@@ -5,6 +5,7 @@
 # install.packages("agricolae")
 # install.packages("ggpubr")
 # devtools::install_github("thomasp85/patchwork")
+# install.packages("ggplot2")
 library(agricolae)
 library(dplyr)
 library(ggplot2)
