@@ -56,12 +56,12 @@ facetOrderedMeanBarplot <- function(dataframe, dx, dy, dg, xlabel, ylabel, flabe
 ## read csv files
 readCSVs <- function(a_csv) {
   print(a_csv)
-  the_data <- read.csv(a_csv, header = TRUE, sep = ",", stringsAsFactors=FALSE)
+  the_data <- read.csv(a_csv, header = TRUE, sep = ",", stringsAsFactors = FALSE)
 }
 
 ## create a list of dataframes from csv files
 getCSVData <- function(dPattern, path, fPattern ){
-  dirs <- grep(dPattern,list.dirs(path,recursive=FALSE),value=TRUE)
+  dirs <- grep(dPattern, list.dirs(path,recursive = FALSE), value = TRUE)
   lfiles <- list.files(dirs, pattern = fPattern, recursive = TRUE, full.names = TRUE, include.dirs = TRUE)
   data <- lapply(lfiles, FUN = readCSVs)
   return(data)
@@ -102,20 +102,20 @@ createOrderedLinePlots <- function(df, dx, dy, dg, dv, xlabel, ylabel, flabel) {
 
 ## create a dataframe that includes data from csv file for all key lengths
 createDataSetFromCSV <- function(csvFolder, expFolder, csvName, verticesNo) {
-  (data_512 <- getCSVData(paste0(csvFolder,"-512*"), paste0("../data/", expFolder), csvName))
+  data_512 <- getCSVData(paste0(csvFolder,"-512*"), paste0("../data/", expFolder), csvName)
   # create a dataframe from the experiments
   df_512 <- bind_rows(data_512, .id="expID")
   df_512['KeyLength'] = 512
   
-  (data_1024 <- getCSVData(paste0(csvFolder,"-1024*"), paste0("../data/", expFolder), csvName))
+  data_1024 <- getCSVData(paste0(csvFolder,"-1024*"), paste0("../data/", expFolder), csvName)
   df_1024 <- bind_rows(data_1024, .id="expID")
   df_1024['KeyLength'] = 1024
   
-  (data_2048 <- getCSVData(paste0(csvFolder,"-2048*"), paste0("../data/", expFolder), csvName))
+  data_2048 <- getCSVData(paste0(csvFolder,"-2048*"), paste0("../data/", expFolder), csvName)
   df_2048 <- bind_rows(data_2048, .id="expID")
   df_2048['KeyLength'] = 2048
   
-  (data_3072 <- getCSVData(paste0(csvFolder,"-3072*"), paste0("../data/", expFolder), csvName))
+  data_3072 <- getCSVData(paste0(csvFolder,"-3072*"), paste0("../data/", expFolder), csvName)
   df_3072 <- bind_rows(data_3072, .id="expID")
   df_3072['KeyLength'] = 3072
   
