@@ -2,7 +2,7 @@
 # usage: ./benchmarkProfiling.sh <data path>
 # example: ./benchmarkProfiling.sh experiment-fork-20-12-18/
 # shell script to export the call tree and method list in csv files  
-YHOME='/Applications/YourKit-Java-Profiler-2019.1.app/Contents/Resources'
+YHOME='/Applications/YourKit-Java-Profiler-2019.8.app/Contents/Resources'
 echo "$YHOME/lib/yourkit.jar"
 
 if [ "$1" = "" ] ; then
