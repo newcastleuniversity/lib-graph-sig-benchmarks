@@ -1,13 +1,27 @@
 data_summary <- function(data, varname, groupnames){
   require(plyr)
-  summary_func <- function(x, col){
-    c(mean = mean(x[[col]], na.rm=TRUE),
-      sd = sd(x[[col]], na.rm=TRUE), 
-      N = length(x[[col]]), 
-      se = sd(x[[col]], na.rm=TRUE)/sqrt(length(x[[col]]))
+  summary_func <- function(x, col){ 
+    
+    if (length(x[[col]]) > 200) {
+      vec = head(x[[col]], 200)
+    } else {
+      vec = x[[col]]
+    }
+       # print(x[[col]])
+       # print(length(x[[col]]))
+       # print(vec)
+    # c(mean = mean(x[[col]], na.rm=TRUE),
+    #   sd = sd(x[[col]], na.rm=TRUE), 
+    #   N = length(x[[col]]), 
+    #   se = sd(x[[col]], na.rm=TRUE)/sqrt(length(x[[col]]))
+    # ) 
+    c(mean = mean(vec, na.rm=TRUE),
+      sd = sd(vec, na.rm=TRUE), 
+      N = length(vec), 
+      se = sd(vec, na.rm=TRUE)/sqrt(length(vec))
     ) 
-      
   }
+  
   data_sum <- ddply(data, groupnames, .fun=summary_func, .inform= TRUE, varname)
   #data_sum <- rename(data_sum, c("mean" = varname))
 
