@@ -161,6 +161,7 @@ filterMethods <- function(df){
   (filtered$Method <- gsub(pattern = "orchestrator.", replacement = "", filtered$Method)) 
   (filtered$Method <- gsub(pattern = "util.", replacement = "", filtered$Method)) 
   (filtered$Method <- gsub(pattern = "commitment.", replacement = "", filtered$Method)) 
+  (filtered$Method <- gsub(pattern = "<...>", replacement = "", filtered$Method)) 
   return(filtered)
 }
 
