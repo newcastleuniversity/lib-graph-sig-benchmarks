@@ -34,11 +34,12 @@ str(proving)
 dProving <- filterProving(fproving)
 
 # (filtered_proving <- dProving[with(dProving, grepl("QRElement.modPow", dProving$Method)), ])
+(comm_prover_methods <- c("AbstractCommitmentProver.executePreChallengePhase"))
 
 # create line plot for commitmentProvers
-(filtered_proving <- dProving[with(dProving, grepl("ProverOrchestrator.computeCommitmentProvers", dProving$Method)), ])
+(filtered_proving <- dProving[with(dProving, grepl(comm_prover_methods, dProving$Method)), ])
 
-(commitment_provers <- data_summary(filtered_proving, varname = "Time_ms", groupnames = c("KeyLength", "Method", "Vertices")))
+(commitment_provers <- data_summary(filtered_proving, varname = "Time_ms", groupnames = c("KeyLength","Method", "Vertices")))
 
 ggplot(commitment_provers, aes(x = reorder(factor(commitment_provers$Vertices)), y = commitment_provers$mean, group = commitment_provers$KeyLength)) +
   geom_errorbar(aes(colour = factor(commitment_provers$KeyLength), ymin = mean - se, ymax = mean + se), width= .1) +
@@ -62,8 +63,10 @@ ggplot(commitment_provers, aes(x = reorder(factor(commitment_provers$Vertices)),
     strip.placement = "outside"
   )
 
+(possession_methods <- c("PossessionProver.executeCompoundPreChallengePhase"))
+
 # create line plot for possession prover
-(filtered_proving <- dProving[with(dProving, grepl("ProverOrchestrator.computeTildeZ", dProving$Method)), ])
+(filtered_proving <- dProving[with(dProving, grepl(possession_methods, dProving$Method)), ])
 
 (possession_prover <- data_summary(filtered_proving, varname = "Time_ms", groupnames = c("KeyLength", "Method", "Vertices")))
 
@@ -72,7 +75,7 @@ ggplot(possession_prover, aes(x = reorder(factor(possession_prover$Vertices)), y
   geom_line(aes(linetype = factor(possession_prover$KeyLength), color = factor(possession_prover$KeyLength)), size = 1) +
   geom_point(aes(colour = factor(possession_prover$KeyLength), shape = factor(possession_prover$KeyLength))) +
   # facet_wrap(signer_issuing_time$Type ~ ., scales = "free_y", ncol = 3) +
-  labs(x = "Graph size (number of vertices)", y = "CPU time (ms)", color = "Key length", shape = "") + 
+  labs(x = "Graph size (number of vertices)", y = "Mean CPU time (ms)", color = "Key length", shape = "") + 
   # coord_trans( y="log2") +
   # coord_trans( y="log10") +
   # scale_y_continuous(labels = scientific) +
@@ -89,7 +92,7 @@ ggplot(possession_prover, aes(x = reorder(factor(possession_prover$Vertices)), y
     strip.placement = "outside"
   )
 
-(pmethods <- c("ProverOrchestrator.computeCommitmentProvers", "ProverOrchestrator.computeTildeZ"))
+(pmethods <- c("AbstractCommitmentProver.executePreChallengePhase", "PossessionProver.executeCompoundPreChallengePhase"))
 
 # create compound csv dataframe for proving stage
 (proving <- dProving[with(dProving, grepl(paste(pmethods, collapse = "|"), dProving$Method)), ])
@@ -100,9 +103,9 @@ pCSVFilePath <- paste0(paperDataFolderPath, pDataFile, ".csv", collapse = "")
 writeCSV(provingCSV, pCSVFilePath)
 
 # create line plot for commitment verifiers
-(filtered_proving <- dProving[with(dProving, grepl("VerifierOrchestrator.computeCommitmentVerifiers", dProving$Method)), ])
+(filtered_proving <- fproving[with(fproving, grepl("AbstractCommitmentVerifier.executeVerification", fproving$Method)), ])
 
-(commitment_verifiers <- data_summary(filtered_proving, varname = "Time_ms", groupnames = c("KeyLength", "Method", "Vertices")))
+(commitment_verifiers <- data_summary(filtered_proving, varname = "Time_ms", groupnames = c("KeyLength",  "Vertices")))
 
 ggplot(commitment_verifiers, aes(x = reorder(factor(commitment_verifiers$Vertices)), y = commitment_verifiers$mean, group = commitment_verifiers$KeyLength)) +
   geom_errorbar(aes(colour = factor(commitment_verifiers$KeyLength), ymin = mean - se, ymax = mean + se), width= .1) +
@@ -153,10 +156,10 @@ ggplot(possession_verifier, aes(x = reorder(factor(possession_verifier$Vertices)
     strip.placement = "outside"
   )
 
-(vmethods <- c("VerifierOrchestrator.computeCommitmentVerifiers", "PossessionVerifier.executeCompoundVerification"))
+(vmethods <- c("AbstractCommitmentVerifier.executeVerification", "PossessionVerifier.executeCompoundVerification"))
 
 # create compound csv dataframe for verification stage
-(verification <- dProving[with(dProving, grepl(paste(vmethods, collapse = "|"), dProving$Method)), ])
+(verification <- fproving[with(fproving, grepl(paste(vmethods, collapse = "|"), fproving$Method)), ])
 (verificationCSV <- data_summary(verification, varname = "Time_ms", groupnames = c("KeyLength", "Method", "Vertices")))
 
 vDataFile <- "verificationData"
