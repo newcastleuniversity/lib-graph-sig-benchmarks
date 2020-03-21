@@ -41,6 +41,11 @@ scatter.smooth(x = factor(filtered_extendedKeygen$KeyLength), y = filtered_exten
 # plot the mean time for generate bases for the extended keypair
 (generateBasesTime <- data_summary(filtered_extendedKeygen, varname = "Time_ms", groupnames = c("KeyLength", "Method", "Vertices")))
 
+ekBasesDataFile <- "ekpBaseGen"
+kCSVFilePath <- paste0(paperDataFolderPath, ekBasesDataFile, ".csv", collapse = "")
+writeCSV(generateBasesTime,kCSVFilePath)
+
+
 ggplot(generateBasesTime, aes(x = reorder(factor(generateBasesTime$Vertices)), y = generateBasesTime$mean, group = generateBasesTime$KeyLength)) +
   geom_line(aes(linetype = factor(generateBasesTime$KeyLength), color = factor(generateBasesTime$KeyLength)), size = 1) +
   geom_point(aes(colour = factor(generateBasesTime$KeyLength), shape = factor(generateBasesTime$KeyLength))) +
@@ -68,6 +73,10 @@ str(filtered_setupEncoding)
 
 # plot geolocation graph encoding setup time for the extended keypair
 (setupEncodingTime <- data_summary(filtered_setupEncoding, varname = "Time_ms", groupnames = c("KeyLength", "Method", "Vertices")))
+
+ekSetupEncodingDataFile <- "ekpSetupEncoding"
+kCSVFilePath <- paste0(paperDataFolderPath, ekSetupEncodingDataFile, ".csv", collapse = "")
+writeCSV(setupEncodingTime,kCSVFilePath)
 
 ggplot(setupEncodingTime, aes(x = reorder(factor(setupEncodingTime$Vertices)), y = setupEncodingTime$mean, group = setupEncodingTime$KeyLength)) +
   geom_line(aes(linetype = factor(setupEncodingTime$KeyLength), color = factor(setupEncodingTime$KeyLength)), size = 1) +
