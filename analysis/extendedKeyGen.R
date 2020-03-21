@@ -38,7 +38,7 @@ str(filtered_extendedKeygen)
 
 scatter.smooth(x = factor(filtered_extendedKeygen$KeyLength), y = filtered_extendedKeygen$Time_ms, main = "KeyLength ~ Time_ms") # scatterplot
 
-
+# plot the mean time for generate bases for the extended keypair
 (generateBasesTime <- data_summary(filtered_extendedKeygen, varname = "Time_ms", groupnames = c("KeyLength", "Method", "Vertices")))
 
 ggplot(generateBasesTime, aes(x = reorder(factor(generateBasesTime$Vertices)), y = generateBasesTime$mean, group = generateBasesTime$KeyLength)) +
@@ -61,3 +61,32 @@ ggplot(generateBasesTime, aes(x = reorder(factor(generateBasesTime$Vertices)), y
     strip.background = element_blank(),
     strip.placement = "outside"
   )
+
+ (filtered_setupEncoding <- filtered[with(filtered, grepl("ExtendedKeyPair.java:312 encoding.GeoLocationGraphEncoding.setupEncoding", filtered$Method)), ])
+# (filtered_setupEncoding <- filtered[with(filtered, grepl("GeoLocationGraphEncoding.java:60 encoding.GeoLocationGraphEncoding.generateVertexRepresentative", filtered$Method)), ])
+str(filtered_setupEncoding)
+
+# plot geolocation graph encoding setup time for the extended keypair
+(setupEncodingTime <- data_summary(filtered_setupEncoding, varname = "Time_ms", groupnames = c("KeyLength", "Method", "Vertices")))
+
+ggplot(setupEncodingTime, aes(x = reorder(factor(setupEncodingTime$Vertices)), y = setupEncodingTime$mean, group = setupEncodingTime$KeyLength)) +
+  geom_line(aes(linetype = factor(setupEncodingTime$KeyLength), color = factor(setupEncodingTime$KeyLength)), size = 1) +
+  geom_point(aes(colour = factor(setupEncodingTime$KeyLength), shape = factor(setupEncodingTime$KeyLength))) +
+  # facet_wrap(signer_issuing_time$Type ~ ., scales = "free_y", ncol = 3) +
+  labs(x = "Graph size (number of vertices)", y = "CPU time (ms)", color = "Key length", shape = "") + 
+  # coord_trans( y="log2") +
+  # coord_trans( y="log10") +
+  # scale_y_continuous(labels = scientific) +
+  # annotation_logticks() +
+  # scale_y_continuous(trans = log2_trans(),
+  # breaks = trans_breaks("log2", function(x) 2^x),
+  # labels = trans_format("log2", math_format(2^.x))) +
+  # scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+  #               labels = trans_format("log10", math_format(10^.x))) +
+  guides(shape = FALSE, linetype = FALSE) +
+  theme(
+    strip.text.x = element_text(colour = "black", size = 10),
+    strip.background = element_blank(),
+    strip.placement = "outside"
+  )
+
