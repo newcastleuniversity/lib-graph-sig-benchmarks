@@ -21,6 +21,7 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
+import org.openjdk.jmh.runner.options.TimeValue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,23 +32,29 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Creates a benchmark for measuring issuing of
+ * Creates a benchmark for measuring issuing of graph signatures for a graph topology
  */
 
 @State(Scope.Benchmark)
 public class IssuingBenchmark {
 	public static final String DATA_RESULTS_ISSUING_RAW_CSV = "data/results-issuing-raw";
 
-	@Param({"512", "1024", "2048", "3072"})
+	@Param({"2048"})
 	private int l_n;
 
-	@Param({"200", "2000", "20000"})
+//	@Param({"200", "2000", "20000"})
 	private int bases;
 
+	//@Param({"signer-infra-1000.graphml", "signer-infra-2000.graphml", "signer-infra-3000.graphml", "signer-infra-4000.graphml", "signer-infra-5000.graphml", "signer-infra-6000.graphml", "signer-infra-7000.graphml", "signer-infra-8000.graphml", "signer-infra-9000.graphml", "signer-infra-10000.graphml"})
+	@Param({"signer-infra-5.graphml"})
+	private String graphFilename;// = "signer-infra-10000.graphml";
+	
 	//	@Param({"10", "100", "1000", "10000"})
 	private int l_V;
 
@@ -64,11 +71,28 @@ public class IssuingBenchmark {
 	private ExtendedKeyPair ekp;
 	private MockMessageGateway messageGateway;
 	private static String sigmaFilename;
+	private Map<String, Integer> grFileToBases;
 
 	public void setup() throws IOException, EncodingException, ClassNotFoundException, InterruptedException, ExecutionException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 
+		// configure graph filename to number of bases mapping for the graph encoding
+		grFileToBases = new HashMap<String, Integer>();
+		grFileToBases.put("signer-infra-5.graphml", 600);
+//		grFileToBases.put("signer-infra-1000.graphml", 7000);
+//		grFileToBases.put("signer-infra-2000.graphml", 12000);
+//		grFileToBases.put("signer-infra-3000.graphml", 17000);
+//		grFileToBases.put("signer-infra-4000.graphml", 21000);
+//		grFileToBases.put("signer-infra-5000.graphml", 26000);
+//		grFileToBases.put("signer-infra-6000.graphml", 31000);
+//		grFileToBases.put("signer-infra-7000.graphml", 36000);
+//		grFileToBases.put("signer-infra-8000.graphml", 41000);
+//		grFileToBases.put("signer-infra-9000.graphml", 46000);
+//		grFileToBases.put("signer-infra-10000.graphml", 51000);
+
+		bases = grFileToBases.get(graphFilename);
+
 		// calculate number of bases for vertices and edges
-		l_V = bases / 4;
+		l_V = bases / 5;
 		l_E = bases - (bases / 4); //- (bases / 5);
 //		System.out.println("l_V: " + l_V);
 //		System.out.println("l_E: " + l_E);
@@ -97,7 +121,7 @@ public class IssuingBenchmark {
 		
 		keyGenParameters = KeyGenParameters.createKeyGenParameters(l_n, 1632, 256, 256, 1, 597, 120, l_v, 80, 256, 80, 80);
 
-		graphEncParams = new GraphEncodingParameters(l_V, 56, l_E, 256, 16);
+		graphEncParams = new GraphEncodingParameters(l_V, 120, l_E, 256, 16);
 
 		if (!new File(signerKeyPairFilename).isFile()) {
 			gsk.keyGen(keyGenParameters);
@@ -124,9 +148,6 @@ public class IssuingBenchmark {
 		//		System.out.println("basecollection length: " + baseCollection.size());
 		//		System.out.println("l_V: " + ekp.getGraphEncodingParameters().getL_V());
 		//		System.out.println("l_E: " + ekp.getGraphEncodingParameters().getL_E());
-		//		System.out.println("vertex bases: " + epk.getEncoding().);
-
-		String graphFilename = "signer-infra-50.graphml";
 
 		signer = new SignerOrchestrator(graphFilename, ekp, messageGateway);
 		recipient = new RecipientOrchestrator(graphFilename, ekp.getExtendedPublicKey(), messageGateway);
@@ -296,6 +317,7 @@ public class IssuingBenchmark {
 
 		@Benchmark
 		@BenchmarkMode({Mode.SingleShotTime})
+		@Timeout(time = 1, timeUnit = TimeUnit.HOURS)
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public void issuing(SerializeGSBenchmark state) throws Exception {
 			signer.round0();
@@ -315,15 +337,17 @@ public class IssuingBenchmark {
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
 				.include(eu.prismacloud.primitives.grs.bench.IssuingBenchmark.class.getSimpleName())
-				.param("l_n", "512", "1024", "2048", "3072")
-				.param("bases", "400")//, "2000", "20000", "200000")
+				.param("l_n", "2048")
 				.jvmArgs("-server")
+				.jvmArgs("-Xms2048m", "-Xmx3072m")
 				.warmupIterations(0)
-//				.addProfiler(YourkitProfiler.class)
-				.warmupForks(0)
+				.addProfiler(YourkitProfiler.class)
+				.warmupForks(10)
 				.measurementIterations(1)
+//				.timeout(TimeValue.minutes(30))
+//				.warmupTime(TimeValue.minutes(30))
 				.threads(1)
-				.forks(1)
+				.forks(25)
 				.shouldFailOnError(true)
 //				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
 				//.shouldDoGC(true)
