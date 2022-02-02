@@ -25,21 +25,27 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by Ioannis Sfyrakis on 2019-01-27
+ * Configure benchmarks for proving and verifying
  */
 @State(Scope.Benchmark)
 public abstract class GSBenchmark {
 
-	@Param({"512", "1024", "2048", "3072"})
+//	@Param({"512", "1024", "2048", "3072"})
+	@Param({"2048"})
 	private int l_n;
 
-	@Param({"200", "2000", "20000"})
+//	@Param({"200", "2000", "20000"})
 	private int bases;
+
+//	@Param({"signer-infra-1000.graphml", "signer-infra-2000.graphml", "signer-infra-3000.graphml", "signer-infra-4000.graphml", "signer-infra-5000.graphml", "signer-infra-6000.graphml", "signer-infra-7000.graphml", "signer-infra-8000.graphml", "signer-infra-9000.graphml", "signer-infra-10000.graphml"})
+	@Param({"signer-infra-5.graphml"})
+	private String graphFilename;
 
 	//	@Param({"10", "100", "1000", "10000"})
 	private int l_V;
@@ -57,6 +63,9 @@ public abstract class GSBenchmark {
 	private ExtendedKeyPair ekp;
 	private Map<URN, BaseRepresentation> encodedBases;
 	private static SignerOrchestrator signer;
+	private String ekpFilename;
+	private ProverOrchestratorBCPerf provervc;
+	private VerifierOrchestratorBCPerf verifiervc;
 
 	public ExtendedPublicKey getEpk() {
 		return epk;
@@ -77,31 +86,65 @@ public abstract class GSBenchmark {
 	public ProverOrchestratorPerf getProver() {
 		return prover;
 	}
+	public ProverOrchestratorBCPerf getProverVC() {
+		return provervc;
+	}
 
 	public VerifierOrchestrator getVerifier() {
 		return verifier;
+	}
+	public VerifierOrchestratorBCPerf getVerifierVC() {
+		return verifiervc;
 	}
 
 	private static RecipientOrchestrator recipient;
 	private static MockMessageGateway messageGateway;
 	private static ProverOrchestratorPerf prover;
 	private static VerifierOrchestrator verifier;
+	private Map<String, Integer> grFileToBases;
 
 	public void GSBenchmark() {
 
 	}
 
 	public void setup() throws IOException, EncodingException, ClassNotFoundException, InterruptedException, ExecutionException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+
+		// configure graph filename to number of bases mapping for the graph encoding
+		grFileToBases = new HashMap<String, Integer>();
+		grFileToBases.put("signer-infra-5.graphml", 600);
+
+//		grFileToBases.put("signer-infra-1000.graphml", 7000);
+//		grFileToBases.put("signer-infra-2000.graphml", 12000);
+//		grFileToBases.put("signer-infra-3000.graphml", 17000);
+//		grFileToBases.put("signer-infra-4000.graphml", 21000);
+//		grFileToBases.put("signer-infra-5000.graphml", 26000);
+//		grFileToBases.put("signer-infra-6000.graphml", 31000);
+//		grFileToBases.put("signer-infra-7000.graphml", 52000);
+//		grFileToBases.put("signer-infra-8000.graphml", 45000);
+//		grFileToBases.put("signer-infra-9000.graphml", 48000);
+//		grFileToBases.put("signer-infra-10000.graphml", 53000);
+
+		bases = grFileToBases.get(graphFilename);
+		
 		// calculate number of bases for vertices and edges
-		l_V = bases / 4;
+		l_V = bases / 5;
 		l_E = bases - (bases / 4);
 		String sigmaFilename = "signer-infra-" + l_n + "-" + l_V + "-" + l_E + ".ser";
+		ekpFilename = "ExtendedKeyPair-" + l_n + "-" + l_V + "-" + l_E + ".ser";
 		String hostAddress = "192.168.0.19";
 		int portNumber = 9998;
+		persistenceUtil = new FilePersistenceUtil();
 
 		messageGateway = new MockMessageGateway(DefaultValues.CLIENT, hostAddress, portNumber);
+		if (new File(ekpFilename).isFile()){
+			ekp = (ExtendedKeyPair) persistenceUtil.read(ekpFilename);
+		}
 
-		setupIssuing(sigmaFilename);
+
+		if (!new File(sigmaFilename).isFile()) {
+			setupIssuing(sigmaFilename);
+		}
+		
 		prover = new ProverOrchestratorPerf(ekp.getExtendedPublicKey(), messageGateway);
 		verifier = new VerifierOrchestrator(ekp.getExtendedPublicKey(), messageGateway);
 		prover.readSignature(sigmaFilename);
@@ -109,7 +152,7 @@ public abstract class GSBenchmark {
 
 		// add proof vectors
 		vector.add(1);
-		vector.add(14);
+		vector.add(3);
 
 		verifier.createQuery(vector);
 		verifier.init();
@@ -124,7 +167,6 @@ public abstract class GSBenchmark {
 		String ekpFilename = "ExtendedKeyPair-" + l_n + "-" + l_V + "-" + l_E + ".ser";
 		String epkFilename = "ExtendedPublicKey-" + l_n + "-" + l_V + "-" + l_E + ".ser";
 
-		persistenceUtil = new FilePersistenceUtil();
 		gsk = new SignerKeyPair();
 
 		int l_v = 2724;
@@ -163,10 +205,12 @@ public abstract class GSBenchmark {
 		//		System.out.println("l_E: " + ekp.getGraphEncodingParameters().getL_E());
 		//		System.out.println("vertex bases: " + epk.getEncoding().);
 
-		String graphFilename = "/Users/alpac/DEV/lib-graph-sig-benchmarks/signer-infra.graphml";
+//		String graphFilename = "/Users/alpac/DEV/lib-graph-sig-benchmarks/signer-infra.graphml";
 
-		signer = new SignerOrchestrator(ekp, messageGateway);
-		recipient = new RecipientOrchestrator(ekp.getExtendedPublicKey(), messageGateway);
+//		signer = new SignerOrchestrator(ekp, messageGateway);
+//		recipient = new RecipientOrchestrator(ekp.getExtendedPublicKey(), messageGateway);
+		signer = new SignerOrchestrator(graphFilename, ekp, messageGateway);
+		recipient = new RecipientOrchestrator(graphFilename, ekp.getExtendedPublicKey(), messageGateway);
 
 		try {
 			signer.init();

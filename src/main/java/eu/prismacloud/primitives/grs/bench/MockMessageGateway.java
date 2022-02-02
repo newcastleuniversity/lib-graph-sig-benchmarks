@@ -49,10 +49,10 @@ public class MockMessageGateway implements IMessageGateway {
 //		System.out.println("send message: " + message.getMessageElements() + "\n");
 
 		Map<URN, Object> messageElements = message.getMessageElements();
-		persistMessage(message);
-		out = getPrintStream();
-		printHeader();
-		measureMessageBits(messageElements);
+//		persistMessage(message);
+//		out = getPrintStream();
+//		printHeader();
+//		measureMessageBits(messageElements);
 
 		temp = new GSMessage();
 
@@ -75,7 +75,7 @@ public class MockMessageGateway implements IMessageGateway {
 		Date date = new Date();
 		Format formatter = new SimpleDateFormat("YYYY-MM-dd_hh-mm-ss");
 		String fileName = messageNo + "-" + ((SimpleDateFormat) formatter).format(date);
-		persistenceUtil.write(message,  fileName + ".ser");
+		persistenceUtil.write(message, fileName + ".ser");
 	}
 
 	private void measureMessageBits(Map<URN, Object> messageElements) {
@@ -124,9 +124,9 @@ public class MockMessageGateway implements IMessageGateway {
 				case "PairWiseCommitments":
 					PairWiseCommitments pwc = (PairWiseCommitments) value;
 					GSCommitment gci = pwc.getC_i();
-					printLine(key.toHumanReadableString(), gci.getCommitmentValue().getClass().getSimpleName(),  String.valueOf(gci.getCommitmentValue().bitLength()));
+					printLine(key.toHumanReadableString(), gci.getCommitmentValue().getClass().getSimpleName(), String.valueOf(gci.getCommitmentValue().bitLength()));
 					GSCommitment gcj = pwc.getC_j();
-					printLine(key.toHumanReadableString(),gcj.getCommitmentValue().getClass().getSimpleName(), String.valueOf(gcj.getCommitmentValue().bitLength()));
+					printLine(key.toHumanReadableString(), gcj.getCommitmentValue().getClass().getSimpleName(), String.valueOf(gcj.getCommitmentValue().bitLength()));
 					break;
 				case "ExtendedPublicKey":
 					ExtendedPublicKey epk = (ExtendedPublicKey) value;
@@ -169,7 +169,7 @@ public class MockMessageGateway implements IMessageGateway {
 		out.print("\r\n");
 	}
 
-	private void printLine(String urnKey, String className,  String bitlength) {
+	private void printLine(String urnKey, String className, String bitlength) {
 		out.print("\"");
 		out.print(urnKey);
 		out.print("\"");
