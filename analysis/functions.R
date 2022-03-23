@@ -2,8 +2,8 @@ data_summary <- function(data, varname, groupnames){
   require(plyr)
   summary_func <- function(x, col){ 
     
-    if (length(x[[col]]) > 200) {
-      vec = head(x[[col]], 200)
+    if (length(x[[col]]) > 100) {
+      vec = head(x[[col]], 100)
     } else {
       vec = x[[col]]
     }
