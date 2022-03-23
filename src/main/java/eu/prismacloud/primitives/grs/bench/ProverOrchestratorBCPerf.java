@@ -16,7 +16,7 @@ import eu.prismacloud.primitives.zkpgs.util.BaseCollection;
 import eu.prismacloud.primitives.zkpgs.util.BaseIterator;
 import eu.prismacloud.primitives.zkpgs.util.GSLoggerConfiguration;
 import eu.prismacloud.primitives.zkpgs.util.crypto.GroupElement;
-import uk.ac.ncl.cascade.binding.ProverVCOrchestrator;
+import uk.ac.ncl.cascade.binding.ProverOrchestratorBC;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 /**
  * Wrapper for prover orchestrator used with jmh benchmarks
  */
-public class ProverOrchestratorBCPerf extends ProverVCOrchestrator {
+public class ProverOrchestratorBCPerf extends ProverOrchestratorBC {
 
 	private PossessionProver possessionProverValue;
 	private Logger gslog = GSLoggerConfiguration.getGSlog();

@@ -19,8 +19,8 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import uk.ac.ncl.cascade.binding.RecipientVCOrchestrator;
-import uk.ac.ncl.cascade.binding.SignerVCOrchestrator;
+import uk.ac.ncl.cascade.binding.RecipientOrchestratorBC;
+import uk.ac.ncl.cascade.binding.SignerOrchestratorBC;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,8 +46,8 @@ public class ProvingBCBenchmark extends GSBenchmark {
 	public static final String DATA_RESULTS_PROVING_RAW_CSV = "data/results-proving-raw";
 	private static ProverOrchestratorBCPerf prover;
 	private static VerifierOrchestratorBCPerf verifier;
-	private static SignerVCOrchestrator signer;
-	private static RecipientVCOrchestrator recipient;
+	private static SignerOrchestratorBC signer;
+	private static RecipientOrchestratorBC recipient;
 	private static String sigmaFilename;
 	@Param({"signer-infra-5.graphml"})
 	private String graphFilename;
@@ -344,8 +344,8 @@ public class ProvingBCBenchmark extends GSBenchmark {
 		String NG = "23998E2A7765B6C913C0ED47D9CB3AC03DB4597D1C4438D61C9FD3418F3D78FFADC59E451FE25A28DD91CEDC59E40980BAE8A176EBEECE412F13466862BFFC3077BB9D26FEB8244ACD4B8D8C868E0095E6AC4122B148FE6F398073111DDCAB8194531CFA8D487B70223CF750E653190732F8BA2A2F7D2BFE2ED175A936BBC7671FC0BB9E45276F81A527F06ABBCC0AFFEDC994BF66D9EB69CC7B61F691FFAB1F78BC6E890A92E332E49519056F502F07206E69E6C182B135D785101DCA408E4F484768854CEAFA0C76355F4";
 		BigInteger pseudonym = new BigInteger(NG, 16);
 		BigInteger e_i = new BigInteger("625843652583480414029392463292031");
-		signer = new SignerVCOrchestrator(pseudonym, e_i, ekp, messageGateway);
-		recipient = new RecipientVCOrchestrator(ekp.getExtendedPublicKey(), messageGateway);
+		signer = new SignerOrchestratorBC(pseudonym, e_i, ekp, messageGateway);
+		recipient = new RecipientOrchestratorBC(ekp.getExtendedPublicKey(), messageGateway);
 
 		try {
 			signer.init();

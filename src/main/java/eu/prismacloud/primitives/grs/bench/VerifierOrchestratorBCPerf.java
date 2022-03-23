@@ -10,7 +10,7 @@ import eu.prismacloud.primitives.zkpgs.util.BaseCollection;
 import eu.prismacloud.primitives.zkpgs.util.GSLoggerConfiguration;
 import eu.prismacloud.primitives.zkpgs.util.crypto.GroupElement;
 import eu.prismacloud.primitives.zkpgs.verifier.PossessionVerifier;
-import uk.ac.ncl.cascade.binding.VerifierVCOrchestrator;
+import uk.ac.ncl.cascade.binding.VerifierOrchestratorBC;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 /**
  * Wrapper for verifier orchestrator used with jmh benchmarks
  */
-public class VerifierOrchestratorBCPerf extends VerifierVCOrchestrator {
+public class VerifierOrchestratorBCPerf extends VerifierOrchestratorBC {
 	private PossessionVerifier possessionVerifier;
 	private BigInteger cChallenge;
 	private GroupElement hatZ;
