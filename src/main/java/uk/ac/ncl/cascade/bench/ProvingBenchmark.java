@@ -1,10 +1,10 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
-import eu.prismacloud.primitives.zkpgs.exception.EncodingException;
-import eu.prismacloud.primitives.zkpgs.exception.ProofStoreException;
-import eu.prismacloud.primitives.zkpgs.exception.VerificationException;
-import eu.prismacloud.primitives.zkpgs.orchestrator.ProverOrchestrator;
-import eu.prismacloud.primitives.zkpgs.orchestrator.VerifierOrchestrator;
+import uk.ac.ncl.cascade.zkpgs.exception.EncodingException;
+import uk.ac.ncl.cascade.zkpgs.exception.ProofStoreException;
+import uk.ac.ncl.cascade.zkpgs.exception.VerificationException;
+import uk.ac.ncl.cascade.zkpgs.orchestrator.ProverOrchestrator;
+import uk.ac.ncl.cascade.zkpgs.orchestrator.VerifierOrchestrator;
 import net.nicoulaj.jmh.profilers.YourkitProfiler;
 import org.jgrapht.io.ImportException;
 import org.openjdk.jmh.annotations.*;
@@ -77,7 +77,7 @@ public class ProvingBenchmark extends GSBenchmark {
 
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
-				.include(eu.prismacloud.primitives.grs.bench.ProvingBenchmark.class.getSimpleName())
+				.include(ProvingBenchmark.class.getSimpleName())
 				//.param("l_n","512","1024", "2048", "3072")
 				.param("l_n", "2048")
 				.jvmArgs("-Xms3072m", "-Xmx4096m")

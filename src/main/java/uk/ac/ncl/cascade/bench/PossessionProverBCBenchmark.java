@@ -1,11 +1,11 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
-import eu.prismacloud.primitives.zkpgs.exception.EncodingException;
-import eu.prismacloud.primitives.zkpgs.exception.ProofStoreException;
-import eu.prismacloud.primitives.zkpgs.exception.VerificationException;
-import eu.prismacloud.primitives.zkpgs.orchestrator.ProverOrchestrator;
-import eu.prismacloud.primitives.zkpgs.prover.PossessionProver;
-import eu.prismacloud.primitives.zkpgs.store.URN;
+import uk.ac.ncl.cascade.zkpgs.exception.EncodingException;
+import uk.ac.ncl.cascade.zkpgs.exception.ProofStoreException;
+import uk.ac.ncl.cascade.zkpgs.exception.VerificationException;
+import uk.ac.ncl.cascade.zkpgs.orchestrator.ProverOrchestrator;
+import uk.ac.ncl.cascade.zkpgs.prover.PossessionProver;
+import uk.ac.ncl.cascade.zkpgs.store.URN;
 import org.jgrapht.io.ImportException;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.RunResult;
@@ -31,9 +31,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Creates a benchmark for measuring the pre/post challenge phase of the possession prover component
+ * for binding credentials.
  */
 @State(Scope.Benchmark)
-public class PossessionProverBenchmark extends GSBenchmark {
+public class PossessionProverBCBenchmark extends GSBenchmark {
 
 	public static final String DATA_RESULTS_POSSESSION_PROVER_RAW_CSV = "data/results-possession-prover-raw";
 
@@ -108,16 +109,16 @@ public class PossessionProverBenchmark extends GSBenchmark {
 
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
-				.include(eu.prismacloud.primitives.grs.bench.PossessionProverBenchmark.class.getSimpleName())
-				.param("l_n", "512")//, "1024", "2048", "3072")
-				.param("bases", "100")//, "1000", "10000", "100000")
+				.include(PossessionProverBenchmark.class.getSimpleName())
+				.param("l_n", "2048")//, "1024", "2048", "3072")
+				.param("bases", "600")//, "1000", "10000", "100000")
 				.jvmArgs("-server")
 				.warmupIterations(0)
 				//				.addProfiler(SolarisStudioProfiler.class)
-				.warmupForks(1)
+				.warmupForks(10)
 				.measurementIterations(1)
 				.threads(1)
-				.forks(1)
+				.forks(25)
 				.shouldFailOnError(true)
 				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
 				//.shouldDoGC(true)

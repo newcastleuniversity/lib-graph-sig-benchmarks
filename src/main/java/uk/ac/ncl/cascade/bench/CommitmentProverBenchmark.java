@@ -1,11 +1,11 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
-import eu.prismacloud.primitives.zkpgs.exception.EncodingException;
-import eu.prismacloud.primitives.zkpgs.exception.ProofStoreException;
-import eu.prismacloud.primitives.zkpgs.exception.VerificationException;
-import eu.prismacloud.primitives.zkpgs.orchestrator.ProverOrchestrator;
-import eu.prismacloud.primitives.zkpgs.prover.PossessionProver;
-import eu.prismacloud.primitives.zkpgs.store.URN;
+import uk.ac.ncl.cascade.zkpgs.exception.EncodingException;
+import uk.ac.ncl.cascade.zkpgs.exception.ProofStoreException;
+import uk.ac.ncl.cascade.zkpgs.exception.VerificationException;
+import uk.ac.ncl.cascade.zkpgs.prover.CommitmentProver;
+import uk.ac.ncl.cascade.zkpgs.store.URN;
+import uk.ac.ncl.cascade.zkpgs.util.crypto.GroupElement;
 import org.jgrapht.io.ImportException;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.RunResult;
@@ -25,26 +25,27 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Creates a benchmark for measuring the pre/post challenge phase of the possession prover component
- * for binding credentials.
+ * Creates a benchmark for measuring the pre/post challenge phase of the commitment prover component
  */
 @State(Scope.Benchmark)
-public class PossessionProverBCBenchmark extends GSBenchmark {
+public class CommitmentProverBenchmark extends GSBenchmark {
 
-	public static final String DATA_RESULTS_POSSESSION_PROVER_RAW_CSV = "data/results-possession-prover-raw";
+	public static final String DATA_RESULTS_COMMITMENT_PROVER_RAW_CSV = "data/results-commitment-prover-raw";
 
 	private static ProverOrchestratorPerf prover;
 
 	@State(Scope.Benchmark)
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class PreChallengeBenchmark extends PossessionProverBenchmark {
+	public static class PreChallengeBenchmark extends CommitmentProverBenchmark {
 
-		private PossessionProver pProver;
+		private List<CommitmentProver> commitmentProverList;
+		private static int csize;
 
 		public PreChallengeBenchmark() {
 			super();
@@ -54,31 +55,29 @@ public class PossessionProverBCBenchmark extends GSBenchmark {
 		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 			super.setup();
 			prover = getProver();
-			prover.executeCompoundPreChallengePhaseForPossessionProver();
-			pProver = prover.getPossessionProverValue();
-
+			prover.executeCompoundPreChallengePhaseForCommitmentProver();
+			prover.createCommitmentProvers();
+			commitmentProverList = prover.getCommitmentProverList();
+			csize = commitmentProverList.size();
 		}
 
 		@Benchmark
 		@BenchmarkMode({Mode.AverageTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void executeCompoundPreChallengePhase(PreChallengeBenchmark state) throws Exception {
-			pProver.executeCompoundPreChallengePhase();
+		public GroupElement executeCommitmentProvers(PreChallengeBenchmark state) throws Exception {
+			return prover.computeCommitmentProvers();
 		}
 
 		@TearDown(Level.Invocation)
 		public void afterInvocation() throws Exception {
 			prover = null;
-			pProver = null;
 		}
 	}
 
 	@State(Scope.Benchmark)
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class PostChallengeBenchmark extends PossessionProverBenchmark {
-		private Class<ProverOrchestrator> sProver;
+	public static class PostChallengeBenchmark extends CommitmentProverBenchmark {
 		private BigInteger challenge;
-		private PossessionProver pProver;
 
 		public PostChallengeBenchmark() {
 			super();
@@ -90,35 +89,34 @@ public class PossessionProverBCBenchmark extends GSBenchmark {
 			prover = getProver();
 			prover.executePreChallengePhase();
 			challenge = prover.computeChallenge();
-			pProver = prover.getPossessionProverValue();
+			prover.postChallengePhaseForCommitmentProver(challenge);
 		}
 
 		@Benchmark
 		@BenchmarkMode({Mode.AverageTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public Map<URN, BigInteger> executePostChallengePhase(PostChallengeBenchmark state) throws Exception {
-			return pProver.executePostChallengePhase(challenge);
+			return prover.executePostChallengePhaseForCommitmentProvers(challenge);
 		}
 
 		@TearDown(Level.Invocation)
 		public void afterInvocation() throws Exception {
 			prover = null;
-			pProver = null;
 		}
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
-				.include(eu.prismacloud.primitives.grs.bench.PossessionProverBenchmark.class.getSimpleName())
-				.param("l_n", "2048")//, "1024", "2048", "3072")
-				.param("bases", "600")//, "1000", "10000", "100000")
+				.include(CommitmentProverBenchmark.class.getSimpleName())
+				.param("l_n", "512")//, "1024", "2048", "3072")
+				.param("bases", "100")//, "1000", "10000", "100000")
 				.jvmArgs("-server")
 				.warmupIterations(0)
 				//				.addProfiler(SolarisStudioProfiler.class)
-				.warmupForks(10)
+				.warmupForks(1)
 				.measurementIterations(1)
 				.threads(1)
-				.forks(25)
+				.forks(1)
 				.shouldFailOnError(true)
 				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
 				//.shouldDoGC(true)
@@ -134,7 +132,7 @@ public class PossessionProverBCBenchmark extends GSBenchmark {
 	private static PrintStream getPrintStream() throws FileNotFoundException {
 		Date date = new Date();
 		Format formatter = new SimpleDateFormat("YYYY-MM-dd_hh-mm-ss");
-		return new PrintStream(new File(DATA_RESULTS_POSSESSION_PROVER_RAW_CSV + "-" + ((SimpleDateFormat) formatter).format(date)) + ".csv");
+		return new PrintStream(new File(DATA_RESULTS_COMMITMENT_PROVER_RAW_CSV + "-" + ((SimpleDateFormat) formatter).format(date)) + ".csv");
 	}
 }
 

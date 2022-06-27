@@ -75,7 +75,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
         mvn install:install-file -Dfile=/path/to/target/graph-sig-0.0.1-SNAPSHOT.jar -DgroupId=prismacloud.primitives -DartifactId=graph-sig -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar
         -->
         <dependency>
-            <groupId>prismacloud.primitives</groupId>
+            <groupId>cascade</groupId>
             <artifactId>graph-sig</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

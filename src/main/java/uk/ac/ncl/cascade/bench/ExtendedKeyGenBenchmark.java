@@ -1,10 +1,10 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
-import eu.prismacloud.primitives.zkpgs.exception.EncodingException;
-import eu.prismacloud.primitives.zkpgs.keys.ExtendedKeyPair;
-import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
-import eu.prismacloud.primitives.zkpgs.parameters.GraphEncodingParameters;
-import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
+import uk.ac.ncl.cascade.zkpgs.exception.EncodingException;
+import uk.ac.ncl.cascade.zkpgs.keys.ExtendedKeyPair;
+import uk.ac.ncl.cascade.zkpgs.keys.SignerKeyPair;
+import uk.ac.ncl.cascade.zkpgs.parameters.GraphEncodingParameters;
+import uk.ac.ncl.cascade.zkpgs.parameters.KeyGenParameters;
 //import net.nicoulaj.jmh.profilers.SolarisStudioProfiler;
 import net.nicoulaj.jmh.profilers.YourkitProfiler;
 import org.openjdk.jmh.annotations.*;
@@ -13,8 +13,6 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.openjdk.jmh.runner.options.TimeValue;
-import org.openjdk.jmh.runner.options.WarmupMode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Creates a benchmark for generating extended key pairs with 512, 1024, 2048 and 3072 key length. The extended keys are generated with the bases required for a a graph sizes of 1000 - 10000 vertices.
- * Usage: java -cp target/benchmarks.jar  eu.prismacloud.primitives.grs.bench.ExtendedKeyGenBenchmark
+ * Usage: java -cp target/benchmarks.jar  uk.ac.ncl.cascade.grs.bench.ExtendedKeyGenBenchmark
  */
 @State(Scope.Benchmark)
 public class ExtendedKeyGenBenchmark {
@@ -99,7 +97,7 @@ public class ExtendedKeyGenBenchmark {
 	public static void main(String[] args) throws RunnerException, FileNotFoundException {
 
 		Options opt = new OptionsBuilder()
-				.include(eu.prismacloud.primitives.grs.bench.ExtendedKeyGenBenchmark.class.getSimpleName())
+				.include(ExtendedKeyGenBenchmark.class.getSimpleName())
 				//.param("l_n", "512", "1024", "2048", "3072")
 				.param("l_n",  "3072")
 				.jvmArgs("-server")

@@ -1,16 +1,18 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
-import eu.prismacloud.primitives.zkpgs.DefaultValues;
-import eu.prismacloud.primitives.zkpgs.exception.EncodingException;
-import eu.prismacloud.primitives.zkpgs.exception.ProofStoreException;
-import eu.prismacloud.primitives.zkpgs.exception.VerificationException;
-import eu.prismacloud.primitives.zkpgs.keys.ExtendedKeyPair;
-import eu.prismacloud.primitives.zkpgs.keys.ExtendedPublicKey;
-import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
-import eu.prismacloud.primitives.zkpgs.parameters.GraphEncodingParameters;
-import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
-import eu.prismacloud.primitives.zkpgs.util.BaseCollection;
-import eu.prismacloud.primitives.zkpgs.util.FilePersistenceUtil;
+import uk.ac.ncl.cascade.zkpgs.DefaultValues;
+import uk.ac.ncl.cascade.zkpgs.exception.EncodingException;
+import uk.ac.ncl.cascade.zkpgs.exception.ProofStoreException;
+import uk.ac.ncl.cascade.zkpgs.exception.VerificationException;
+import uk.ac.ncl.cascade.zkpgs.keys.ExtendedKeyPair;
+import uk.ac.ncl.cascade.zkpgs.keys.ExtendedPublicKey;
+import uk.ac.ncl.cascade.zkpgs.keys.SignerKeyPair;
+import uk.ac.ncl.cascade.zkpgs.orchestrator.RecipientOrchestrator;
+import uk.ac.ncl.cascade.zkpgs.orchestrator.SignerOrchestrator;
+import uk.ac.ncl.cascade.zkpgs.parameters.GraphEncodingParameters;
+import uk.ac.ncl.cascade.zkpgs.parameters.KeyGenParameters;
+import uk.ac.ncl.cascade.zkpgs.util.BaseCollection;
+import uk.ac.ncl.cascade.zkpgs.util.FilePersistenceUtil;
 import net.nicoulaj.jmh.profilers.YourkitProfiler;
 import org.jgrapht.io.ImportException;
 import org.openjdk.jmh.annotations.*;
@@ -19,14 +21,11 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import uk.ac.ncl.cascade.binding.RecipientOrchestratorBC;
-import uk.ac.ncl.cascade.binding.SignerOrchestratorBC;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -38,11 +37,11 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Creates a benchmark for measuring issuing of binding credentials in a topology
+ * Creates a benchmark for measuring issuing of graph signatures for a graph topology
  */
 
 @State(Scope.Benchmark)
-public class IssuingBCBenchmark {
+public class IssuingBenchmark {
 	public static final String DATA_RESULTS_ISSUING_RAW_CSV = "data/results-issuing-raw";
 
 	@Param({"2048"})
@@ -50,7 +49,8 @@ public class IssuingBCBenchmark {
 
 //	@Param({"200", "2000", "20000"})
 	private int bases;
-	
+
+	//@Param({"signer-infra-1000.graphml", "signer-infra-2000.graphml", "signer-infra-3000.graphml", "signer-infra-4000.graphml", "signer-infra-5000.graphml", "signer-infra-6000.graphml", "signer-infra-7000.graphml", "signer-infra-8000.graphml", "signer-infra-9000.graphml", "signer-infra-10000.graphml"})
 	@Param({"signer-infra-5.graphml"})
 	private String graphFilename;// = "signer-infra-10000.graphml";
 	
@@ -60,8 +60,8 @@ public class IssuingBCBenchmark {
 	//	@Param({"50", "500", "5000", "50000"})
 	private int l_E;
 
-	private static SignerOrchestratorBC signer;
-	private static RecipientOrchestratorBC recipient;
+	private static SignerOrchestrator signer;
+	private static RecipientOrchestrator recipient;
 	private KeyGenParameters keyGenParameters;
 	private SignerKeyPair gsk;
 	private ExtendedPublicKey epk;
@@ -77,6 +77,7 @@ public class IssuingBCBenchmark {
 		// configure graph filename to number of bases mapping for the graph encoding
 		grFileToBases = new HashMap<String, Integer>();
 		grFileToBases.put("signer-infra-5.graphml", 600);
+//		grFileToBases.put("signer-infra-1000.graphml", 7000);
 //		grFileToBases.put("signer-infra-2000.graphml", 12000);
 //		grFileToBases.put("signer-infra-3000.graphml", 17000);
 //		grFileToBases.put("signer-infra-4000.graphml", 21000);
@@ -146,11 +147,9 @@ public class IssuingBCBenchmark {
 		//		System.out.println("basecollection length: " + baseCollection.size());
 		//		System.out.println("l_V: " + ekp.getGraphEncodingParameters().getL_V());
 		//		System.out.println("l_E: " + ekp.getGraphEncodingParameters().getL_E());
-		String NG = "23998E2A7765B6C913C0ED47D9CB3AC03DB4597D1C4438D61C9FD3418F3D78FFADC59E451FE25A28DD91CEDC59E40980BAE8A176EBEECE412F13466862BFFC3077BB9D26FEB8244ACD4B8D8C868E0095E6AC4122B148FE6F398073111DDCAB8194531CFA8D487B70223CF750E653190732F8BA2A2F7D2BFE2ED175A936BBC7671FC0BB9E45276F81A527F06ABBCC0AFFEDC994BF66D9EB69CC7B61F691FFAB1F78BC6E890A92E332E49519056F502F07206E69E6C182B135D785101DCA408E4F484768854CEAFA0C76355F4";
-	    BigInteger pseudonym = new BigInteger(NG,16);
-		BigInteger e_i = new BigInteger("625843652583480414029392463292031");
-		signer = new SignerOrchestratorBC(pseudonym, e_i, ekp, messageGateway);
-		recipient = new RecipientOrchestratorBC( ekp.getExtendedPublicKey(), messageGateway);
+
+		signer = new SignerOrchestrator(graphFilename, ekp, messageGateway);
+		recipient = new RecipientOrchestrator(graphFilename, ekp.getExtendedPublicKey(), messageGateway);
 
 		try {
 			signer.init();
@@ -160,10 +159,152 @@ public class IssuingBCBenchmark {
 		}
 	}
 
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class Round0Benchmark extends IssuingBenchmark {
+//		public Round0Benchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void round0(Round0Benchmark state) throws Exception {
+//			signer.round0();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void stop() throws Exception {
+//			signer = null;
+//			recipient = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class Round1Benchmark extends IssuingBenchmark {
+//		public Round1Benchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//			signer.round0();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void round1(Round1Benchmark state) throws Exception {
+//			recipient.round1();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void stop() throws Exception {
+//			signer = null;
+//			recipient = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class Round2Benchmark extends IssuingBenchmark {
+//		public Round2Benchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//			System.out.println("round0: ");
+//			signer.round0();
+//			System.out.println("round1: ");
+//			recipient.round1();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void round2(Round2Benchmark state) throws Exception {
+//			System.out.println("round2: ");
+//			signer.round2();
+//		}
+//
+//
+//		@TearDown(Level.Invocation)
+//		public void stop() throws Exception {
+//			signer = null;
+//			recipient = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class Round3Benchmark extends IssuingBenchmark {
+//		public Round3Benchmark() {
+//			super();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void round3(Round3Benchmark state) throws Exception {
+//			recipient.round3();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//			signer.round0();
+//			recipient.round1();
+//			signer.round2();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void stop() throws Exception {
+//			signer = null;
+//			recipient = null;
+//		}
+//	}
+//
+//	@State(Scope.Benchmark)
+//	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//	public static class RoundAllBenchmark extends IssuingBenchmark {
+//		public RoundAllBenchmark() {
+//			super();
+//		}
+//
+//		@Setup(Level.Invocation)
+//		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+//			super.setup();
+//		}
+//
+//		@Benchmark
+//		@BenchmarkMode({Mode.SingleShotTime})
+//		@OutputTimeUnit(TimeUnit.MILLISECONDS)
+//		public void issuing(RoundAllBenchmark state) throws Exception {
+//			signer.round0();
+//			recipient.round1();
+//			signer.round2();
+//			recipient.round3();
+//		}
+//
+//		@TearDown(Level.Invocation)
+//		public void stop() throws Exception {
+//			signer = null;
+//			recipient = null;
+//		}
+//	}
 
 	@State(Scope.Benchmark)
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class SerializeGSBenchmark extends IssuingBCBenchmark {
+	public static class SerializeGSBenchmark extends IssuingBenchmark {
 		public SerializeGSBenchmark() {
 			super();
 		}
@@ -194,7 +335,7 @@ public class IssuingBCBenchmark {
 
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
-				.include(IssuingBCBenchmark.class.getSimpleName())
+				.include(IssuingBenchmark.class.getSimpleName())
 				.param("l_n", "2048")
 				.jvmArgs("-server")
 				.jvmArgs("-Xms2048m", "-Xmx3072m")

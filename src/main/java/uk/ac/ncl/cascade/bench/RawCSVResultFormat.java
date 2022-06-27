@@ -1,4 +1,4 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
 import org.openjdk.jmh.infra.BenchmarkParams;
 import org.openjdk.jmh.results.BenchmarkResult;

@@ -1,7 +1,7 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
-import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
-import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
+import uk.ac.ncl.cascade.zkpgs.keys.SignerKeyPair;
+import uk.ac.ncl.cascade.zkpgs.parameters.KeyGenParameters;
 //import net.nicoulaj.jmh.profilers.SolarisStudioProfiler;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.RunResult;
@@ -9,7 +9,6 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.openjdk.jmh.runner.options.TimeValue;
 import org.openjdk.jmh.runner.options.WarmupMode;
 
 import java.io.File;
@@ -23,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Creates a benchmark for generating keys with 512, 1024, 2048 and 3072 length
- * Usage: java -cp target/benchmarks.jar  eu.prismacloud.primitives.grs.bench.KeyGenBenchmark
+ * Usage: java -cp target/benchmarks.jar  uk.ac.ncl.cascade.grs.bench.KeyGenBenchmark
  *
  * Measuring Throughput (ops/time unit) needs to define the measurement time, which currently is set to 1 minute.
  */

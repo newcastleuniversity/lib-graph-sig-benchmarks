@@ -1,19 +1,19 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
-import eu.prismacloud.primitives.zkpgs.BaseRepresentation;
-import eu.prismacloud.primitives.zkpgs.commitment.GSCommitment;
-import eu.prismacloud.primitives.zkpgs.exception.EncodingException;
-import eu.prismacloud.primitives.zkpgs.keys.ExtendedKeyPair;
-import eu.prismacloud.primitives.zkpgs.keys.ExtendedPublicKey;
-import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
-import eu.prismacloud.primitives.zkpgs.message.HttpMessageGateway;
-import eu.prismacloud.primitives.zkpgs.parameters.GraphEncodingParameters;
+import uk.ac.ncl.cascade.zkpgs.BaseRepresentation;
+import uk.ac.ncl.cascade.zkpgs.commitment.GSCommitment;
+import uk.ac.ncl.cascade.zkpgs.exception.EncodingException;
+import uk.ac.ncl.cascade.zkpgs.keys.ExtendedKeyPair;
+import uk.ac.ncl.cascade.zkpgs.keys.ExtendedPublicKey;
+import uk.ac.ncl.cascade.zkpgs.keys.SignerKeyPair;
+import uk.ac.ncl.cascade.zkpgs.message.HttpMessageGateway;
+import uk.ac.ncl.cascade.zkpgs.parameters.GraphEncodingParameters;
 //import net.nicoulaj.jmh.profilers.SolarisStudioProfiler;
-import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
-import eu.prismacloud.primitives.zkpgs.recipient.GSRecipient;
-import eu.prismacloud.primitives.zkpgs.store.URN;
-import eu.prismacloud.primitives.zkpgs.util.BaseCollection;
-import eu.prismacloud.primitives.zkpgs.util.FilePersistenceUtil;
+import uk.ac.ncl.cascade.zkpgs.parameters.KeyGenParameters;
+import uk.ac.ncl.cascade.zkpgs.recipient.GSRecipient;
+import uk.ac.ncl.cascade.zkpgs.store.URN;
+import uk.ac.ncl.cascade.zkpgs.util.BaseCollection;
+import uk.ac.ncl.cascade.zkpgs.util.FilePersistenceUtil;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.RunResult;
 import org.openjdk.jmh.runner.Runner;
@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Creates a benchmark for computing commitments with a number of bases and with a key with variable lengths (512, 1024, 2048, 3072)
- * Usage: java -cp target/benchmarks.jar  eu.prismacloud.primitives.grs.bench.CommitmentBenchmark
+ * Usage: java -cp target/benchmarks.jar  uk.ac.ncl.cascade.grs.bench.CommitmentBenchmark
  * <p>
  * Measuring Throughput (ops/time unit) needs to define the measurement time, which currently is set to 1 minute.
  */
@@ -136,7 +136,7 @@ public class CommitmentBenchmark {
 	public static void main(String[] args) throws RunnerException, FileNotFoundException {
 
 		Options opt = new OptionsBuilder()
-				.include(eu.prismacloud.primitives.grs.bench.CommitmentBenchmark.class.getSimpleName())
+				.include(CommitmentBenchmark.class.getSimpleName())
 				.param("l_n", "512", "1024", "2048", "3072")
 				.param("bases", "50", "500", "5000", "50000")
 				.jvmArgs("-server")

@@ -1,22 +1,23 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
-import eu.prismacloud.primitives.zkpgs.BaseRepresentation;
-import eu.prismacloud.primitives.zkpgs.commitment.GSCommitment;
-import eu.prismacloud.primitives.zkpgs.exception.ProofStoreException;
-import eu.prismacloud.primitives.zkpgs.keys.ExtendedPublicKey;
-import eu.prismacloud.primitives.zkpgs.message.IMessageGateway;
-import eu.prismacloud.primitives.zkpgs.prover.CommitmentProver;
-import eu.prismacloud.primitives.zkpgs.prover.PairWiseDifferenceProver;
-import eu.prismacloud.primitives.zkpgs.prover.PossessionProver;
-import eu.prismacloud.primitives.zkpgs.signature.GSSignature;
-import eu.prismacloud.primitives.zkpgs.store.ProofStore;
-import eu.prismacloud.primitives.zkpgs.store.URN;
-import eu.prismacloud.primitives.zkpgs.util.Assert;
-import eu.prismacloud.primitives.zkpgs.util.BaseCollection;
-import eu.prismacloud.primitives.zkpgs.util.BaseIterator;
-import eu.prismacloud.primitives.zkpgs.util.GSLoggerConfiguration;
-import eu.prismacloud.primitives.zkpgs.util.crypto.GroupElement;
-import uk.ac.ncl.cascade.binding.ProverOrchestratorBC;
+import uk.ac.ncl.cascade.zkpgs.BaseRepresentation;
+import uk.ac.ncl.cascade.zkpgs.commitment.GSCommitment;
+import uk.ac.ncl.cascade.zkpgs.exception.ProofStoreException;
+import uk.ac.ncl.cascade.zkpgs.keys.ExtendedPublicKey;
+import uk.ac.ncl.cascade.zkpgs.message.IMessageGateway;
+import uk.ac.ncl.cascade.zkpgs.orchestrator.ProverOrchestrator;
+import uk.ac.ncl.cascade.zkpgs.prover.CommitmentProver;
+import uk.ac.ncl.cascade.zkpgs.prover.PairWiseDifferenceProver;
+import uk.ac.ncl.cascade.zkpgs.prover.PossessionProver;
+import uk.ac.ncl.cascade.zkpgs.signature.GSSignature;
+import uk.ac.ncl.cascade.zkpgs.store.ProofStore;
+import uk.ac.ncl.cascade.zkpgs.store.URN;
+import uk.ac.ncl.cascade.zkpgs.util.Assert;
+import uk.ac.ncl.cascade.zkpgs.util.BaseCollection;
+import uk.ac.ncl.cascade.zkpgs.util.BaseIterator;
+import uk.ac.ncl.cascade.zkpgs.util.GSLoggerConfiguration;
+import uk.ac.ncl.cascade.zkpgs.util.crypto.GroupElement;
+import uk.ac.ncl.cascade.zkpgs.keys.ExtendedPublicKey;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -33,7 +34,7 @@ import java.util.logging.Logger;
 /**
  * Wrapper for prover orchestrator used with jmh benchmarks
  */
-public class ProverOrchestratorBCPerf extends ProverOrchestratorBC {
+public class ProverOrchestratorPerf extends ProverOrchestrator {
 
 	private PossessionProver possessionProverValue;
 	private Logger gslog = GSLoggerConfiguration.getGSlog();
@@ -45,9 +46,12 @@ public class ProverOrchestratorBCPerf extends ProverOrchestratorBC {
 
 	private List<PairWiseDifferenceProver> pairWiseDifferenceProvers;
 
-	public ProverOrchestratorBCPerf(ExtendedPublicKey extendedPublicKey, IMessageGateway messageGateway) throws NoSuchFieldException {
+	public ProverOrchestratorPerf(ExtendedPublicKey extendedPublicKey, IMessageGateway messageGateway) throws NoSuchFieldException {
 		super(extendedPublicKey, messageGateway);
 	}
+
+
+
 
 	public PossessionProver getPossessionProverValue() throws NoSuchFieldException, IllegalAccessException {
 		return (PossessionProver) getValueOfField("possessionProver");

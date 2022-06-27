@@ -1,10 +1,11 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
-import eu.prismacloud.primitives.zkpgs.exception.EncodingException;
-import eu.prismacloud.primitives.zkpgs.exception.ProofStoreException;
-import eu.prismacloud.primitives.zkpgs.exception.VerificationException;
-import eu.prismacloud.primitives.zkpgs.prover.PairWiseDifferenceProver;
-import eu.prismacloud.primitives.zkpgs.store.URN;
+import uk.ac.ncl.cascade.zkpgs.exception.EncodingException;
+import uk.ac.ncl.cascade.zkpgs.exception.ProofStoreException;
+import uk.ac.ncl.cascade.zkpgs.exception.VerificationException;
+import uk.ac.ncl.cascade.zkpgs.orchestrator.ProverOrchestrator;
+import uk.ac.ncl.cascade.zkpgs.prover.PossessionProver;
+import uk.ac.ncl.cascade.zkpgs.store.URN;
 import org.jgrapht.io.ImportException;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.RunResult;
@@ -24,27 +25,25 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Creates a benchmark for measuring the pre/post challenge phase of the pair wise prover component
+ * Creates a benchmark for measuring the pre/post challenge phase of the possession prover component
  */
-
 @State(Scope.Benchmark)
-public class PairWiseProverBenchmark extends GSBenchmark {
+public class PossessionProverBenchmark extends GSBenchmark {
 
-	public static final String DATA_RESULTS_PAIR_WISE_PROVER_CSV = "data/results-pair-wise-prover-raw";
+	public static final String DATA_RESULTS_POSSESSION_PROVER_RAW_CSV = "data/results-possession-prover-raw";
 
 	private static ProverOrchestratorPerf prover;
 
 	@State(Scope.Benchmark)
-	@BenchmarkMode({Mode.AverageTime})
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class PreChallengeBenchmark extends PairWiseProverBenchmark {
-		private List<PairWiseDifferenceProver> pairWiseDifferenceProvers;
+	public static class PreChallengeBenchmark extends PossessionProverBenchmark {
+
+		private PossessionProver pProver;
 
 		public PreChallengeBenchmark() {
 			super();
@@ -54,28 +53,31 @@ public class PairWiseProverBenchmark extends GSBenchmark {
 		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 			super.setup();
 			prover = getProver();
-			prover.executeCompoundPreChallengePhaseForPairWiseProver();
-			pairWiseDifferenceProvers = prover.getPairWiseDifferenceProvers();
+			prover.executeCompoundPreChallengePhaseForPossessionProver();
+			pProver = prover.getPossessionProverValue();
+
 		}
 
 		@Benchmark
 		@BenchmarkMode({Mode.AverageTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public void executeCommitmentProvers(PreChallengeBenchmark state) throws Exception {
-			prover.computePairWiseProvers(pairWiseDifferenceProvers);
+		public void executeCompoundPreChallengePhase(PreChallengeBenchmark state) throws Exception {
+			pProver.executeCompoundPreChallengePhase();
 		}
 
 		@TearDown(Level.Invocation)
 		public void afterInvocation() throws Exception {
 			prover = null;
+			pProver = null;
 		}
 	}
 
 	@State(Scope.Benchmark)
-	@BenchmarkMode({Mode.AverageTime})
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class PostChallengeBenchmark extends PairWiseProverBenchmark {
+	public static class PostChallengeBenchmark extends PossessionProverBenchmark {
+		private Class<ProverOrchestrator> sProver;
 		private BigInteger challenge;
+		private PossessionProver pProver;
 
 		public PostChallengeBenchmark() {
 			super();
@@ -85,29 +87,28 @@ public class PairWiseProverBenchmark extends GSBenchmark {
 		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
 			super.setup();
 			prover = getProver();
-
 			prover.executePreChallengePhase();
 			challenge = prover.computeChallenge();
-			prover.postChallengePhaseForPairWiseProver(challenge);
-
+			pProver = prover.getPossessionProverValue();
 		}
 
 		@Benchmark
 		@BenchmarkMode({Mode.AverageTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
 		public Map<URN, BigInteger> executePostChallengePhase(PostChallengeBenchmark state) throws Exception {
-			return prover.executePostChallengePhaseForPairWiseProvers(challenge);
+			return pProver.executePostChallengePhase(challenge);
 		}
 
 		@TearDown(Level.Invocation)
 		public void afterInvocation() throws Exception {
 			prover = null;
+			pProver = null;
 		}
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
-				.include(eu.prismacloud.primitives.grs.bench.PairWiseProverBenchmark.class.getSimpleName())
+				.include(PossessionProverBenchmark.class.getSimpleName())
 				.param("l_n", "512")//, "1024", "2048", "3072")
 				.param("bases", "100")//, "1000", "10000", "100000")
 				.jvmArgs("-server")
@@ -132,6 +133,7 @@ public class PairWiseProverBenchmark extends GSBenchmark {
 	private static PrintStream getPrintStream() throws FileNotFoundException {
 		Date date = new Date();
 		Format formatter = new SimpleDateFormat("YYYY-MM-dd_hh-mm-ss");
-		return new PrintStream(new File(DATA_RESULTS_PAIR_WISE_PROVER_CSV + "-" + ((SimpleDateFormat) formatter).format(date)) + ".csv");
+		return new PrintStream(new File(DATA_RESULTS_POSSESSION_PROVER_RAW_CSV + "-" + ((SimpleDateFormat) formatter).format(date)) + ".csv");
 	}
 }
+

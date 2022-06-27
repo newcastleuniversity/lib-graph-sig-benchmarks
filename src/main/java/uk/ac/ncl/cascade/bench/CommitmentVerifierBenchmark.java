@@ -1,22 +1,21 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
-import eu.prismacloud.primitives.zkpgs.BaseRepresentation;
-import eu.prismacloud.primitives.zkpgs.DefaultValues;
-import eu.prismacloud.primitives.zkpgs.exception.EncodingException;
-import eu.prismacloud.primitives.zkpgs.exception.ProofStoreException;
-import eu.prismacloud.primitives.zkpgs.exception.VerificationException;
-import eu.prismacloud.primitives.zkpgs.keys.ExtendedKeyPair;
-import eu.prismacloud.primitives.zkpgs.keys.ExtendedPublicKey;
-import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
-import eu.prismacloud.primitives.zkpgs.orchestrator.RecipientOrchestrator;
-import eu.prismacloud.primitives.zkpgs.orchestrator.SignerOrchestrator;
-import eu.prismacloud.primitives.zkpgs.parameters.GraphEncodingParameters;
-import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
-import eu.prismacloud.primitives.zkpgs.store.URN;
-import eu.prismacloud.primitives.zkpgs.util.BaseCollection;
-import eu.prismacloud.primitives.zkpgs.util.FilePersistenceUtil;
-import eu.prismacloud.primitives.zkpgs.util.crypto.GroupElement;
-import eu.prismacloud.primitives.zkpgs.verifier.PossessionVerifier;
+import uk.ac.ncl.cascade.zkpgs.BaseRepresentation;
+import uk.ac.ncl.cascade.zkpgs.DefaultValues;
+import uk.ac.ncl.cascade.zkpgs.exception.EncodingException;
+import uk.ac.ncl.cascade.zkpgs.exception.ProofStoreException;
+import uk.ac.ncl.cascade.zkpgs.exception.VerificationException;
+import uk.ac.ncl.cascade.zkpgs.keys.ExtendedKeyPair;
+import uk.ac.ncl.cascade.zkpgs.keys.ExtendedPublicKey;
+import uk.ac.ncl.cascade.zkpgs.keys.SignerKeyPair;
+import uk.ac.ncl.cascade.zkpgs.orchestrator.RecipientOrchestrator;
+import uk.ac.ncl.cascade.zkpgs.orchestrator.SignerOrchestrator;
+import uk.ac.ncl.cascade.zkpgs.parameters.GraphEncodingParameters;
+import uk.ac.ncl.cascade.zkpgs.parameters.KeyGenParameters;
+import uk.ac.ncl.cascade.zkpgs.store.URN;
+import uk.ac.ncl.cascade.zkpgs.util.BaseCollection;
+import uk.ac.ncl.cascade.zkpgs.util.FilePersistenceUtil;
+import uk.ac.ncl.cascade.zkpgs.verifier.PossessionVerifier;
 import org.jgrapht.io.ImportException;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.RunResult;
@@ -30,6 +29,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.text.Format;
@@ -42,19 +42,17 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Creates a benchmark for measuring the verification phase of the possession verifier component
- * for binding credentials.
+ * Creates a benchmark for measuring the verification phase of the commitment verifier component
  */
 @State(Scope.Benchmark)
-public class PossessionVerifierBCBenchmark {
+public class CommitmentVerifierBenchmark {
 
-	public static final String DATA_RESULTS_POSSESSION_VERIFIER_CSV = "data/results-possession-verifier-raw";
+	public static final String DATA_RESULTS_COMMITMENT_VERIFIER_CSV = "data/results-possession-verifier-raw";
 
-//	@Param({"512", "1024", "2048", "3072"})
-	@Param({"2048"})
+	@Param({"512", "1024", "2048", "3072"})
 	private int l_n;
 
-	@Param({"600"})
+	@Param({"100", "1000", "10000", "100000"})
 	private int bases;
 
 	//	@Param({"10", "100", "1000", "10000"})
@@ -79,7 +77,7 @@ public class PossessionVerifierBCBenchmark {
 	private static VerifierOrchestratorPerf verifier;
 	private BigInteger cChallenge;
 
-	public void setup() throws IOException, EncodingException, ClassNotFoundException, InterruptedException, ExecutionException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+	public void setup() throws IOException, EncodingException, ClassNotFoundException, InterruptedException, ExecutionException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 		// calculate number of bases for vertices and edges
 		l_V = bases / 5;
 		l_E = bases - (bases / 5);
@@ -168,7 +166,7 @@ public class PossessionVerifierBCBenchmark {
 	@State(Scope.Benchmark)
 	@BenchmarkMode({Mode.SingleShotTime})
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	public static class ExecuteVerificationBenchmark extends PossessionVerifierBenchmark {
+	public static class ExecuteVerificationBenchmark extends CommitmentVerifierBenchmark {
 
 		private BigInteger cChallenge;
 		private PossessionVerifier pVerifier;
@@ -179,23 +177,21 @@ public class PossessionVerifierBCBenchmark {
 		}
 
 		@Setup(Level.Invocation)
-		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException {
+		public void setup() throws ClassNotFoundException, ExecutionException, EncodingException, InterruptedException, IOException, ProofStoreException, NoSuchAlgorithmException, VerificationException, ImportException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 			super.setup();
 			prover.executePreChallengePhase();
 			cChallenge = prover.computeChallenge();
 			prover.executePostChallengePhase(cChallenge);
 			verifier.receiveProverMessage();
-			verifier.executeVerificationForPossessionVerifier();
-			pVerifier = verifier.getPossessionVerifier();
-			vChallenge = verifier.getcChallenge();
+			verifier.executeVerificationForCommitmentVerifiers();
 
 		}
 
 		@Benchmark
 		@BenchmarkMode({Mode.SingleShotTime})
 		@OutputTimeUnit(TimeUnit.MILLISECONDS)
-		public Map<URN, GroupElement> executeCompoundVerification(ExecuteVerificationBenchmark state) throws Exception {
-			return pVerifier.executeCompoundVerification(vChallenge);
+		public Object executeCompoundVerification(ExecuteVerificationBenchmark state) throws Exception {
+			return verifier.executeCommitmentVerifiers();
 		}
 
 		@TearDown(Level.Invocation)
@@ -210,16 +206,16 @@ public class PossessionVerifierBCBenchmark {
 
 	public static void main(String[] args) throws FileNotFoundException, RunnerException {
 		Options opt = new OptionsBuilder()
-				.include(PossessionVerifierBenchmark.class.getSimpleName())
-				.param("l_n", "2048")//, "1024", "2048", "3072")
-				.param("bases", "600")//, "1000", "10000", "100000")
+				.include(CommitmentVerifierBenchmark.class.getSimpleName())
+				.param("l_n", "512")//, "1024", "2048", "3072")
+				.param("bases", "100")//, "1000", "10000", "100000")
 				.jvmArgs("-server")
 				.warmupIterations(0)
 				//				.addProfiler(SolarisStudioProfiler.class)
-				.warmupForks(10)
+				.warmupForks(1)
 				.measurementIterations(1)
 				.threads(1)
-				.forks(25)
+				.forks(1)
 				.shouldFailOnError(true)
 				.measurementTime(new TimeValue(1, TimeUnit.MINUTES)) // used for throughput benchmark
 				//.shouldDoGC(true)
@@ -235,8 +231,7 @@ public class PossessionVerifierBCBenchmark {
 	private static PrintStream getPrintStream() throws FileNotFoundException {
 		Date date = new Date();
 		Format formatter = new SimpleDateFormat("YYYY-MM-dd_hh-mm-ss");
-		return new PrintStream(new File(DATA_RESULTS_POSSESSION_VERIFIER_CSV + "-" + ((SimpleDateFormat) formatter).format(date)) + ".csv");
+		return new PrintStream(new File(DATA_RESULTS_COMMITMENT_VERIFIER_CSV + "-" + ((SimpleDateFormat) formatter).format(date)) + ".csv");
 	}
 }
-
 

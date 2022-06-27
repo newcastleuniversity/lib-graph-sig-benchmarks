@@ -1,12 +1,10 @@
-package eu.prismacloud.primitives.grs.bench;
+package uk.ac.ncl.cascade.bench;
 
-import eu.prismacloud.primitives.zkpgs.exception.EncodingException;
-import eu.prismacloud.primitives.zkpgs.keys.ExtendedKeyPair;
-import eu.prismacloud.primitives.zkpgs.keys.SignerKeyPair;
-import eu.prismacloud.primitives.zkpgs.parameters.GraphEncodingParameters;
-import eu.prismacloud.primitives.zkpgs.parameters.KeyGenParameters;
-import eu.prismacloud.primitives.zkpgs.util.CryptoUtilsFacade;
-import net.nicoulaj.jmh.profilers.YourkitProfiler;
+import uk.ac.ncl.cascade.zkpgs.exception.EncodingException;
+import uk.ac.ncl.cascade.zkpgs.keys.ExtendedKeyPair;
+import uk.ac.ncl.cascade.zkpgs.keys.SignerKeyPair;
+import uk.ac.ncl.cascade.zkpgs.parameters.GraphEncodingParameters;
+import uk.ac.ncl.cascade.zkpgs.parameters.KeyGenParameters;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 import org.openjdk.jmh.results.RunResult;
@@ -30,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Creates a benchmark for generating vertex prime representatives. The vertex prime representatives are generated for graph sizes of 1000 - 10000 vertices.
- * Usage: java -cp target/benchmarks.jar  eu.prismacloud.primitives.grs.bench.SetupEncodingBenchmark
+ * Usage: java -cp target/benchmarks.jar  uk.ac.ncl.cascade.grs.bench.SetupEncodingBenchmark
  */
 @State(Scope.Benchmark)
 public class SetupEncodingBenchmark {
@@ -101,17 +99,21 @@ public class SetupEncodingBenchmark {
 		for (int i = 0; i < this.graphEncParams.getL_V(); i++) {
 			if (i == 0) {
 				vertexPrimeRepresentative = this.graphEncParams.getLeastVertexRepresentative();
+				System.out.println("\n first: " + vertexPrimeRepresentative);
+				System.out.println("\n first bitlength: " + vertexPrimeRepresentative.bitLength());
 			} else {
-				blackhole.consume(vertexPrimeRepresentative.nextProbablePrime());
+				blackhole.consume(vertexPrimeRepresentative = vertexPrimeRepresentative.nextProbablePrime());
+				System.out.println("\n second : " + vertexPrimeRepresentative);
+				System.out.println("\n second bitlength: " + vertexPrimeRepresentative.bitLength());
 			}
-			if (!CryptoUtilsFacade.isInRange(
-					vertexPrimeRepresentative,
-					this.graphEncParams.getLeastVertexRepresentative(),
-					this.graphEncParams.getUpperBoundVertexRepresentatives())) {
-				throw new EncodingException(
-						"The graph encoding attempted to "
-								+ "create a vertex representative outside of the designated range.");
-			}
+//			if (!CryptoUtilsFacade.isInRange(
+//					vertexPrimeRepresentative,
+//					this.graphEncParams.getLeastVertexRepresentative(),
+//					this.graphEncParams.getUpperBoundVertexRepresentatives())) {
+//				throw new EncodingException(
+//						"The graph encoding attempted to "
+//								+ "create a vertex representative outside of the designated range.");
+//			}
 
 		}
 	}
@@ -119,13 +121,13 @@ public class SetupEncodingBenchmark {
 	public static void main(String[] args) throws RunnerException, FileNotFoundException {
 
 		Options opt = new OptionsBuilder()
-				.include(eu.prismacloud.primitives.grs.bench.SetupEncodingBenchmark.class.getSimpleName())
+				.include(SetupEncodingBenchmark.class.getSimpleName())
 				//.param("l_n", "512", "1024", "2048", "3072")
 				.param("l_n", "512")
 				.jvmArgs("-server")
 				.jvmArgs("-Xms2048m", "-Xmx3072m")
 				.warmupIterations(0)
-				.addProfiler(YourkitProfiler.class)
+//				.addProfiler(YourkitProfiler.class)
 				.warmupForks(5)
 				.measurementIterations(1)
 				.threads(1)
